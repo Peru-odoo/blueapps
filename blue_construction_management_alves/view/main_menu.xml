@@ -5,5 +5,9 @@
                 id="work_packages_main"
                 name="Work Package"
                 parent="project.menu_project_config"/>
-    </data>
+         <menuitem
+                id="inherit_material_consume_tree"
+                name="Lista de Materiais Utilizados"
+                parent="project.menu_project_config"/>
+ </data>
 </odoo>

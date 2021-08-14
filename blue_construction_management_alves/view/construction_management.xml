@@ -2,6 +2,21 @@
 <odoo>
     <data>
 
+        <record id="inherit_material_consume_tree" model="ir.ui.view">
+            <field name="name">inherit.material.consume.tree</field>
+            <field name="model">material.consume</field>
+            <field name="arch" type="xml">
+				<tree string="Materiais Utitilizados" multi_edit="1" editable="bottom">
+                    <field name="task_id" optional="hide"/>
+                    <field name="product_id"/>
+                    <field name="name" optional="show"/>
+                    <field name="product_qty"/>
+                    <field name="uom_id"/>
+                </tree>
+            </field>
+        </record>
+
+
         <record id="inherit_view_note_note_tree" model="ir.ui.view">
             <field name="name">inherit.view.note.note.tree</field>
             <field name="model">note.note</field>
@@ -151,7 +166,7 @@
             <field name="inherit_id" ref="project.view_task_form2"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='extra_info']" position="after">
-                    <page string="Material Plannings">
+                    <page string="Material Plannings"  invisible="1">
                         <group>
                             <field name="prod_material_ids" nolabel="1">
                                 <tree editable="bottom">
@@ -164,7 +179,7 @@
                         </group>
                     </page>
 
-                    <page string="Consumed Material">
+                    <page string="Consumed Material"> 
                         <group>
                             <field name="consume_material_ids" nolabel="1">
                                 <tree editable="bottom">
@@ -177,7 +192,7 @@
                         </group>
                     </page>
 
-                    <page string="Material Requisitions">
+                    <page string="Material Requisitions"  invisible="1">
                         <group>
                             <field name="material_req_stock_ids" nolabel="1">
                                 <tree editable="bottom">
@@ -193,7 +208,7 @@
                         </group>
                     </page>
 
-                    <page string="Stock Moves">
+                    <page string="Stock Moves" invisible="1">
                         <group>
                             <field name="stock_move_ids" nolabel="1">
                                 <tree editable="bottom">
