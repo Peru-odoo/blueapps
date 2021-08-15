@@ -14,9 +14,7 @@ class EthContract(models.Model):
     _name = "eth.contract"
 
     name = fields.Char(string="Contract")
-    model_id = fields.Many2one(
-        comodel_name="ir.model", string="Referenced Model", required=True
-    )
+    model_id = fields.Many2one("ir.model", string="Referenced Model", required=True)
     state = fields.Selection(
         [("draft", "Draft"), ("open", "Running"), ("close", "Expired")],
         string="Status",
