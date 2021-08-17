@@ -46,15 +46,51 @@ class material_consume(models.Model):
             return res
         self.name = self.product_id.name
         self.uom_id = self.product_id.uom_id
-        self.valor = self.product_id.lst_price
+        self.price_unit = self.product_id.lst_price
 
     product_id = fields.Many2one('product.product', 'Product')
     name = fields.Char('Description')
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    valor = fields.Float('Valor')
+    price_unit = fields.Float(
+        "Valor Unitario",
+        digits=("Product Price"),
+#        compute="_compute_price_unit",
+        store=True,
+        readonly=True,
+    )
+    discount = fields.Float(string="Discount (%)", digits=("Discount"), default=0.0)
+    price_subtotal = fields.Monetary(
+        string="Subtotal", readonly=True, store=True, compute="_compute_amount_service"
+    )
+    price_total = fields.Monetary(
+        string="Total", readonly=True, store=True, compute="_compute_amount_service"
+    )
+    price_tax = fields.Float(
+        string="Taxes Amount",
+        readonly=True,
+        store=True,
+        compute="_compute_amount_service",
+    )
 
+    @api.depends("product_qty", "discount", "price_unit")
+    def _compute_amount_service(self):
+        for consume in self:
+ #           folio = service.folio_id
+ #           reservation = service.reservation_id
+ #           currency = folio.currency_id if folio else reservation.currency_id
+            product = consume.product_id
+            price = consume.price_unit * (1 - (consume.discount or 0.0) * 0.01)
+            consume.update(
+                {
+                    "price_tax": sum(
+                        t.get("amount", 0.0) for t in taxes.get("taxes", [])
+                    ),
+                    "price_total": taxes["total_included"],
+                    "price_subtotal": taxes["total_excluded"],
+                }
+            )
 
 class product_product(models.Model):
     _inherit = 'product.product'
@@ -66,7 +102,7 @@ class product_product(models.Model):
 
 '''class project_issue(models.Model):
     _inherit = 'project.issue'
-    
+
     progress = fields.Float(store=True, string='Progress Bar', group_operator="avg")'''
 
 

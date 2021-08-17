@@ -12,6 +12,7 @@
                     <field name="name" optional="show"/>
                     <field name="product_qty"/>
                     <field name="uom_id"/>
+                    <field name="price_unit" widget="monetary"/>
                 </tree>
             </field>
         </record>
@@ -78,7 +79,7 @@
                 <xpath expr="//field[@name='tag_ids']" position="after">
                         <field name="progress" widget="progressbar"/>
                 </xpath>
-                
+
             </field>
         </record>-->
 
@@ -141,7 +142,7 @@
 
                 <!--<xpath expr="//header" position="inside">
                         <div name="button_box">
-                            <button class="oe_stat_button" type="action" icon="fa-comments">        
+                            <button class="oe_stat_button" type="action" icon="fa-comments">
                                 <field string="Purchases"  widget="statinfo"/>
                             </button>
                         </div>
@@ -154,7 +155,7 @@
                             <field name="worker_cost"/>
                             <field name="work_cost_package"/>
                             <field name="sub_contract_cost"/>
-                        </group>                
+                        </group>
                     </page>
                 </notebook>-->
             </field>
@@ -179,7 +180,7 @@
                         </group>
                     </page>
 
-                    <page string="Consumed Material"> 
+                    <page string="Consumed Material">
                         <group>
                             <field name="consume_material_ids" nolabel="1">
                                 <tree editable="bottom">
