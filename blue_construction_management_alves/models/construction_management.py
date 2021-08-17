@@ -25,14 +25,14 @@ class material_details(models.Model):
             return res
         self.name = self.product_id.name
         self.uom_id = self.product_id.uom_id
-        self.valor = self.product_id.lst_price
+        self.price_unit = self.product_id.lst_price
 
     product_id = fields.Many2one('product.product', 'Product')
     name = fields.Char('Description')
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    valor = fields.Float('Valor')
+    price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default=0.0)
 
 
 class material_consume(models.Model):
@@ -46,14 +46,14 @@ class material_consume(models.Model):
             return res
         self.name = self.product_id.name
         self.uom_id = self.product_id.uom_id
-        self.valor = self.product_id.lst_price
+        self.price_unit = self.product_id.lst_price
 
     product_id = fields.Many2one('product.product', 'Product')
     name = fields.Char('Description')
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    valor = fields.Float('Valor')
+    price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default=0.0)
 
 
 class product_product(models.Model):
