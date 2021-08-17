@@ -67,7 +67,11 @@ class material_consume(models.Model):
         self.uom_id = self.product_id.uom_id
         self.price_unit = self.product_id.lst_price
 
+
     product_id = fields.Many2one('product.product', 'Product')
+    currency_id = fields.Many2one(
+        related="product_id.currency_id", store=True, string="Currency", readonly=True
+    )
     name = fields.Char('Description')
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
@@ -98,7 +102,7 @@ class material_consume(models.Model):
         for consume in self:
  #           folio = service.folio_id
  #           reservation = service.reservation_id
- #           currency = folio.currency_id if folio else reservation.currency_id
+            currency = consume.currency_id # if folio else reservation.currency_id
             product = consume.product_id
             price = consume.price_unit * (1 - (consume.discount or 0.0) * 0.01)
             consume.update(
