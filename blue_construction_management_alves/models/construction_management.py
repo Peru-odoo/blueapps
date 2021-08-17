@@ -25,31 +25,14 @@ class material_details(models.Model):
             return res
         self.name = self.product_id.name
         self.uom_id = self.product_id.uom_id
-        self.price_unit = self.product_id.lst_price
+        self.valor = self.product_id.lst_price
 
     product_id = fields.Many2one('product.product', 'Product')
     name = fields.Char('Description')
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    price_unit = fields.Float(
-        "Valor Unitario",
-        digits=("Product Price"),
-        store=True,
-        readonly=True,
-    )
-    discount = fields.Float(string="Discount (%)", digits=("Discount"), default=0.0)
-    price_subtotal = fields.Monetary(
-        string="Subtotal", readonly=True, store=True
-    )
-    price_total = fields.Monetary(
-        string="Total", readonly=True, store=True
-    )
-    price_tax = fields.Float(
-        string="Taxes Amount",
-        readonly=True,
-        store=True
-    )
+    valor = fields.Float('Valor')
 
 
 class material_consume(models.Model):
@@ -63,32 +46,14 @@ class material_consume(models.Model):
             return res
         self.name = self.product_id.name
         self.uom_id = self.product_id.uom_id
-        self.price_unit = self.product_id.lst_price
-
+        self.valor = self.product_id.lst_price
 
     product_id = fields.Many2one('product.product', 'Product')
     name = fields.Char('Description')
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    price_unit = fields.Float(
-        "Valor Unitario",
-        digits=("Product Price"),
-        store=True,
-        readonly=True
-    )
-    discount = fields.Float(string="Discount (%)", digits=("Discount"), default=0.0)
-    price_subtotal = fields.Monetary(
-        string="Subtotal", readonly=True, store=True
-    )
-    price_total = fields.Monetary(
-        string="Total", readonly=True, store=True
-    )
-    price_tax = fields.Float(
-        string="Taxes Amount",
-        readonly=True,
-        store=True
-    )
+    valor = fields.Float('Valor')
 
 
 class product_product(models.Model):

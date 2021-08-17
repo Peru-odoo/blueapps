@@ -12,7 +12,7 @@
                     <field name="name" optional="show"/>
                     <field name="product_qty"/>
                     <field name="uom_id"/>
-                    <field name="price_unit" widget="monetary"/>
+                    <field name="valor" widget="monetary"/>
                 </tree>
             </field>
         </record>
