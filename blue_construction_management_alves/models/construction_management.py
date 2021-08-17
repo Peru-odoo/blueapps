@@ -65,12 +65,14 @@ class material_consume(models.Model):
             return res
         self.name = self.product_id.name
         self.uom_id = self.product_id.uom_id
+        self.currency_id = self.product_id.currency_id
         self.price_unit = self.product_id.lst_price
 
 
     product_id = fields.Many2one('product.product', 'Product')
     currency_id = fields.Many2one(
-        related="product_id.currency_id", store=True, string="Currency", readonly=True
+#        related="product_id.currency_id",
+        store=True, string="Currency", readonly=True
     )
     name = fields.Char('Description')
     product_qty = fields.Float('Quantity', default=1.0)
