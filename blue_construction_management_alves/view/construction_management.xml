@@ -16,7 +16,7 @@
                 </tree>
             </field>
         </record>
-        <record id="material_consome_view_form" model="ir.ui.view">
+        <record id="inherit_material_consome_view_form" model="ir.ui.view">
             <field name="name">material_consome_view_form</field>
             <field name="model">material.consume</field>
             <field name="arch" type="xml">
@@ -29,7 +29,7 @@
                            <field name="name" optional="show"/>
                            <field name="product_qty"/>
                            <field name="uom_id"/>
-                          <field name="price_unit" widget="monetary"/>
+                           <field name="price_unit" widget="monetary"/>
                         </group>
                     </sheet>
                 </form>
