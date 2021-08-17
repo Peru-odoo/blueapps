@@ -20,8 +20,8 @@
             <field name="name">material_consome_view_form</field>
             <field name="model">material.consume</field>
             <field name="arch" type="xml">
-                <form string="material_consome_form">
-                    <sheet>
+                <form string="Materiais Utilizados">
+                    <group>
                         <group>
                            <field name="name"/>
                            <field name="task_id" optional="hide"/>
@@ -31,7 +31,7 @@
                            <field name="uom_id"/>
                            <field name="price_unit" widget="monetary"/>
                         </group>
-                    </sheet>
+                    </group>
                 </form>
             </field>
         </record>
