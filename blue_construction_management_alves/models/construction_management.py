@@ -35,22 +35,20 @@ class material_details(models.Model):
     price_unit = fields.Float(
         "Valor Unitario",
         digits=("Product Price"),
-        #        compute="_compute_price_unit",
         store=True,
         readonly=True,
     )
     discount = fields.Float(string="Discount (%)", digits=("Discount"), default=0.0)
     price_subtotal = fields.Monetary(
-        string="Subtotal", readonly=True, store=True, compute="_compute_amount_service"
+        string="Subtotal", readonly=True, store=True
     )
     price_total = fields.Monetary(
-        string="Total", readonly=True, store=True, compute="_compute_amount_service"
+        string="Total", readonly=True, store=True
     )
     price_tax = fields.Float(
         string="Taxes Amount",
         readonly=True,
-        store=True,
-        compute="_compute_amount_service",
+        store=True
     )
 
 
@@ -76,22 +74,20 @@ class material_consume(models.Model):
     price_unit = fields.Float(
         "Valor Unitario",
         digits=("Product Price"),
-#        compute="_compute_price_unit",
         store=True,
-        readonly=True,
+        readonly=True
     )
     discount = fields.Float(string="Discount (%)", digits=("Discount"), default=0.0)
     price_subtotal = fields.Monetary(
-        string="Subtotal", readonly=True, store=True, compute="_compute_amount_service"
+        string="Subtotal", readonly=True, store=True
     )
     price_total = fields.Monetary(
-        string="Total", readonly=True, store=True, compute="_compute_amount_service"
+        string="Total", readonly=True, store=True
     )
     price_tax = fields.Float(
         string="Taxes Amount",
         readonly=True,
-        store=True,
-        compute="_compute_amount_service",
+        store=True
     )
 
 
