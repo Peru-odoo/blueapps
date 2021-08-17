@@ -32,7 +32,7 @@ class material_details(models.Model):
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default=0.0)
+    price_unit = fields.Float('Valor Unitario', required=True, digits=dp.get_precision('Product Price'), default=0.0)
 
 
 class material_consume(models.Model):
@@ -53,7 +53,7 @@ class material_consume(models.Model):
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default=0.0)
+    price_unit = fields.Float('Valor Unitario', required=True, digits=dp.get_precision('Product Price'), default=0.0)
 
 
 class product_product(models.Model):
