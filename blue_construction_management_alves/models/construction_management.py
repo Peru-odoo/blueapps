@@ -77,6 +77,9 @@ class project_task(models.Model):
     consume_material_ids = fields.One2many('material.consume', 'task_id')
     material_req_stock_ids = fields.One2many('stock.picking', 'job_orders_id')
     stock_move_ids = fields.One2many('stock.move', 'project_stock_move_id')
+ #   material_count = fields.Integer(compute="_compute_material_count", string="Custo Total")
+
+ #   def _compute_material_count(self):
 
 
 class stock_move(models.Model):
