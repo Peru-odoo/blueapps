@@ -59,7 +59,7 @@ class material_consume(models.Model):
     @api.depends('price_unit', 'product_qty', 'product_id')
     def _compute_price(self):
         for i in self:
-            i.price_subtotal = i.qty * i.price_unit
+            i.price_subtotal = i.product_qty * i.price_unit
 
 #    def _calculate_price_total(self):
 #        if self.price_unit > 0:
