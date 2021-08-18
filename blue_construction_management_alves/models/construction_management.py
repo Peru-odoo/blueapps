@@ -86,27 +86,26 @@ class project_task(models.Model):
     stock_move_ids = fields.One2many('stock.move', 'project_stock_move_id')
     #   material_count = fields.Integer(compute="_compute_material_count", string="Custo Total")
 
-    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', string='Qtd. Materias Utilizados',
-                                 help="Quantidade total de materias utilizados na OS atual")
+    #    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', string='Qtd. Materias Utilizados',
+    #                                 help="Quantidade total de materias utilizados na OS atual")
     price_total_materiais = fields.Float(compute='_calculate_price_total_materiais',
                                          string='Custo com Materias Utilizados',
                                          help="Valor total dos materias utilizados na OS atual")
 
     def _calculate_price_total_materiais(self):
         for pt in self:
-            sumqty = 0
+            ptsumqty = 0
             for line in pt.consume_material_ids:
-                sumqty += line.price_subtotal
-        pt.price_total_materiais = sumqty
-
-    def _calculate_qtd_materiais(self):
-        for rs in self:
-            sumqty = 0
-            for line in rs.consume_material_ids:
-                sumqty += line.product_qty
-        rs.qtd_materiais = sumqty
+                ptsumqty += line.price_subtotal
+        pt.price_total_materiais = ptsumqty
 
 
+#   def _calculate_qtd_materiais(self):
+#       for rs in self:
+#           sumqty = 0
+#           for line in rs.consume_material_ids:
+#               sumqty += line.product_qty
+#       rs.qtd_materiais = sumqty
 
 
 class stock_move(models.Model):
