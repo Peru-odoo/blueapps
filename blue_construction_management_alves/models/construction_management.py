@@ -58,8 +58,8 @@ class material_consume(models.Model):
 
     def _calculate_price_total(self):
         for rs in self:
-            price    = price_unit
-            qty      = product_qty
+            price    = self.price_unit
+            qty      = self.product_qty
             total    = qty * price
         rs.price_total = total
 
