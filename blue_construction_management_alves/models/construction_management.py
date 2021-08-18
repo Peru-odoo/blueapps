@@ -57,11 +57,11 @@ class material_consume(models.Model):
     price_total = fields.Float('Valor Total', compute='_calculate_price_total', digits=dp.get_precision('Product Price'), default=0.0)
 
     def _calculate_price_total(self):
-        for rs in self:
+        if self.price_unit > 0:
             price    = self.price_unit
             qty      = self.product_qty
             total    = qty * price
-        rs.price_total = total
+        self.price_total = total
 
 class product_product(models.Model):
     _inherit = 'product.product'
