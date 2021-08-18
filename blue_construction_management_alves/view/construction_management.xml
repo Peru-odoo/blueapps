@@ -10,9 +10,10 @@
                     <field name="task_id" optional="hide"/>
                     <field name="product_id"/>
                     <field name="name" optional="show"/>
-                    <field name="product_qty" optional="show"/>
+                    <field name="product_qty" optional="show" sum="Qtd. Total"/>
                     <field name="uom_id" optional="show"/>
-                    <field name="price_unit" widget="monetary" optional="show" sum="Custo Total"/>
+                    <field name="price_unit" widget="monetary" optional="show"/>
+                    <field name="price_total" widget="monetary" optional="show" sum="Custo Total"/>
                 </tree>
             </field>
         </record>
@@ -30,6 +31,7 @@
                            <field name="product_qty"/>
                            <field name="uom_id"/>
                            <field name="price_unit" widget="monetary"/>
+                           <field name="price_total" widget="monetary"/>
                         </group>
                     </group>
                 </form>
