@@ -105,7 +105,7 @@ class project_task(models.Model):
     def _calculate_price_total(self):
         for rs in self:
             sumqty = 0
-            for line in pt.consume_material_ids:
+            for line in rs.consume_material_ids:
                 sumqty += line.price_subtotal
         rs.price_total = sumqty
 
