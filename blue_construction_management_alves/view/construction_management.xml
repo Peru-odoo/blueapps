@@ -12,8 +12,8 @@
                     <field name="name" optional="show"/>
                     <field name="product_qty" optional="show" sum="Qtd. Total"/>
                     <field name="uom_id" optional="show"/>
-                    <field name="price_unit" widget="monetary" optional="show"/>
-                    <field name="price_subtotal" widget="monetary" optional="show" sum="Custo Total"/>
+                    <field name="price_unit" widget="monetary" optional="show" readonly='True'/>
+                    <field name="price_subtotal" widget="monetary" optional="show" readonly='True' sum="Custo Total"/>
                 </tree>
             </field>
         </record>

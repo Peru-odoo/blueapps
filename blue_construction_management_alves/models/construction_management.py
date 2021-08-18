@@ -86,9 +86,9 @@ class project_task(models.Model):
     stock_move_ids = fields.One2many('stock.move', 'project_stock_move_id')
     #   material_count = fields.Integer(compute="_compute_material_count", string="Custo Total")
 
-    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', readonly=True, string='Qtd. Materias Utilizados',
+    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', string='Qtd. Materias Utilizados',
                                  help="Quantidade total de materias utilizados na OS atual")
-    price_total_materiais = fields.Float(compute='_calculate_price_total_materiais', readonly=True,
+    price_total_materiais = fields.Float(compute='_calculate_price_total_materiais',
                                          string='Custo com Materias Utilizados',
                                          help="Valor total dos materias utilizados na OS atual")
 
