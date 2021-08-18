@@ -104,11 +104,11 @@ class project_task(models.Model):
         help="Valor total dos materias utilizados na OS atual")
 
     def _calculate_price_total_materiais(self):
-        for pt in self:
-            ptsumqty = 0
+        for rs in self:
+            sumqty = 0
             for line in pt.consume_material_ids:
-                ptsumqty += line.price_subtotal
-        pt.price_total_materiais = ptsumqty
+                sumqty += line.price_subtotal
+        rs.price_total_materiais = sumqty
 
     def _calculate_qtd_materiais(self):
         for rs in self:
