@@ -91,6 +91,8 @@ class project_task(models.Model):
     #                                 help="Quantidade total de materias utilizados na OS atual")
 
     price_total_materiais = fields.Float(compute='_calculate_price_total_materiais',
+                                         store=True,
+                                         copy=True,
                                          string='Custo com Materias Utilizados',
                                          help="Valor total dos materias utilizados na OS atual")
     def _calculate_price_total_materiais(self):
