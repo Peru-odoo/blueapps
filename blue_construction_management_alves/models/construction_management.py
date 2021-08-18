@@ -54,9 +54,12 @@ class material_consume(models.Model):
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
     price_unit = fields.Float('Valor Unitario',
-                              digits=dp.get_precision('Product Price'), default=0.0)
+                              digits=dp.get_precision('Product Price'))
+    # , default=0.0)
     price_subtotal = fields.Float('Valor Total', compute='_compute_price',
-                                  digits=dp.get_precision('Product Price'), default=0.0)
+                                  digits=dp.get_precision('Product Price'))
+
+    # , default=0.0)
 
     @api.depends('price_unit', 'product_qty', 'product_id')
     def _compute_price(self):
@@ -93,9 +96,9 @@ class project_task(models.Model):
         string='Observações',
         required=False)
 
-    price_total_materiais = fields.Float(compute='_calculate_price_total_materiais',
-                                         store=True,
-                                         string='Custo com Materias Utilizados',
+    price_total_materiais = fields.Float(string='Custo com Materias Utilizados',
+                                         #                                         compute='_calculate_price_total_materiais',
+                                         #                                        store=True,
                                          help="Valor total dos materias utilizados na OS atual")
 
 
