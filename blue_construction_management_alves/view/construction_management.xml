@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-
         <record id="material_consume_view_tree" model="ir.ui.view">
             <field name="name">material.consome.view.tree</field>
             <field name="model">material.consume</field>
@@ -204,6 +203,7 @@
                 <xpath expr="//page[@name='description_page']" position="before">
                     <page string="Material Plannings" invisible="1">
                         <group>
+                            <field name="currency_id" invisible="1"/>
                             <field name="prod_material_ids" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="product_id" string="Product" options="{'no_create': True}"/>
