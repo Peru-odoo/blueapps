@@ -56,7 +56,7 @@ class material_consume(models.Model):
     price_unit = fields.Float('Valor Unitario',
                               digits=dp.get_precision('Product Price'))
     price_subtotal = fields.Float('Valor Total', compute='_compute_price',
-                                  digits=dp.get_precision('Product Price'), default=0.0)
+                                  digits=dp.get_precision('Product Price'))
 
     @api.depends('price_unit', 'product_qty', 'product_id')
     def _compute_price(self):
