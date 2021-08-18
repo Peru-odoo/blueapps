@@ -87,6 +87,8 @@ class project_task(models.Model):
     consume_material_ids = fields.One2many('material.consume', 'task_id')
     material_req_stock_ids = fields.One2many('stock.picking', 'job_orders_id')
     stock_move_ids = fields.One2many('stock.move', 'project_stock_move_id')
+    currency_id = fields.Many2one('res.currency', string='Currency',
+                                  default=lambda self: self.env.user.company_id.currency_id)
     #   material_count = fields.Integer(compute="_compute_material_count", string="Custo Total")
 
     #    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', string='Qtd. Materias Utilizados',
