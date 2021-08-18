@@ -97,17 +97,17 @@ class project_task(models.Model):
     observacao = fields.Html(
         string='Observações',
         required=False)
-    price_total_materiais = fields.Float(
+    price_total = fields.Float(
         string='Custo com Materias Utilizados',
-        compute='_calculate_price_total_materiais',
+        compute='_calculate_price_total',
         help="Valor total dos materias utilizados na OS atual")
 
-    def _calculate_price_total_materiais(self):
+    def _calculate_price_total(self):
         for rs in self:
             sumqty = 0
             for line in pt.consume_material_ids:
                 sumqty += line.price_subtotal
-        rs.price_total_materiais = sumqty
+        rs.price_total = sumqty
 
     def _calculate_qtd_materiais(self):
         for rs in self:
