@@ -201,8 +201,8 @@
             <field name="model">project.task</field>
             <field name="inherit_id" ref="project.view_task_form2"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='extra_info']" position="after">
-                    <page string="Material Plannings"  invisible="1">
+                <xpath expr="//page[@name='description_page']" position="before">
+                    <page string="Material Plannings" invisible="1">
                         <group>
                             <field name="prod_material_ids" nolabel="1">
                                 <tree editable="bottom">
@@ -228,6 +228,7 @@
                                            sum="Custo Total"/>
                                 </tree>
                             </field>
+                            <field name="observacao" widget="html"/>
                         </group>
                     </page>
 
