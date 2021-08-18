@@ -57,7 +57,6 @@ class material_consume(models.Model):
                               digits=dp.get_precision('Product Price'))
     price_subtotal = fields.Float('Valor Total', compute='_compute_price',
                                   store=True,
-                                  copy=True,
                                   digits=dp.get_precision('Product Price'), default=0.0)
 
     @api.depends('price_unit', 'product_qty', 'product_id')
@@ -94,7 +93,6 @@ class project_task(models.Model):
 
     price_total_materiais = fields.Float(compute='_calculate_price_total_materiais',
                                          store=True,
-                                         copy=True,
                                          string='Custo com Materias Utilizados',
                                          help="Valor total dos materias utilizados na OS atual")
 
