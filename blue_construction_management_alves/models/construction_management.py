@@ -53,8 +53,15 @@ class material_consume(models.Model):
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    price_unit = fields.Float('Valor Unitario', required=True, digits=dp.get_precision('Product Price'), default=0.0)
+    price_unit = fields.Float('Valor Unitario', digits=dp.get_precision('Product Price'), default=0.0)
+    price_total = fields.Float('Valor Total', compute='_calculate_price_total', digits=dp.get_precision('Product Price'), default=0.0)
 
+    def _calculate_price_total(self):
+        for rs in self:
+            price    = price_unit
+            qty      = product_qty
+            total    = qty * price
+        rs.price_total = total
 
 class product_product(models.Model):
     _inherit = 'product.product'
@@ -80,17 +87,17 @@ class project_task(models.Model):
  #   material_count = fields.Integer(compute="_compute_material_count", string="Custo Total")
 
 
-    tot_sale_qty = fields.Float(compute='_calculate_sale_qty', string='Total Sale Quantity',
-                                help="Total sale quantity in active document")
+    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', string='Qtd. Materias Utilizados',
+                                help="Quantidade total de materias utilizados na OS atual")
+    price_total_materiais = fields.Float(compute='_calculate_price_total_materiais', string='Custo com Materias Utilizados',
+                                help="Valor total dos materias utilizados na OS atual")
 
-    def _calculate_sale_qty(self):
+    def _calculate_qtd_materiais(self):
         for rs in self:
             sumqty = 0
             for line in rs.consume_material_ids:
                 sumqty += line.product_qty
-        rs.tot_sale_qty = sumqty
-
- #   def _compute_material_count(self):
+        rs.qtd_materiais = sumqty
 
 
 class stock_move(models.Model):
