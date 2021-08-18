@@ -90,18 +90,21 @@ class project_task(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency',
                                   default=lambda self: self.env.user.company_id.currency_id)
 
-    qtd_materiais = fields.Float(
-        compute='_calculate_qtd_materiais',
-        string='Qtd. Materias Utilizados',
-        help="Quantidade total de materias utilizados na OS atual")
+    #    qtd_materiais = fields.Float(
+    #        compute='_calculate_qtd_materiais',
+    #        string='Qtd. Materias Utilizados',
+    #        help="Quantidade total de materias utilizados na OS atual")
     observacao = fields.Html(
         string='Observações',
         required=False)
     price_total = fields.Float(
         string='Custo com Materias Utilizados',
+        copy=True,
+        store=True,
         compute='_calculate_price_total',
         help="Valor total dos materias utilizados na OS atual")
 
+    @api.onchange('consume_material_ids')
     def _calculate_price_total(self):
         for rs in self:
             sumqty = 0
@@ -109,12 +112,14 @@ class project_task(models.Model):
                 sumqty += line.price_subtotal
         rs.price_total = sumqty
 
-    def _calculate_qtd_materiais(self):
-        for rs in self:
-            sumqty = 0
-            for line in rs.consume_material_ids:
-                sumqty += line.product_qty
-        rs.qtd_materiais = sumqty
+
+#    @api.onchange('consume_material_ids')
+#    def _calculate_qtd_materiais(self):
+#        for rs in self:
+#            sumqty = 0
+#            for line in rs.consume_material_ids:
+#                sumqty += line.product_qty
+#        rs.qtd_materiais = sumqty
 
 
 class stock_move(models.Model):
