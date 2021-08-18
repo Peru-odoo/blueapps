@@ -56,7 +56,6 @@ class material_consume(models.Model):
     price_unit = fields.Float('Valor Unitario',
                               digits=dp.get_precision('Product Price'))
     price_subtotal = fields.Float('Valor Total', compute='_compute_price',
-                                  store=True,
                                   digits=dp.get_precision('Product Price'), default=0.0)
 
     @api.depends('price_unit', 'product_qty', 'product_id')
@@ -92,10 +91,8 @@ class project_task(models.Model):
     #                                 help="Quantidade total de materias utilizados na OS atual")
 
     price_total_materiais = fields.Float(compute='_calculate_price_total_materiais',
-                                         store=True,
                                          string='Custo com Materias Utilizados',
                                          help="Valor total dos materias utilizados na OS atual")
-
     def _calculate_price_total_materiais(self):
         for pt in self:
             ptsumqty = 0
@@ -135,7 +132,6 @@ class product_template(models.Model):
 
     quantity = fields.Integer(string="Quantity")
     tmpl_id = fields.Many2one('purchase.order.wizard', string='Products')
-
 
 class product_purchase_order(models.Model):
     _name = 'product.purchase.order'

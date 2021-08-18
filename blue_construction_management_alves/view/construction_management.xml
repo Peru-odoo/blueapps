@@ -229,10 +229,6 @@
                                 </tree>
                             </field>
                         </group>
-                        <!-- Campo com Custo Total dos Materiais Utilizados -->
-                        <group>
-                            <field name="price_total_materiais"/>
-                        </group>
                     </page>
 
                     <page string="Material Requisitions"  invisible="1">
