@@ -89,18 +89,19 @@ class project_task(models.Model):
     stock_move_ids = fields.One2many('stock.move', 'project_stock_move_id')
     currency_id = fields.Many2one('res.currency', string='Currency',
                                   default=lambda self: self.env.user.company_id.currency_id)
-    #   material_count = fields.Integer(compute="_compute_material_count", string="Custo Total")
 
-    #    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', string='Qtd. Materias Utilizados',
-    #                                 help="Quantidade total de materias utilizados na OS atual")
+    qtd_materiais = fields.Float(
+        compute='_calculate_qtd_materiais',
+        string='Qtd. Materias Utilizados',
+        help="Quantidade total de materias utilizados na OS atual")
     observacao = fields.Html(
         string='Observações',
         required=False)
-
-    price_total_materiais = fields.Float(string='Custo com Materias Utilizados',
-                                         compute='_calculate_price_total_materiais',
-                                         #                                         store=True,
-                                         help="Valor total dos materias utilizados na OS atual")
+    price_total_materiais = fields.Float(
+        string='Custo com Materias Utilizados',
+        compute='_calculate_price_total_materiais',
+        store=True,
+        help="Valor total dos materias utilizados na OS atual")
 
     def _calculate_price_total_materiais(self):
         for pt in self:
@@ -110,12 +111,12 @@ class project_task(models.Model):
         pt.price_total_materiais = ptsumqty
 
 
-#   def _calculate_qtd_materiais(self):
-#       for rs in self:
-#           sumqty = 0
-#           for line in rs.consume_material_ids:
-#               sumqty += line.product_qty
-#       rs.qtd_materiais = sumqty
+def _calculate_qtd_materiais(self):
+    for rs in self:
+        sumqty = 0
+        for line in rs.consume_material_ids:
+            sumqty += line.product_qty
+    rs.qtd_materiais = sumqty
 
 
 class stock_move(models.Model):
