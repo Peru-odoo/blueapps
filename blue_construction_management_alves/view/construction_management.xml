@@ -225,7 +225,8 @@
                                     <field name="uom_id" string="Unit Of Measure" optional="show"/>
                                     <field name="price_unit" widget="monetary" optional="show" readonly='True'/>
                                     <field name="price_subtotal" widget="monetary" optional="show" readonly='True'
-                                           sum="Custo Total"/></tree>
+                                           sum="Custo Total"/>
+                                </tree>
                             </field>
                         </group>
                         <!-- Campo com Custo Total dos Materiais Utilizados -->
