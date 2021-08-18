@@ -206,10 +206,10 @@
                         <group>
                             <field name="prod_material_ids" nolabel="1">
                                 <tree editable="bottom">
-                                    <field name="product_id" string="Product"/>
+                                    <field name="product_id" string="Product" options="{'no_create': True}"/>
                                     <field name="name" string="Description"/>
                                     <field name="product_qty" string="Quantity"/>
-                                    <field name="uom_id" string="Unit Of Measure"/>
+                                    <field name="uom_id" string="Unit Of Measure" options="{'no_create': True}"/>
                                 </tree>
                             </field>
                         </group>
@@ -228,7 +228,10 @@
                                            sum="Custo Total"/>
                                 </tree>
                             </field>
-                            <field name="observacao" widget="html"/>
+
+                        </group>
+                        <group>
+                            <field name="observacao" widget="html" nolabel="1" placeholder="Informe aqui qualquer observação sobre o serviço executado..."/>
                         </group>
                     </page>
 
