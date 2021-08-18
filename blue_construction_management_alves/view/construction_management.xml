@@ -223,9 +223,14 @@
                                     <field name="name" string="Description" optional="show"/>
                                     <field name="product_qty" string="Quantity" optional="show"/>
                                     <field name="uom_id" string="Unit Of Measure" optional="show"/>
-                                    <field name="price_unit" widget="monetary" optional="show" sum="Custo Total"/>
-                                </tree>
+                                    <field name="price_unit" widget="monetary" optional="show" readonly='True'/>
+                                    <field name="price_subtotal" widget="monetary" optional="show" readonly='True'
+                                           sum="Custo Total"/></tree>
                             </field>
+                        </group>
+                        <!-- Campo com Custo Total dos Materiais Utilizados -->
+                        <group>
+                            <field name="price_total_materiais"/>
                         </group>
                     </page>
 
