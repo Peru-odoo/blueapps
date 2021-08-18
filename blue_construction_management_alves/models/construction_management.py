@@ -53,20 +53,15 @@ class material_consume(models.Model):
     product_qty = fields.Float('Quantity', default=1.0)
     uom_id = fields.Many2one('uom.uom', 'Unit of Measure')
     task_id = fields.Many2one('project.task', 'Task')
-    price_unit = fields.Float('Valor Unitario', digits=dp.get_precision('Product Price'), default=0.0)
-    price_subtotal = fields.Float('Valor Total', compute='_compute_price', digits=dp.get_precision('Product Price'), default=0.0)
+    price_unit = fields.Float('Valor Unitario', readonly=True, digits=dp.get_precision('Product Price'), default=0.0)
+    price_subtotal = fields.Float('Valor Total', readonly=True, compute='_compute_price',
+                                  digits=dp.get_precision('Product Price'), default=0.0)
 
     @api.depends('price_unit', 'product_qty', 'product_id')
     def _compute_price(self):
         for i in self:
             i.price_subtotal = i.product_qty * i.price_unit
 
-#    def _calculate_price_total(self):
-#        if self.price_unit > 0:
-#            price    = self.price_unit
-#            qty      = self.product_qty
-#            total    = qty * price
-#        self.price_total = total
 
 class product_product(models.Model):
     _inherit = 'product.product'
@@ -91,11 +86,11 @@ class project_task(models.Model):
     stock_move_ids = fields.One2many('stock.move', 'project_stock_move_id')
  #   material_count = fields.Integer(compute="_compute_material_count", string="Custo Total")
 
-
-    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', string='Qtd. Materias Utilizados',
-                                help="Quantidade total de materias utilizados na OS atual")
-    price_total_materiais = fields.Float(compute='_calculate_price_total_materiais', string='Custo com Materias Utilizados',
-                                help="Valor total dos materias utilizados na OS atual")
+    qtd_materiais = fields.Float(compute='_calculate_qtd_materiais', readonly=True, string='Qtd. Materias Utilizados',
+                                 help="Quantidade total de materias utilizados na OS atual")
+    price_total_materiais = fields.Float(compute='_calculate_price_total_materiais', readonly=True,
+                                         string='Custo com Materias Utilizados',
+                                         help="Valor total dos materias utilizados na OS atual")
 
     def _calculate_qtd_materiais(self):
         for rs in self:

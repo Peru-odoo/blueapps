@@ -3,7 +3,7 @@
     <data>
 
         <record id="material_consume_view_tree" model="ir.ui.view">
-            <field name="name">material_consume_tree</field>
+            <field name="name">material.consome.view.tree</field>
             <field name="model">material.consume</field>
             <field name="arch" type="xml">
 				<tree string="Materiais Utitilizados" multi_edit="1" editable="bottom">
@@ -13,12 +13,12 @@
                     <field name="product_qty" optional="show" sum="Qtd. Total"/>
                     <field name="uom_id" optional="show"/>
                     <field name="price_unit" widget="monetary" optional="show"/>
-                    <field name="price_total" widget="monetary" optional="show" sum="Custo Total"/>
+                    <field name="price_subtotal" widget="monetary" optional="show" sum="Custo Total"/>
                 </tree>
             </field>
         </record>
         <record id="material_consome_view_form" model="ir.ui.view">
-            <field name="name">material_consome_view_form</field>
+            <field name="name">material.consome.view.form</field>
             <field name="model">material.consume</field>
             <field name="arch" type="xml">
                 <form string="Materiais Utilizados">
@@ -31,13 +31,27 @@
                            <field name="product_qty"/>
                            <field name="uom_id"/>
                            <field name="price_unit" widget="monetary"/>
-                           <field name="price_total" widget="monetary"/>
+                            <field name="price_subtotal" widget="monetary"/>
                         </group>
                     </group>
                 </form>
             </field>
         </record>
 
+        <record id="material_consome_view_kanban" model="ir.ui.view">
+            <field name="name">material.consome.view.kanban</field>
+            <field name="model">material.consume</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="price_subtotal"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
         <record id="inherit_view_note_note_tree" model="ir.ui.view">
             <field name="name">inherit.view.note.note.tree</field>
