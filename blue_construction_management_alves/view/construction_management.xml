@@ -220,10 +220,10 @@
                             <field name="consume_material_ids" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="product_id" string="Product"/>
-                                    <field name="name" string="Description" optional="show"/>
+                                    <field name="name" string="Description" optional="hide"/>
                                     <field name="product_qty" string="Quantity" optional="show"/>
                                     <field name="uom_id" string="Unit Of Measure" optional="show"/>
-                                    <field name="price_unit" widget="monetary" optional="show" readonly='True'/>
+                                    <field name="price_unit" widget="monetary" optional="show"/>
                                     <field name="price_subtotal" widget="monetary" optional="show" readonly='True'
                                            sum="Custo Total"/>
                                 </tree>
