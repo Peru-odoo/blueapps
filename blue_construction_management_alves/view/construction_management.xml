@@ -35,20 +35,7 @@
                 </form>
             </field>
         </record>
-        <record id="material_consome_view_kanban" model="ir.ui.view">
-         <field name="name">material_consome_view_kanban</field>
-          <field name="model">material.consome</field>
-         <field name="arch" type="xml">
-            <kanban>
-                <field name="name"/>
-                <field name="price_unit" widget="monetary"/>
-         <templates>
-         <t t-name="kanban-box">
-         </t>
-         </templates>
-         </kanban>
-         </field>
-        </record>
+
 
         <record id="inherit_view_note_note_tree" model="ir.ui.view">
             <field name="name">inherit.view.note.note.tree</field>

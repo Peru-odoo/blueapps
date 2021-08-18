@@ -79,6 +79,17 @@ class project_task(models.Model):
     stock_move_ids = fields.One2many('stock.move', 'project_stock_move_id')
  #   material_count = fields.Integer(compute="_compute_material_count", string="Custo Total")
 
+
+    tot_sale_qty = fields.Float(compute='_calculate_sale_qty', string='Total Sale Quantity',
+                                help="Total sale quantity in active document")
+
+    def _calculate_sale_qty(self):
+        for rs in self:
+            sumqty = 0
+            for line in rs.consume_material_ids:
+                sumqty += line.product_qty
+        rs.tot_sale_qty = sumqty
+
  #   def _compute_material_count(self):
 
 
