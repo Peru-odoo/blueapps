@@ -110,13 +110,12 @@ class project_task(models.Model):
                 ptsumqty += line.price_subtotal
         pt.price_total_materiais = ptsumqty
 
-
-def _calculate_qtd_materiais(self):
-    for rs in self:
-        sumqty = 0
-        for line in rs.consume_material_ids:
-            sumqty += line.product_qty
-    rs.qtd_materiais = sumqty
+    def _calculate_qtd_materiais(self):
+        for rs in self:
+            sumqty = 0
+            for line in rs.consume_material_ids:
+                sumqty += line.product_qty
+        rs.qtd_materiais = sumqty
 
 
 class stock_move(models.Model):
