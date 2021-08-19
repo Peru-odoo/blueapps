@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="assets_backend" name="Note Tray Assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/note_quick/static/src/js/widgets/note_tray.js"></script>
+            <link href="/note_quick/static/src/css/note_tray.css" rel="stylesheet"/>
+        </xpath>
+    </template>
+</odoo>

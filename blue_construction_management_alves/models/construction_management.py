@@ -103,6 +103,8 @@ class project_task(models.Model):
         compute='_calculate_price_total',
         help="Valor total dos materias utilizados na OS atual")
 
+
+
     @api.onchange('consume_material_ids')
     def _calculate_price_total(self):
         for rs in self:

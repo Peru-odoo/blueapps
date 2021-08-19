@@ -1,0 +1,119 @@
+<odoo>
+	<!-- Quick note Kanban View -->
+    <record id="view_quick_note_kanban" model="ir.ui.view">
+      <field name="name">Quick Preview Notes</field>
+      <field name="model">note.note</field>
+      <field name="arch" type="xml">
+        <kanban default_group_by="stage_id" class="oe_notes oe_kanban_quickcreate_textarea o_kanban_small_column">
+          <field name="color"/>
+          <field name="sequence"/>
+          <field name="name"/>
+          <field name="stage_id"/>
+          <field name="open"/>
+          <field name="memo"/>
+          <field name="date_done"/>
+          <field name="message_partner_ids"/>
+          <field name="activity_ids" />
+          <field name="activity_state" />
+          <header>
+            <button name="act_create_one" type="object" string="Create" />
+          </header>
+          <templates>
+            <t t-name="kanban-box">
+
+              <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click_edit oe_semantic_html_override oe_kanban_card">
+
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+
+                <div class="o_dropdown_kanban dropdown">
+                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" >
+                        <span class="fa fa-ellipsis-v"/>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li><a type="delete">Delete</a></li>
+                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                    </ul>
+                </div>
+                  <span>
+                    <a name="action_close" type="object" t-if="record.open.raw_value"><i class="fa fa-check"/></a>
+                    <a name="action_open" type="object" t-if="!record.open.raw_value"><i class="fa fa-undo"/></a>
+                  </span>
+                <!-- kanban note -->
+                <span t-attf-class="oe_kanban_content #{record.open.raw_value ? '' : 'note_text_line_through'}">
+                  <!-- title -->
+                  <field name="name"/>
+                  <div class="oe_kanban_bottom_right">
+                    <div class="o_kanban_inline_block mr4">
+                        <field name="activity_ids" widget="kanban_activity" />
+                        <button name="act_edit" type="object" string="Edit"><i class="fa fa-pencil"/></button>
+                    </div>
+                  </div>
+                </span>
+                <t t-if="record.message_partner_ids.raw_value.length &gt; 1">
+                    <div class="clearfix"></div>
+                      <t t-foreach="record.message_partner_ids.raw_value" t-as="follower">
+                        <img t-att-src="kanban_image('res.partner', 'image_small', follower)" width="24" height="24" class="oe_kanban_avatar pull-right" t-att-data-member_id="follower"/>
+                      </t>
+                    <div class="clearfix"></div>
+                </t>
+              </div>
+            </t>
+            <footer>
+              <button name="act_create_one" type="object" string="Create" />
+            </footer>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- New note Form View -->
+    <record id="view_quick_note_form" model="ir.ui.view">
+        <field name="name">Note</field>
+        <field name="model">note.note</field>
+        <field name="arch" type="xml">
+            <form string="Note" class="oe_form_nomargin o_note_form_view">
+                <header>
+                    <field name="stage_id" domain="[('user_id','=',uid)]" widget="statusbar" clickable="1"/>
+                </header>
+                <sheet>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="Tags"/>
+                    <field name="memo" widget="html" class="oe_memo" editor_height="450px" />
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                <field name="id" invisible="1" />
+                <footer>
+                	<button name="act_back" type="object" class="btn-primary" string="Save &amp; Close" attrs="{'invisible': [('id', '=', False)]}" context="{'save_close': True}" />
+                	<button name="act_back" type="object" class="btn-primary" string="Save &amp; Back" attrs="{'invisible': [('id', '=', False)]}" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_quick_note" model="ir.actions.act_window">
+      <field name="name">Notes</field>
+      <field name="res_model">note.note</field>
+      <field name="view_id" ref="view_quick_note_kanban" />
+      <field name="view_mode">kanban</field>
+      <field name="target">new</field>
+      <field name="context">{'create': False}</field>
+      <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click Create to add a personal note.
+          </p><p>
+            Use notes to organize personal tasks or notes. All
+            notes are private; no one else will be able to see them. However
+            you can share some notes with other people by inviting followers
+            on the note. (Useful for meeting minutes, especially if
+            you activate the pad feature for collaborative writings).
+          </p><p>
+            You can customize how you process your notes/tasks by adding,
+            removing or modifying columns.
+          </p>
+        </field>
+    </record>
+</odoo>

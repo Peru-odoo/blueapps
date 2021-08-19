@@ -1,0 +1,15 @@
+{'name': 'Quick Access Note',
+ 'summary': 'Note Tray',
+ 'author': 'Erlangga Indra Permana',
+ 'website': 'https://erlaangga.github.io',
+ 'version': '1.0',
+ 'category': 'Productivity',
+ 'depends': ['note'],
+ 'license': 'LGPL-3',
+ 'data': ['views/webclient_note.xml',
+ 		  'views/note_views.xml'],
+ 'images': ['static/description/tray_icon.png'],
+ 'qweb': [
+        "static/src/xml/*.xml",
+    ],
+}
