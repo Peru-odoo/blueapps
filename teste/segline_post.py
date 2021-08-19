@@ -2,13 +2,13 @@ import requests
 import json
 
 #6374
-campanha = input("Digite o Código da Campanha: ")
+#campanha = input("Digite o Código da Campanha: ")
+campanha = 6374
+#if len(campanha) != 4:
+#    print("Quantidade de dígitos invalido")
+#    exit()
 
-if len(campanha) != 4:
-    print("Quantidade de dígitos invalido")
-    exit()
-
-quantidade = input("Quantidade de Leads: ")
+#quantidade = input("Quantidade de Leads: ")
 
 url = "http://sip.segline.srv.br/jeta/api/campanha/cliente/importado"
 payload = json.dumps({
@@ -17,7 +17,7 @@ payload = json.dumps({
   "TABELA": "CAMPANHA_IMPORTACAO",
   "EMPRESA": "new",
   "JETA": 38427,
-  "PAGESIZE": (quantidade),
+  "PAGESIZE": 1,
   "PAGEINDEX": 2
 })
 headers = {
@@ -26,8 +26,11 @@ headers = {
 
 response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
-#print('Campanha: {}'.format(response['code']))
+dados = response
+
+parsed_json = json.loads(dados)
+#print(response.text)
+print(dados)
 
 
 
