@@ -53,6 +53,7 @@ class project_project(models.Model):
             self.work_package_ids = False
         # return True
 
+		
     sale_order_ids = fields.Many2many("sale.order", string="Sale Order Reference")
     purchase_order_ids = fields.Many2many("purchase.order", string="Purchase Order Reference")
     work_package_ids = fields.One2many("work.package.extension", 'project_id', string="Work Package Reference",
