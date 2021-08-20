@@ -7,7 +7,7 @@ print("################")
 print()
 
 request = requests.get('http://sip.segline.srv.br/jeta/api/campanha?EMPRESA=new&CAMPO=DESCRICAO&SITUACAO=1&PAGEINDEX=1&ABERTO=S&AGENTE=J9641997&jeta=38427')
-campanhas = request.json()
+campanhas = request.text()
 
 dados = campanhas
 parsed_json = json.loads(dados)

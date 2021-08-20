@@ -1,5 +1,6 @@
-import requests
 import json
+import jsonpickle
+import requests
 
 #6374
 #campanha = input("Digite o Código da Campanha: ")
@@ -27,10 +28,11 @@ headers = {
 response = requests.request("POST", url, headers=headers, data=payload)
 
 dados = response
-
+dados1 = json.dumps(dados)
+dados2 = jsonpickle.encode(dados)
 parsed_json = json.loads(dados)
 #print(response.text)
-print(dados)
+#print(dados2)
 
 
 

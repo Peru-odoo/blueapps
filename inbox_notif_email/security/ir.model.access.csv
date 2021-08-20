@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_inbox_notif_email_inbox_notif_email,inbox_notif_email.inbox_notif_email,model_inbox_notif_email_inbox_notif_email,base.group_user,1,1,1,1
