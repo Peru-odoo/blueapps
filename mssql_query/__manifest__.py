@@ -15,7 +15,7 @@ You can use SELECT, UPDATE, DELETE, CREATE, INSERT, ALTER and DROP statements.
          """,
      'depends': ['base'],
      'data': [
-         'security/ir.model.access.csv',
+# Erro         'security/ir.model.access.csv',
          'security/security.xml',
          'views/mssql_query.xml',
      ],
