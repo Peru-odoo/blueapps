@@ -2,6 +2,10 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 import pyodbc
 
+class res_partner(models.Model):
+    _inherit = 'res.partner'
+    
+    cust_old_id = fields.Char(string='ID Antigo')
 
 class QueryMSSQL(models.Model):
     _name = "mssql.query"
