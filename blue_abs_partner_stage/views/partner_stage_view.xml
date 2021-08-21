@@ -37,8 +37,10 @@
             <field name="view_id" ref="view_partner_stages_tree"/>
         </record>
 
-        <menuitem id="menu_partner_stages"
+ <!--       <menuitem id="menu_partner_stages"
                   name="Partner Stages" 
-                  sequence="10"
+                  parent="sale.menu_sale_config"
+                  sequence="3"
                   action="abs_partner_stage.partner_stages_action"/>
+-->
 </odoo>
