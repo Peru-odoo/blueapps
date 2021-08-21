@@ -2,13 +2,6 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 import pyodbc
 
-class res_partner(models.Model):
-    _inherit = 'res.partner'
-    
-    name_ar = fields.Char(string="Arabic Name", required=False, )
-    vend_old_id = fields.Integer(string="Old ID", required=False,)
-    cust_old_id = fields.Integer(string="Old ID", required=False, )
-
 class QueryMSSQL(models.Model):
     _name = "mssql.query"
     _description = "MS SQL queries from Odoo interface"
