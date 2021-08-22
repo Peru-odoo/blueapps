@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="view_library_installer" model="ir.ui.view">
+            <field name="name">library.installer.installer.wizard</field>
+            <field name="model">library_installer.installer</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Python Library Installer">
+                    <sheet>
+                        <div>
+                            <h2>Python Libraries</h2>
+                        </div>
+                        <br/>
+                        <group>
+                            <field name="select_type" required="True"/>
+                            <field name="lib_data" attrs="{'invisible': [('select_type', '=', 'file')]}"/>
+                            <field name="requirements_file" attrs="{'invisible': [('select_type', '=', 'text')]}"/>
+                        </group>
+                        <div>
+                            <p style="color: red;">Note: Just specify the names of Python libraries with or without version.</p>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button string="Install" class="oe_highlight" type="object" name="install"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_open_library_installer_view">
+            <field name="name">Installer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">library_installer.installer</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_installer_view_form">
+            <field name="act_window_id" ref="act_open_library_installer_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_library_installer"/>
+        </record>
+        <menuitem id="menu_act_open_installer_view" action="act_open_library_installer_view" parent="base.menu_management" name="Install Python Library" sequence="35"/>
+    </data>
+</odoo>
