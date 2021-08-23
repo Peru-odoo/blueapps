@@ -28,12 +28,10 @@ class ResPartner(models.Model):
         result = super(ResPartner, self).default_get('customer')
         stages_final = False
         stages = []
-'''
         if self.env.context.get('search_default_customer',False) == 1:
             stages = self.env['partner.stage'].search([('customer','=',True)])
         elif self.env.context.get('search_default_supplier',False) == 1:
             stages = self.env['partner.stage'].search([('vendor','=',True)])
-'''
         stage_list = []
         stage_return = False
         for stage in stages:
