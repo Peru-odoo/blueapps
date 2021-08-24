@@ -37,7 +37,7 @@ class DbConnection(models.Model):
     # ------------------------------customer----------------
     customer_id_map = fields.Char(string="Customer ID", required=False, help="Customer ID map filed to integer field.")
     customer_name_map = fields.Char(string="Customer Name", required=False,
-                                    help="Customer Name map filed to string field.")
+                                    help="Customer Name map filed to string field.", default="RAZAO")
     customer_email_map = fields.Char(string="Customer Email", required=False,
                                      help="Customer Email map filed to string field.")
     customer_phone_map = fields.Char(string="Customer Phone", required=False,
@@ -46,6 +46,35 @@ class DbConnection(models.Model):
                                       help="Customer table name \ View name.")
     customer_table_where = fields.Text(string="Customer Table Where", required=False,
                                        help="Customer table where conditions (Do not add WHERE word).")
+    #### Segline ###
+    ddD1 = fields.Char(string="DDD1", default="ddD1")
+    telefone1 = fields.Char(string="Telefone 1", default="telefone1")
+    ddD2 = fields.Char(string="DDD2", default="ddD2")
+    telefone2 = fields.Char(string="Telefone 2", default="telefone2")
+    ddD3 = fields.Char(string="DDD3", default="ddD3")
+    telefone3 = fields.Char(string="Telefone 3", default="telefone3")
+    ddD4 = fields.Char(string="DDD4", default="ddD4")
+    telefone4 = fields.Char(string="Telefone 4", default="telefone4")
+    ddD5 = fields.Char(string="DDD5", default="ddD5")
+    telefone5 = fields.Char(string="Telefone 5", default="telefone5")
+    ddD6 = fields.Char(string="DDD6", default="ddD6")
+    telefone6 = fields.Char(string="Telefone 6", default="telefone6")
+    ddD7 = fields.Char(string="DDD7", default="ddD7")
+    telefone7 = fields.Char(string="Telefone 7", default="telefone7")
+    ddD8 = fields.Char(string="DDD8", default="ddD8")
+    telefone8 = fields.Char(string="Telefone 8", default="telefone8")
+    ddD9 = fields.Char(string="DDD9", default="ddD9")
+    telefone9 = fields.Char(string="Telefone 9", default="telefone9")
+    ddD10 = fields.Char(string="DDD10", default="ddD10")
+    telefone10 = fields.Char(string="Telefone 10", default="telefone10")
+    campanha = fields.Char(string="Campanha", default="campanha")
+    nomeCampanha = fields.Char(string="Nome da Campanha", default=")
+    beneficio1 = fields.Char(string="Beneficio 1", default="beneficio1")
+    beneficio2 = fields.Char(string="Beneficio 2", default="beneficio2")
+    agbcocred = fields.Char(string="Agencia", default="agbcocred")
+    ccbcocred = fields.Char(string="Conta", default="ccbcocred")
+    datanasc = fields.Datetime(string="Nascimento", default="datanasc")
+
     # ------------------------------Product category----------------
     product_category_id_map = fields.Char(string="Product Category ID", required=False,
                                           help="Product Category ID map filed to integer field.")
@@ -259,12 +288,33 @@ class DbConnection(models.Model):
             customer_obj = self.env['res.partner'].search([('cust_old_id', '=', user_id)], limit=1)
             if not customer_obj:
                 customer_obj = self.env['res.partner'].create({
-                    'name': name,
+                    'name': RAZAO,
                     'mobile': mobile,
                     'email': email,
                     'is_company': 'false',
                     'customer_rank': 1,
                     'cust_old_id': user_id
+                    'ddD1': ddD1,
+                    'telefone1': telefone1,
+                    'ddD2': ddD2,
+                    'telefone2': telefone2,
+                    'ddD3': ddD3,
+                    'telefone3': telefone3,
+                    'ddD1': ddD4,
+                    'telefone4': telefone4,
+                    'ddD1': ddD5,
+                    'telefone5': telefone5,
+                    'ddD1': ddD6,
+                    'telefone6': telefone6,
+                    'ddD1': ddD7,
+                    'telefone7': telefone7,
+                    'ddD1': ddD8,
+                    'telefone8': telefone8,
+                    'ddD1': ddD9,
+                    'telefone9': telefone9,
+                    'ddD10': ddD10,
+                    'telefone10': telefone10,
+
                 })
             return customer_obj.id
         except Exception as e:
