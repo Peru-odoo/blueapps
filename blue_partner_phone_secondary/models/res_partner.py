@@ -7,33 +7,38 @@ import urllib3
 import json
 
 
-class NotesNote(models.Model):
-    _name = 'notes.note'
-    _description = 'Description'
-
-    partner_id = fields.Many2one('res.partner', name="Note By")
-    note = fields.Text(name="Note")
-    time_date = fields.Datetime(string="Time")
-
-    def get_notes(self):
-        http = urllib3.PoolManager()
-        URL = 'http://www.example.com'
-        root = '/notes/note'  # the path where the request handler is located
-        datas = http.request('GET', URL + root)
-        datas = json.loads(datas.data.decode('utf-8'))  # parses the response to  a compatible form
-        for data in datas:
-            self.env['notes.note'].create({
-                'partner_id': self.env['res.partner.search'].search([('notes_user_id', '=', data['user_id'])]).id,
-                'note': data['note'],
-                'time_date': data['time']
-            })
-
-
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
     phone2 = fields.Char("Phone (Secondary)")
+    ddD1 = fields.Char("DDD1")
+    telefone1 = fields.Char("Telefone 1")
+    ddD2 = fields.Char("DDD2")
+    telefone2 = fields.Char("Telefone 2")
+    ddD3 = fields.Char("DDD3")
+    telefone3 = fields.Char("Telefone 3")
+    ddD4 = fields.Char("DDD4")
+    telefone4 = fields.Char("Telefone 4")
+    ddD5 = fields.Char("DDD5")
+    telefone5 = fields.Char("Telefone 5")
+    ddD6 = fields.Char("DDD6")
+    telefone6 = fields.Char("Telefone 6")
+    ddD7 = fields.Char("DDD7")
+    telefone7 = fields.Char("Telefone 7")
+    ddD8 = fields.Char("DDD8")
+    telefone8 = fields.Char("Telefone 8")     
+    ddD9 = fields.Char("DDD9")
+    telefone9 = fields.Char("Telefone 9")   
+    ddD10 = fields.Char("DDD10")
+    telefone10 = fields.Char("Telefone 10") 
+    campanha = fields.Char("Campanha")
+    nomeCampanha = fields.Char("Nome da Campanha")
+    beneficio1 = fields.Char("Beneficio 1")
+    beneficio1 = fields.Char("Beneficio 2")
+    agbcocred = fields.Char("Agencia")
+    ccbcocred = fields.Char("Conta")
+    datanasc = fields.Char("Nascimento")
 
     @api.onchange("phone2", "country_id", "company_id")
     def _onchange_phone2_validation(self):
