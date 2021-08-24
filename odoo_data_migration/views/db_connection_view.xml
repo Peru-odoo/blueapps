@@ -62,15 +62,37 @@
                                     <field name="vendor_table_where" string="Table Where"/>
                                 </group>
                             </page>
-                            <page string="Customers">
+                            <page string="Clientes Segline">
                                 <group>
                                     <group>
                                         <field name="customer_id_map" string="ID"/>
-                                        <field name="customer_name_map" string="Name"/>
+                                        <field name="customer_name_map" string="Nome"/>
+                                        <field name="customer_email_map" string="Email"/>
+                                        <field name="customer_phone_map" string="Hot"/>
                                     </group>
                                     <group>
-                                        <field name="customer_email_map" string="Email"/>
-                                        <field name="customer_phone_map" string="Phone"/>
+                                        <field name="ddD1"/>
+                                        <field name="telefone1"/>
+                                        <field name="ddD2"/>
+                                        <field name="telefone2"/>
+                                        <field name="ddD3"/>
+                                        <field name="telefone3"/>
+                                        <field name="ddD4"/>
+                                        <field name="telefone4"/>
+                                        <field name="ddD5"/>
+                                        <field name="telefone5"/>
+                                        <field name="ddD6"/>
+                                        <field name="telefone6"/>
+                                        <field name="ddD7"/>
+                                        <field name="telefone7"/>
+                                        <field name="ddD8"/>
+                                        <field name="telefone8"/>
+                                        <field name="ddD9"/>
+                                        <field name="telefone9"/>
+                                        <field name="ddD10"/>
+                                        <field name="telefone10"/>
+
+
                                     </group>
                                 </group>
                                 <group>
