@@ -291,6 +291,27 @@ class DbConnection(models.Model):
                 query_str += self.customer_name_map + ', ' if self.customer_name_map else ''
                 query_str += self.customer_email_map + ', ' if self.customer_email_map else ''
                 query_str += self.customer_phone_map + ' ' if self.customer_phone_map else ''
+
+                query_str += self.ddD1 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone1 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD2 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone2 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD3 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone3 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD4 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone4 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD5 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone5 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD6 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone6 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD7 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone7 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD8 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone8 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD9 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone9 + ' ' if self.customer_phone_map else ''
+                query_str += self.ddD10 + ' ' if self.customer_phone_map else ''
+                query_str += self.telefone10 + ' ' if self.customer_phone_map else ''
                 query_str += 'FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
                 query_str += 'WHERE ' + self.customer_table_where.replace('where', ''). \
                     replace('Where', '').replace('WHERE', '') + ' ' if self.customer_table_where else ''
@@ -328,29 +349,27 @@ class DbConnection(models.Model):
                     'email': email,
                     'is_company': 'false',
                     'customer_rank': 1,
-                    'id_segline': user_id
-                    '''
-                        'ddD1': ddD1,
-                        'telefone1': telefone1,
-                        'ddD2': ddD2,
-                        'telefone2': telefone2,
-                        'ddD3': ddD3,
-                        'telefone3': telefone3,
-                        'ddD4': ddD4,
-                        'telefone4': telefone4,
-                        'ddD5': ddD5,
-                        'telefone5': telefone5,
-                        'ddD6': ddD6,
-                        'telefone6': telefone6,
-                        'ddD7': ddD7,
-                        'telefone7': telefone7,
-                        'ddD8': ddD8,
-                        'telefone8': telefone8,
-                        'ddD9': ddD9,
-                        'telefone9': telefone9,
-                        'ddD10': ddD10,
-                        'telefone10': telefone10
-                    '''
+                    'id_segline': user_id,
+                    'ddD1': ddD1,
+                    'telefone1': telefone1,
+                    'ddD2': ddD2,
+                    'telefone2': telefone2,
+                    'ddD3': ddD3,
+                    'telefone3': telefone3,
+                    'ddD4': ddD4,
+                    'telefone4': telefone4,
+                    'ddD5': ddD5,
+                    'telefone5': telefone5,
+                    'ddD6': ddD6,
+                    'telefone6': telefone6,
+                    'ddD7': ddD7,
+                    'telefone7': telefone7,
+                    'ddD8': ddD8,
+                    'telefone8': telefone8,
+                    'ddD9': ddD9,
+                    'telefone9': telefone9,
+                    'ddD10': ddD10,
+                    'telefone10': telefone10
                 })
             return customer_obj.id
         except Exception as e:
