@@ -47,25 +47,25 @@ class DbConnection(models.Model):
     customer_table_where = fields.Text(string="Customer Table Where", required=False,
                                        help="Customer table where conditions (Do not add WHERE word).")
     #### Segline ###
-    ddd1 = fields.Char(string="DDD1", default="ddD1", required=False, )
+    ddD1 = fields.Char(string="DDD1", default="ddD1", required=False, )
     telefone1 = fields.Char(string="Telefone 1", default="telefone1", required=False, )
-    ddd2 = fields.Char(string="DDD2", default="ddD2", required=False, )
+    ddD2 = fields.Char(string="DDD2", default="ddD2", required=False, )
     telefone2 = fields.Char(string="Telefone 2", default="telefone2", required=False, )
-    ddd3 = fields.Char(string="DDD3", default="ddD3", required=False, )
+    ddD3 = fields.Char(string="DDD3", default="ddD3", required=False, )
     telefone3 = fields.Char(string="Telefone 3", default="telefone3", required=False, )
-    ddd4 = fields.Char(string="DDD4", default="ddD4", required=False, )
+    ddD4 = fields.Char(string="DDD4", default="ddD4", required=False, )
     telefone4 = fields.Char(string="Telefone 4", default="telefone4", required=False, )
-    ddd5 = fields.Char(string="DDD5", default="ddD5", required=False, )
+    ddD5 = fields.Char(string="DDD5", default="ddD5", required=False, )
     telefone5 = fields.Char(string="Telefone 5", default="telefone5", required=False, )
-    ddd6 = fields.Char(string="DDD6", default="ddD6", required=False, )
+    ddD6 = fields.Char(string="DDD6", default="ddD6", required=False, )
     telefone6 = fields.Char(string="Telefone 6", default="telefone6", required=False, )
-    ddd7 = fields.Char(string="DDD7", default="ddD7", required=False, )
+    ddD7 = fields.Char(string="DDD7", default="ddD7", required=False, )
     telefone7 = fields.Char(string="Telefone 7", default="telefone7", required=False, )
-    ddd8 = fields.Char(string="DDD8", default="ddD8", required=False, )
+    ddD8 = fields.Char(string="DDD8", default="ddD8", required=False, )
     telefone8 = fields.Char(string="Telefone 8", default="telefone8", required=False, )
-    ddd9 = fields.Char(string="DDD9", default="ddD9", required=False, )
+    ddD9 = fields.Char(string="DDD9", default="ddD9", required=False, )
     telefone9 = fields.Char(string="Telefone 9", default="telefone9", required=False, )
-    ddd10 = fields.Char(string="DDD10", default="ddD10", required=False, )
+    ddD10 = fields.Char(string="DDD10", default="ddD10", required=False, )
     telefone10 = fields.Char(string="Telefone 10", default="telefone10", required=False, )
     campanha = fields.Char(string="Campanha", default="campanha")
     nomeCampanha = fields.Char(string="Nome da Campanha", default="nomeCampanha")
@@ -293,7 +293,7 @@ class DbConnection(models.Model):
                     'email': email,
                     'is_company': 'false',
                     'customer_rank': 1,
-                    'cust_old_id': user_id
+                    'cust_old_id': user_id,
                     'ddD1': ddD1,
                     'telefone1': telefone1,
                     'ddD2': ddD2,
@@ -313,8 +313,7 @@ class DbConnection(models.Model):
                     'ddD1': ddD9,
                     'telefone9': telefone9,
                     'ddD10': ddD10,
-                    'telefone10': telefone10,
-
+                    'telefone10': telefone10
                 })
             return customer_obj.id
         except Exception as e:
