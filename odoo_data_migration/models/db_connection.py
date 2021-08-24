@@ -11,14 +11,14 @@ class DbConnection(models.Model):
     _rec_name = 'name'
     _description = 'Database connectivity setup'
 
-    name = fields.Char(string="Connection Name", required=True, size=100)
+    name = fields.Char(string="Connection Name", required=True, size=100, default="uniexpresscred_01")
     connection_status = fields.Char(string="Connection Status", required=False, )
     connection_driver = fields.Char(string="ODBC Driver", required=False, default='{ODBC Driver 17 for SQL Server}')
-    connection_server = fields.Char(string="Server", required=False, default='localhost')
-    connection_db = fields.Char(string="Database", required=False, default='tempdb')
+    connection_server = fields.Char(string="Server", required=False, default='uniexpresscred_01.sqlserver.dbaas.com.br')
+    connection_db = fields.Char(string="Database", required=False, default='uniexpresscred_01')
     connection_port = fields.Char(string="Port", required=False, default='1433')
-    connection_user = fields.Char(string="User Name", required=False, default='sa')
-    connection_password = fields.Char(string="Password", required=False, default='sa')
+    connection_user = fields.Char(string="User Name", required=False, default='uniexpresscred_01')
+    connection_password = fields.Char(string="Password", required=False, default='idmssqlsg90')
     loading_process_ids = fields.One2many(comodel_name="loading_process", inverse_name="dbconnection", string="Logs")
     # ------------------------------vendor----------------
     vendor_id_map = fields.Char(string="Vendor ID", required=False, help="Vendor ID map filed to integer field.")
@@ -35,7 +35,8 @@ class DbConnection(models.Model):
     vendor_table_where = fields.Text(string="Vendor Table Where", required=False,
                                      help="Vendor table where conditions (Do not add WHERE word).")
     # ------------------------------customer----------------
-    customer_id_map = fields.Char(string="Customer ID", required=False, help="Customer ID map filed to integer field.")
+    customer_id_map = fields.Char(string="Customer ID", required=False,
+                                  help="Customer ID map filed to integer field.", default="CPFCNPJ")
     customer_name_map = fields.Char(string="Customer Name", required=False,
                                     help="Customer Name map filed to string field.", default="RAZAO")
     customer_email_map = fields.Char(string="Customer Email", required=False,
