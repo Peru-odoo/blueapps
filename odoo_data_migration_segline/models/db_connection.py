@@ -256,7 +256,7 @@ class DbConnection(models.Model):
 
     def create_customer(self, user_id, name, email, mobile):
         try:
-            customer_obj = self.env['res.partner'].search([('cust_old_id', '=', user_id)], limit=1)
+            customer_obj = self.env['res.partner'].search([('id_segline', '=', user_id)], limit=1)
             if not customer_obj:
                 customer_obj = self.env['res.partner'].create({
                     'name': name,
@@ -264,7 +264,7 @@ class DbConnection(models.Model):
                     'email': email,
                     'is_company': 'false',
                     'customer_rank': 1,
-                    'cust_old_id': user_id
+                    'id_segline': user_id
                 })
             return customer_obj.id
         except Exception as e:
@@ -452,12 +452,12 @@ class DbConnection(models.Model):
                         # self.create_invoice(row[0], row[1], row[2], row[3], row[4], row[5])
                         if (row[0] != order_id) and (order_id == 0):
                             # customer_id = get_create_customer(self, row.user_id, row.cust_name, row.mobile, row.email)
-                            customer_id = self.env['res.partner'].search([('cust_old_id', '=', row[2])], limit=1)
+                            customer_id = self.env['res.partner'].search([('id_segline', '=', row[2])], limit=1)
                             order_id = row[0]
 
                         if (row[0] != order_id) and (order_id != 0):
                             # customer_id = get_create_customer(self, row.user_id, row.cust_name, row.mobile, row.email)
-                            customer_id = self.env['res.partner'].search([('cust_old_id', '=', row[2])], limit=1)
+                            customer_id = self.env['res.partner'].search([('id_segline', '=', row[2])], limit=1)
                             order_id = row[0]
                             self.create_invoice(order_details)
                             order_details = []
