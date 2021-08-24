@@ -2,7 +2,7 @@
 <odoo>
 
 
-        <record id="note_tree_view" model="ir.ui.view">
+    <record id="note_tree_view" model="ir.ui.view">
             <field name="name">notes.note.tree</field>
             <field name="model">notes.note</field>
             <field name="arch" type="xml">
@@ -26,17 +26,12 @@
             </field>
         </record>
 
-        <record id="note_act_window" model="ir.actions.act_window">
+
+    <record id="note_act_window" model="ir.actions.act_window">
             <field name="name">Notes</field>
-            <field name="type">ir.actions.act_window</field>
             <field name="res_model">notes.note</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    There is no examples click here to add new Notes.
-                </p>
-            </field>
         </record>
 
         <menuitem name="Notes" id="note_menu" action="note_act_window"/>
