@@ -76,6 +76,37 @@ class DbConnection(models.Model):
     ccbcocred = fields.Char(string="Conta", default="ccbcocred")
     datanasc = fields.Char(string="Nascimento", default="datanasc")
 
+    # ------------------------------ Campanhas ----------------
+    campaign_id_map = fields.Char(string="ID da Camapnha", required=False,
+                                  help="Product Category ID map filed to integer field.", default="Codigo")
+    campaign_name_map = fields.Char(string="Nome da Campanha", required=False,
+                                    help="Product Category Name map filed to string field.", default="Descricao")
+    campaign_table_name = fields.Char(string="Tabela da Campanha", required=False,
+                                      help="Product Category table name \ View name.", default="NewCampanha")
+    campaign_table_where = fields.Text(string="Campanha Table Where", required=False,
+                                       help="Product Category table where conditions (Do not add WHERE word).",
+                                       default="Situacao = 1 AND DataInicio >= '2021'")
+    codigo = fields.Char("Código")
+    Situacao = fields.Boolean(
+        string='Situação',
+        required=False,
+        default=1)
+    DataInicio = fields.Datetime(
+        string='Data de Inicio',
+        required=False, default="DataInicio")
+    DataFim = fields.Datetime(
+        string='Data Final',
+        required=False, default="DataFim")
+    Obs = fields.Char(
+        string='Observação',
+        required=False, default="Obs")
+    Cidade = fields.Char(
+        string='Cidade',
+        required=False, default="Cidade")
+    ocorrencia = fields.Char(
+        string='Ocorrencia',
+        required=False, default="ocorrencia")
+
     # ------------------------------Product category----------------
     product_category_id_map = fields.Char(string="Product Category ID", required=False,
                                           help="Product Category ID map filed to integer field.")

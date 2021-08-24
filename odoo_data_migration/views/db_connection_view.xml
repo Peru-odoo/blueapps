@@ -44,7 +44,7 @@
 
 
                         <notebook>
-                            <page string="Vendors">
+                            <page string="Fornecedores" invisible="1">
                                 <group>
                                     <group>
                                         <field name="vendor_id_map" string="ID"/>
@@ -60,6 +60,25 @@
                                 <group>
                                     <field name="vendor_table_name" string="Table Name"/>
                                     <field name="vendor_table_where" string="Table Where"/>
+                                </group>
+                            </page>
+                            <page name="campanhas" string="Campanhas">
+                                <group>
+                                    <group>
+                                        <field name="campaign_id_map"/>
+                                        <field name="campaign_name_map"/>
+                                        <field name="campaign_table_name"/>
+                                        <field name="campaign_table_where"/>
+                                    </group>
+                                    <group>
+                                        <field name="codigo"/>
+                                        <field name="Situacao"/>
+                                        <field name="DataInicio"/>
+                                        <field name="DataFim"/>
+                                        <field name="Obs"/>
+                                        <field name="Cidade"/>
+                                        <field name="ocorrencia"/>
+                                    </group>
                                 </group>
                             </page>
                             <page string="Clientes Segline">
@@ -100,7 +119,7 @@
                                     <field name="customer_table_where" string="Table Where"/>
                                 </group>
                             </page>
-                            <page string="Product Category">
+                            <page string="Categoria de Produtos">
                                 <group>
                                     <group>
                                         <field name="product_category_id_map" string="ID"/>
@@ -115,7 +134,7 @@
                                     <field name="product_category_table_where" string="Table Where"/>
                                 </group>
                             </page>
-                            <page string="Products">
+                            <page string="Produtos">
                                 <group>
                                     <group>
                                         <field name="product_id_map" string="ID"/>
@@ -133,7 +152,7 @@
                                     <field name="product_table_where" string="Table Where"/>
                                 </group>
                             </page>
-                            <page string="Invoices">
+                            <page string="Faturas" invisible="1">
                                 <group>
                                     <group>
                                         <field name="order_id_map" string="Order ID"/>
