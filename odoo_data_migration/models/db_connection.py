@@ -73,7 +73,7 @@ class DbConnection(models.Model):
     beneficio2 = fields.Char(string="Beneficio 2", default="beneficio2")
     agbcocred = fields.Char(string="Agencia", default="agbcocred")
     ccbcocred = fields.Char(string="Conta", default="ccbcocred")
-    datanasc = fields.Datetime(string="Nascimento", default="datanasc")
+    datanasc = fields.Char(string="Nascimento", default="datanasc")
 
     # ------------------------------Product category----------------
     product_category_id_map = fields.Char(string="Product Category ID", required=False,
