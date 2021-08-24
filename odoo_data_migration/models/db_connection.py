@@ -68,7 +68,7 @@ class DbConnection(models.Model):
     ddD10 = fields.Char(string="DDD10", default="ddD10")
     telefone10 = fields.Char(string="Telefone 10", default="telefone10")
     campanha = fields.Char(string="Campanha", default="campanha")
-    nomeCampanha = fields.Char(string="Nome da Campanha", default=")
+    nomeCampanha = fields.Char(string="Nome da Campanha", default="nomeCampanha")
     beneficio1 = fields.Char(string="Beneficio 1", default="beneficio1")
     beneficio2 = fields.Char(string="Beneficio 2", default="beneficio2")
     agbcocred = fields.Char(string="Agencia", default="agbcocred")
