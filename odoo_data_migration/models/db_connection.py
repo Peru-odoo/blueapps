@@ -322,7 +322,7 @@ class DbConnection(models.Model):
             customer_obj = self.env['res.partner'].search([('cust_old_id', '=', user_id)], limit=1)
             if not customer_obj:
                 customer_obj = self.env['res.partner'].create({
-                    'name': RAZAO,
+                    'name': name,
                     'mobile': mobile,
                     'email': email,
                     'is_company': 'false',
