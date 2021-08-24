@@ -1,6 +1,5 @@
 from odoo import fields, models, api
 
-
 class utmCampaign(models.Model):
     _inherit = "utm.campaign"
     #    _name = 'utm.campaign'

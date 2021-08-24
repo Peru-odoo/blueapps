@@ -87,16 +87,18 @@ class DbConnection(models.Model):
                                        help="Product Category table where conditions (Do not add WHERE word).",
                                        default="Situacao = 1 AND DataInicio >= '2021'")
     codigo = fields.Char("Código")
-    Situacao = fields.Boolean(
+    Situacao = fields.Char(
         string='Situação',
         required=False,
-        default=1)
-    DataInicio = fields.Datetime(
+        default='Situacao')
+    DataInicio = fields.Char(
         string='Data de Inicio',
-        required=False)
-    DataFim = fields.Datetime(
+        required=False,
+        default='DataInicio')
+    DataFim = fields.Char(
         string='Data Final',
-        required=False)
+        required=False,
+        default='DataFim')
     Obs = fields.Char(
         string='Observação',
         required=False, default="Obs")
@@ -289,8 +291,8 @@ class DbConnection(models.Model):
                 query_str += self.customer_name_map + ', ' if self.customer_name_map else ''
                 query_str += self.customer_email_map + ', ' if self.customer_email_map else ''
                 query_str += self.customer_phone_map + ' ' if self.customer_phone_map else ''
-                query_str += 'FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
-                query_str += 'WHERE ' + self.customer_table_where.replace('where', ''). \
+                query_str += ' FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
+                query_str += ' WHERE ' + self.customer_table_where.replace('where', ''). \
                     replace('Where', '').replace('WHERE', '') + ' ' if self.customer_table_where else ''
                 print(query_str)
                 cursor = conn.cursor()
