@@ -11,5 +11,5 @@
     "category": "Customer Relationship Management",
     "depends": ["base"],
     "website": "https://github.com/OCA/partner-contact",
-    "data": ["views/res_partner.xml"],
+    "data": ["views/res_partner.xml", "views/notes.xml"],
 }
