@@ -49,7 +49,7 @@ class DbConnection(models.Model):
                                        help="Customer table where conditions (Do not add WHERE word).")
     #### Segline ###
     ddD1 = fields.Char(string="DDD1", default="ddD1", required=False)
-    map_telefone1 = fields.Char(string="Telefone 1", default="telefone1", required=False)
+    customer_telefone1_map = fields.Char(string="Telefone 1", default="telefone1", required=False)
     ddD2 = fields.Char(string="DDD2", default="ddD2", required=False)
     telefone2 = fields.Char(string="Telefone 2", default="telefone2", required=False)
     ddD3 = fields.Char(string="DDD3", default="ddD3", required=False)
@@ -291,7 +291,7 @@ class DbConnection(models.Model):
                 query_str += self.customer_name_map + ', ' if self.customer_name_map else ''
                 query_str += self.customer_email_map + ', ' if self.customer_email_map else ''
                 query_str += self.customer_phone_map + ', ' if self.customer_phone_map else ''
-                query_str += self.map_telefone1 + ' ' if self.map_telefone1 else ''
+                query_str += self.customer_telefone1_map + ' ' if self.customer_telefone1_map else ''
                 query_str += 'FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
                 query_str += 'WHERE ' + self.customer_table_where.replace('where', ''). \
                     replace('Where', '').replace('WHERE', '') + ' ' if self.customer_table_where else ''
@@ -310,7 +310,7 @@ class DbConnection(models.Model):
                 if len(rows) > 0:
                     self.log_actions('customer_upload', 'Customers records = %i' % len(rows))
                     for row in rows:
-                        self.create_customer(row[0], row[1], row[2], row[3])
+                        self.create_customer(row[0], row[1], row[2], row[3], row[4])
 
                 self.log_actions('customer_upload', 'Load customers completed.')
         except Exception as e:
@@ -330,7 +330,7 @@ class DbConnection(models.Model):
                     'is_company': 'false',
                     'customer_rank': 1,
                     'id_segline': user_id,
-                    'telefone1': telefone1
+                    'telefone1': customer_telefone1_map
                 })
             return customer_obj.id
         except Exception as e:
