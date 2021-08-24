@@ -49,7 +49,7 @@ class DbConnection(models.Model):
                                        help="Customer table where conditions (Do not add WHERE word).")
     #### Segline ###
     ddD1 = fields.Char(string="DDD1", default="ddD1", required=False, )
-    telefone1 = fields.Char(string="Telefone 1", default="telefone1", required=False, )
+    map_telefone1 = fields.Char(string="Telefone 1", default="telefone1", required=False, )
     ddD2 = fields.Char(string="DDD2", default="ddD2", required=False, )
     telefone2 = fields.Char(string="Telefone 2", default="telefone2", required=False, )
     ddD3 = fields.Char(string="DDD3", default="ddD3", required=False, )
@@ -291,7 +291,7 @@ class DbConnection(models.Model):
                 query_str += self.customer_name_map + ', ' if self.customer_name_map else ''
                 query_str += self.customer_email_map + ', ' if self.customer_email_map else ''
                 query_str += self.customer_phone_map + ', ' if self.customer_phone_map else ''
-                query_str += self.telefone1 + ' ' if self.telefone1 else ''
+                query_str += self.map_telefone1 + ' ' if self.map_telefone1 else ''
                 query_str += 'FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
                 query_str += 'WHERE ' + self.customer_table_where.replace('where', ''). \
                     replace('Where', '').replace('WHERE', '') + ' ' if self.customer_table_where else ''
