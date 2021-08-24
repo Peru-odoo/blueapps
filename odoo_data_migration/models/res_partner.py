@@ -6,7 +6,6 @@ from odoo.exceptions import UserError
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    name_ar = fields.Char(string="Arabic Name", required=False, )
-    vend_old_id = fields.Integer(string="Old ID", required=False,)
-    cust_old_id = fields.Integer(string="Old ID", required=False, )
-
+    name_ar = fields.Char(string="Arabic Name", required=False)
+    vend_old_id = fields.Integer(string="Old ID", required=False)
+    cust_old_id = fields.Integer(string="Old ID", required=False)
