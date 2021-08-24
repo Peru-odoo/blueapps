@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="note_form_view" model="ir.ui.view">
+            <field name="name">notes.note.form</field>
+            <field name="model">notes.note</field>
+            <field name="arch" type="xml">
+                <form string="Notes">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="example_title"/>
+                            <h1>
+                                <field name="example_title" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="time_date"/>
+                            </group>
+                            <group>
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="note_tree_view" model="ir.ui.view">
+            <field name="name">notes.note.tree</field>
+            <field name="model">notes.note</field>
+            <field name="arch" type="xml">
+                <tree string="Notes">
+                    <field name="create_date"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="note_search_view" model="ir.ui.view">
+            <field name="name">notes.note.search</field>
+            <field name="model">notes.note</field>
+            <field name="arch" type="xml">
+                <search string="Notes">
+                    <group expand="1" string="Group By">
+                        <filter string="Example Field" name="partner_id" domain="[]"
+                                context="{'group_by':'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="note_act_window" model="ir.actions.act_window">
+            <field name="name">Notes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">notes.note</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Notes.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Notes" id="note_menu" action="note_act_window"/>
+
+    </data>
+</odoo>
