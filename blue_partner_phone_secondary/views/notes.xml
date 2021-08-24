@@ -27,7 +27,7 @@
         </record>
 
 
-    <record id="note_act_window" model="ir.actions.act_window">
+        <record id="note_act_window" model="ir.actions.act_window">
             <field name="name">Notes</field>
             <field name="res_model">notes.note</field>
             <field name="view_type">form</field>
