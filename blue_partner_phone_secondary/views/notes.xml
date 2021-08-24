@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
-        <record id="notes_note_form_view" model="ir.ui.view">
+
+<record id="notes_note_form_view" model="ir.ui.view">
             <field name="name">notes.note.form</field>
             <field name="model">notes.note</field>
             <field name="arch" type="xml">
@@ -67,5 +67,5 @@
 
         <menuitem name="Notes" id="note_menu" action="note_act_window"/>
 
-    </data>
+
 </odoo>
