@@ -93,10 +93,10 @@ class DbConnection(models.Model):
         default=1)
     DataInicio = fields.Datetime(
         string='Data de Inicio',
-        required=False, default="DataInicio")
+        required=False)
     DataFim = fields.Datetime(
         string='Data Final',
-        required=False, default="DataFim")
+        required=False)
     Obs = fields.Char(
         string='Observação',
         required=False, default="Obs")
