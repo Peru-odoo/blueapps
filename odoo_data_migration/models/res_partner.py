@@ -9,3 +9,4 @@ class ResPartner(models.Model):
     name_ar = fields.Char(string="Arabic Name", required=False)
     vend_old_id = fields.Integer(string="Old ID", required=False)
     cust_old_id = fields.Integer(string="Old ID", required=False)
+    id_segline = fields.Integer(string="ID Segline", required=False)

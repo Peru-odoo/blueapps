@@ -291,8 +291,8 @@ class DbConnection(models.Model):
                 query_str += self.customer_name_map + ', ' if self.customer_name_map else ''
                 query_str += self.customer_email_map + ', ' if self.customer_email_map else ''
                 query_str += self.customer_phone_map + ' ' if self.customer_phone_map else ''
-                query_str += ' FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
-                query_str += ' WHERE ' + self.customer_table_where.replace('where', ''). \
+                query_str += 'FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
+                query_str += 'WHERE ' + self.customer_table_where.replace('where', ''). \
                     replace('Where', '').replace('WHERE', '') + ' ' if self.customer_table_where else ''
                 print(query_str)
                 cursor = conn.cursor()
@@ -319,7 +319,8 @@ class DbConnection(models.Model):
 
     def create_customer(self, user_id, name, email, mobile):
         try:
-            customer_obj = self.env['res.partner'].search([('cust_old_id', '=', user_id)], limit=1)
+#            customer_obj = self.env['res.partner'].search([('cust_old_id', '=', user_id)], limit=1)
+            customer_obj = ''
             if not customer_obj:
                 customer_obj = self.env['res.partner'].create({
                     'name': name,
