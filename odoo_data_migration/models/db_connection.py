@@ -207,6 +207,67 @@ class DbConnection(models.Model):
             logger.exception("log_actions")
             raise ValidationError(e)
 
+
+
+    # =================================Customers functions=====================
+    def _load_customer_cron(self, connection_name):
+        self.env['dbconnection'].search([('name', '=', connection_name)], limit=1).load_customer_process()
+
+    def load_customer_process(self):
+        try:
+            self.log_actions('customer_upload', 'Load customers Started.')
+            conn = self._open_connection()
+            if conn:
+                query_str = "SELECT "
+                query_str += self.customer_id_map + ', ' if self.customer_id_map else ''
+                query_str += self.customer_name_map + ', ' if self.customer_name_map else ''
+                query_str += self.customer_email_map + ', ' if self.customer_email_map else ''
+                query_str += self.customer_phone_map + ', ' if self.customer_phone_map else ''
+                query_str += self.customer_telefone1_map + ' ' if self.customer_telefone1_map else ''
+                query_str += 'FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
+                query_str += 'WHERE ' + self.customer_table_where.replace('where', ''). \
+                    replace('Where', '').replace('WHERE', '') + ' ' if self.customer_table_where else ''
+                print(query_str)
+                cursor = conn.cursor()
+                if cursor:
+                    self.log_actions('database_connection', 'Connection to DB established.')
+                else:
+                    self.log_actions('database_connection', 'Connection to DB failed.')
+
+                cursor.execute(query_str)
+                rows = cursor.fetchall()
+                conn.close()
+                self.log_actions('database_connection', 'Connection to DB closed.')
+
+                if len(rows) > 0:
+                    self.log_actions('customer_upload', 'Customers records = %i' % len(rows))
+                    for row in rows:
+                        self.create_customer(row[0], row[1], row[2], row[3], row[4])
+
+                self.log_actions('customer_upload', 'Load customers completed.')
+        except Exception as e:
+            self.log_actions('error', e)
+            logger.exception("_cron_vendor_process")
+            raise ValidationError(e)
+
+    def create_customer(self, user_id, name, email, mobile, telefone1):
+        try:
+            customer_obj = self.env['res.partner'].search([('id_segline', '=', user_id)], limit=1)
+            if not customer_obj:
+                customer_obj = self.env['res.partner'].create({
+                    'name': name,
+                    'mobile': mobile,
+                    'email': email,
+                    'is_company': 'false',
+                    'customer_rank': 1,
+                    'id_segline': user_id,
+                    'telefone1': telefone1
+                })
+            return customer_obj.id
+        except Exception as e:
+            logger.exception("create_customer")
+            raise ValidationError(e)
+
     # =================================Vendors functions=====================
     def _load_vendor_cron(self, connection_name):
         self.env['dbconnection'].search([('name', '=', connection_name)], limit=1).load_vendor_process()
@@ -275,66 +336,6 @@ class DbConnection(models.Model):
             return vendor_obj.id
         except Exception as e:
             logger.exception("upload_vendor_record")
-            raise ValidationError(e)
-
-    # =================================Customers functions=====================
-    def _load_customer_cron(self, connection_name):
-        self.env['dbconnection'].search([('name', '=', connection_name)], limit=1).load_customer_process()
-
-    def load_customer_process(self):
-        try:
-            self.log_actions('customer_upload', 'Load customers Started.')
-            conn = self._open_connection()
-            if conn:
-                query_str = "SELECT "
-                query_str += self.customer_id_map + ', ' if self.customer_id_map else ''
-                query_str += self.customer_name_map + ', ' if self.customer_name_map else ''
-                query_str += self.customer_email_map + ', ' if self.customer_email_map else ''
-                query_str += self.customer_phone_map + ', ' if self.customer_phone_map else ''
-                query_str += self.customer_telefone1_map + ' ' if self.customer_telefone1_map else ''
-                query_str += 'FROM ' + self.customer_table_name + ' ' if self.customer_table_name else ''
-                query_str += 'WHERE ' + self.customer_table_where.replace('where', ''). \
-                    replace('Where', '').replace('WHERE', '') + ' ' if self.customer_table_where else ''
-                print(query_str)
-                cursor = conn.cursor()
-                if cursor:
-                    self.log_actions('database_connection', 'Connection to DB established.')
-                else:
-                    self.log_actions('database_connection', 'Connection to DB failed.')
-
-                cursor.execute(query_str)
-                rows = cursor.fetchall()
-                conn.close()
-                self.log_actions('database_connection', 'Connection to DB closed.')
-
-                if len(rows) > 0:
-                    self.log_actions('customer_upload', 'Customers records = %i' % len(rows))
-                    for row in rows:
-                        self.create_customer(row[0], row[1], row[2], row[3], row[4])
-
-                self.log_actions('customer_upload', 'Load customers completed.')
-        except Exception as e:
-            self.log_actions('error', e)
-            logger.exception("_cron_vendor_process")
-            raise ValidationError(e)
-
-    def create_customer(self, user_id, name, email, mobile):
-        try:
-            customer_obj = self.env['res.partner'].search([('id_segline', '=', user_id)], limit=1)
-#            customer_obj = ''
-            if not customer_obj:
-                customer_obj = self.env['res.partner'].create({
-                    'name': name,
-                    'mobile': mobile,
-                    'email': email,
-                    'is_company': 'false',
-                    'customer_rank': 1,
-                    'id_segline': user_id,
-                    'telefone1': telefone1
-                })
-            return customer_obj.id
-        except Exception as e:
-            logger.exception("create_customer")
             raise ValidationError(e)
 
     # =================================Product Category functions=====================
