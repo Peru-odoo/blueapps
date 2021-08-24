@@ -8,6 +8,9 @@ try:
 except NameError:
     to_unicode = str
 
+ = fields.Char(
+    string='',
+    required=False)
 
 url = "http://sip.segline.srv.br/jeta/api/campanha/cliente/importado"
 
