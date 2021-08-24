@@ -330,7 +330,7 @@ class DbConnection(models.Model):
                     'is_company': 'false',
                     'customer_rank': 1,
                     'id_segline': user_id,
-                    'telefone1': map_telefone1
+                    'telefone1': telefone1
                 })
             return customer_obj.id
         except Exception as e:
