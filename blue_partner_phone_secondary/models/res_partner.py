@@ -27,7 +27,7 @@ class ResPartner(models.Model):
     telefone8 = fields.Integer(string="Telefone 8")
     ddD9 = fields.Integer(string="DDD9")
     telefone9 = fields.Integer(string="Telefone 9")
-    ddD10 = fields.IntegerInteger(string="DDD10")
+    ddD10 = fields.Integer(string="DDD10")
     telefone10 = fields.Integer(string="Telefone 10")
     campanha = fields.Char(string="Campanha")
     nomeCampanha = fields.Char(string="Nome da Campanha")
