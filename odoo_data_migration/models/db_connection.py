@@ -271,7 +271,7 @@ class DbConnection(models.Model):
             logger.exception("_cron_vendor_process")
             raise ValidationError(e)
 
-'''    def create_customer(self, user_id, name, email, mobile, ddD1, ddD2, ddD3, ddD4, ddD5, ddD6, ddD7, ddD8, ddD9, ddD10, telefone1, telefone2, telefone3, telefone4, telefone5, telefone6, telefone7, telefone8, telefone9, telefone10):
+    def create_customer(self, user_id, name, email, mobile, ddD1, ddD2, ddD3, ddD4, ddD5, ddD6, ddD7, ddD8, ddD9, ddD10, telefone1, telefone2, telefone3, telefone4, telefone5, telefone6, telefone7, telefone8, telefone9, telefone10):
         try:
             customer_obj = self.env['res.partner'].search([('id_segline', '=', user_id)], limit=1)
             if not customer_obj:
@@ -307,7 +307,7 @@ class DbConnection(models.Model):
         except Exception as e:
             logger.exception("create_customer")
             raise ValidationError(e)
-'''
+
     # =================================Vendors functions=====================
     def _load_vendor_cron(self, connection_name):
         self.env['dbconnection'].search([('name', '=', connection_name)], limit=1).load_vendor_process()
