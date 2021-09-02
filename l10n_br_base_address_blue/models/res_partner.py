@@ -99,7 +99,7 @@ class ResPartner(models.Model):
 
             response = requests.request("POST", url, headers=headers, data=payload)
             data = response.json()
-            self.json = data
+            self.comment = data
 
     def action_check_sefaz(self):
         if self.l10n_br_cnpj_cpf and self.state_id:

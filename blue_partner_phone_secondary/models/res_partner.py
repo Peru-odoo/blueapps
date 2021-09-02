@@ -6,6 +6,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     id_segline = fields.Char(string="ID/CPF", required=False)
+
     ddD1 = fields.Char(string="DDD1")
     telefone1 = fields.Char(string="Telefone 1")
     ddD2 = fields.Char(string="DDD2")
