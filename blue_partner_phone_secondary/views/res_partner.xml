@@ -10,9 +10,41 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
+                <xpath expr="//page[last()]" position="before">
+                    <page string="Telefones">
+                        <group>
+                            <group string="DDD">
+                                <field name="ddD1"/>
+                                <field name="ddD2"/>
+                                <field name="ddD3"/>
+                                <field name="ddD4"/>
+                                <field name="ddD5"/>
+                                <field name="ddD6"/>
+                                <field name="ddD7"/>
+                                <field name="ddD8"/>
+                                <field name="ddD9"/>
+                                <field name="ddD10"/>
+                            </group>
+                            <group string="Telefones">
+                                <field name="telefone1" widget="phone" />
+                                <field name="telefone2" widget="phone" />
+                                <field name="telefone3" widget="phone" />
+                                <field name="telefone4" widget="phone" />
+                                <field name="telefone5" widget="phone" />
+                                <field name="telefone6" widget="phone" />
+                                <field name="telefone7" widget="phone" />
+                                <field name="telefone8" widget="phone" />
+                                <field name="telefone9" widget="phone" />
+                                <field name="telefone10" widget="phone" />
+                            </group>
+                        </group>
+<!--
             <field name="phone" position="after">
                 <field name="phone2" widget="phone"/>
             </field>
+-->
+                    </page>
+                </xpath>
         </field>
     </record>
 

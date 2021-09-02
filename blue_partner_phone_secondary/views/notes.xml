@@ -27,12 +27,12 @@
         </record>
 
 
-        <record id="note_act_window" model="ir.actions.act_window">
+        <rcord id="note_act_window" model="ir.actions.act_window">
             <field name="name">Notes</field>
             <field name="res_model">notes.note</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-        </record>
+        </rcord>
 
         <menuitem name="Notes" id="note_menu" action="note_act_window"/>
 

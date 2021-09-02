@@ -55,6 +55,15 @@ class DbConnection(models.Model):
     telefone9 = fields.Char(string="Telefone 9", default="telefone9", required=False)
     ddD10 = fields.Char(string="DDD10", default="ddD10", required=False)
     telefone10 = fields.Char(string="Telefone 10", default="telefone10", required=False)
+
+    endereco = fields.Char(string="Endereço", default="ENDERECO", required=False)
+    compd = fields.Char(string="Complemento", default="COMPD", required=False)
+    bairro = fields.Char(string="Bairro", default="BAIRRO", required=False)
+    cidade = fields.Char(string="Cidade", default="CIDADE", required=False)
+    cep = fields.Char(string="CEP", default="CEP", required=False)
+    uf = fields.Char(string="UF", default="UF", required=False)
+    obs = fields.Char(string="Observações", default="OBS", required=False)
+
     campanha = fields.Char(string="Campanha", default="campanha")
     nomeCampanha = fields.Char(string="Nome da Campanha", default="nomeCampanha")
     beneficio1 = fields.Char(string="Beneficio 1", default="beneficio1")
@@ -185,11 +194,11 @@ class DbConnection(models.Model):
             conn = pyodbc.connect(driver_str + SERVER_str + DATABASE_str + UID_str + PWD_str + port_str)
             cursor = conn.cursor()
             if cursor:
-                self.log_actions('database_connection', 'Conexão com o DB estabelecido..')
+                self.log_actions('database_connection', 'Connection to DB established.')
                 self.connection_status = "Connected"
                 conn.close()
             else:
-                self.log_actions('database_connection', 'Conexão com o DB falhou.')
+                self.log_actions('database_connection', 'Connection to DB failed.')
                 self.connection_status = "Not Connected"
                 conn.close()
         except Exception as e:
@@ -217,7 +226,7 @@ class DbConnection(models.Model):
 
     def load_customer_process(self):
         try:
-            self.log_actions('customer_upload', 'Upload clientes iniciado.')
+            self.log_actions('customer_upload', 'Load customers Started.')
             conn = self._open_connection()
             if conn:
                 query_str = "SELECT "
@@ -251,21 +260,21 @@ class DbConnection(models.Model):
                 print(query_str)
                 cursor = conn.cursor()
                 if cursor:
-                    self.log_actions('database_connection', 'Conexão com o DB estabelecido..')
+                    self.log_actions('database_connection', 'Connection to DB established.')
                 else:
-                    self.log_actions('database_connection', 'Conexão com o DB falhou.')
+                    self.log_actions('database_connection', 'Connection to DB failed.')
 
                 cursor.execute(query_str)
                 rows = cursor.fetchall()
                 conn.close()
-                self.log_actions('database_connection', 'Conexão com o DB encerrado..')
+                self.log_actions('database_connection', 'Connection to DB closed.')
 
                 if len(rows) > 0:
-                    self.log_actions('customer_upload', 'Clientes importados = %i' % len(rows))
+                    self.log_actions('customer_upload', 'Customers records = %i' % len(rows))
                     for row in rows:
                         self.create_customer(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23])
 
-                self.log_actions('customer_upload', 'Carregando da tabela da clientes completada.')
+                self.log_actions('customer_upload', 'Load customers completed.')
         except Exception as e:
             self.log_actions('error', e)
             logger.exception("_cron_vendor_process")
@@ -330,14 +339,14 @@ class DbConnection(models.Model):
 
                 cursor = conn.cursor()
                 if cursor:
-                    self.log_actions('database_connection', 'Conexão com o DB estabelecido..')
+                    self.log_actions('database_connection', 'Connection to DB established.')
                 else:
-                    self.log_actions('database_connection', 'Conexão com o DB falhou.')
+                    self.log_actions('database_connection', 'Connection to DB failed.')
 
                 cursor.execute(query_str)
                 rows = cursor.fetchall()
                 conn.close()
-                self.log_actions('database_connection', 'Conexão com o DB encerrado..')
+                self.log_actions('database_connection', 'Connection to DB closed.')
 
                 if len(rows) > 0:
                     self.log_actions('vendor_upload', 'Vendors records = %i' % len(rows))
@@ -398,14 +407,14 @@ class DbConnection(models.Model):
                 print(query_str)
                 cursor = conn.cursor()
                 if cursor:
-                    self.log_actions('database_connection', 'Conexão com o DB estabelecido..')
+                    self.log_actions('database_connection', 'Connection to DB established.')
                 else:
-                    self.log_actions('database_connection', 'Conexão com o DB falhou.')
+                    self.log_actions('database_connection', 'Connection to DB failed.')
 
                 cursor.execute(query_str)
                 rows = cursor.fetchall()
                 conn.close()
-                self.log_actions('database_connection', 'Conexão com o DB encerrado..')
+                self.log_actions('database_connection', 'Connection to DB closed.')
 
                 if len(rows) > 0:
                     self.log_actions('product_categ_upload', 'Product Category records = %i' % len(rows))
@@ -475,14 +484,14 @@ class DbConnection(models.Model):
                 print(query_str)
                 cursor = conn.cursor()
                 if cursor:
-                    self.log_actions('database_connection', 'Conexão com o DB estabelecido..')
+                    self.log_actions('database_connection', 'Connection to DB established.')
                 else:
-                    self.log_actions('database_connection', 'Conexão com o DB falhou.')
+                    self.log_actions('database_connection', 'Connection to DB failed.')
 
                 cursor.execute(query_str)
                 rows = cursor.fetchall()
                 conn.close()
-                self.log_actions('database_connection', 'Conexão com o DB encerrado..')
+                self.log_actions('database_connection', 'Connection to DB closed.')
 
                 if len(rows) > 0:
                     self.log_actions('product_upload', 'Product records = %i' % len(rows))
@@ -541,14 +550,14 @@ class DbConnection(models.Model):
                 print(query_str)
                 cursor = conn.cursor()
                 if cursor:
-                    self.log_actions('database_connection', 'Conexão com o DB estabelecido..')
+                    self.log_actions('database_connection', 'Connection to DB established.')
                 else:
-                    self.log_actions('database_connection', 'Conexão com o DB falhou.')
+                    self.log_actions('database_connection', 'Connection to DB failed.')
 
                 cursor.execute(query_str)
                 rows = cursor.fetchall()
                 conn.close()
-                self.log_actions('database_connection', 'Conexão com o DB encerrado..')
+                self.log_actions('database_connection', 'Connection to DB closed.')
 
                 order_id = 0
                 customer_id = 0

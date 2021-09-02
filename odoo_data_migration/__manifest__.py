@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Odoo Data Migration",
+    'name': "BlueConnect Data Migration Segline",
     'summary': """
         This module can help you to migrate your data from your current system to Odoo database without RESTAPI,
         using database direct connection, this is very helpfull when your current system doesn't support RESTAPI technology.
-        
+
         """,
     'description': """
         This module can help you to migrate your data from your current system to Odoo database without RESTAPI,
         using database direct connection, this is very helpfull when your current system doesn't support RESTAPI technology.
-        
-        This module will performs the migration process in a professional way using model objects, 
-        in addition to that you can also use both systems (your current system and Odoo) together by 
+
+        This module will performs the migration process in a professional way using model objects,
+        in addition to that you can also use both systems (your current system and Odoo) together by
         syncing Odoo with your old system,
-        this is can done by defining schedule migration jobs to copy customers\vendors\products\inoices\.. data 
+        this is can done by defining schedule migration jobs to copy customers\vendors\products\inoices\.. data
         to odoo based on Odoo schedule Actions.
     """,
-    'author': "Bassam Mannaa",
-    'website': "http://www.linkedin.com/in/bassam-mannaa-b8291a45",
+    'author': "BlueConnect, Bassam Mannaa",
+    'website': "https://www.blueconnect.com.br",
     'category': 'tools',
-    'version': '0.1',
+    'version': '0.1.0.0.2',
     'license': 'OPL-1',
     'images': ['static/description/main_screenshot.png'],
     'depends': ['base'],
