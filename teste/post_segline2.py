@@ -1,14 +1,8 @@
 import requests
-# import json
-# import jsonpickle
-# import io
-# import pickle
-import xml.dom.minidom
-
-try:
-    to_unicode = unicode
-except NameError:
-    to_unicode = str
+import untangle
+import xmltodict
+# import xml.etree.ElementTree as ET
+from xml.etree import ElementTree
 
 url = "http://162.214.190.43/~buscador/ws2/rFucador.php?u=vendaseirele&s=k13997&k=2053&tipo=CONSULTANB&doc=5162815965"
 payload = {}
@@ -16,14 +10,33 @@ headers = {}
 
 
 def buscar_dados():
-    response = requests.request("GET", url, headers=headers, data=payload)
-    todos = response.text
-    doc = xml.dom.minidom.parse(todos);
+    # response = requests.request("GET", url, headers=headers, data=payload)
+    r = requests.get(url)
+    dict_data = xmltodict.parse(r.content)
+    # contatos = dict(dict_data) # Ocorreu tudo bem
+    contatos = dict_data
+    # print(type(contatos))
+    print(contatos['consultaws']['dados_cadastrais']['beneficio'])
+    # print(contatos.get('dados_cadastrais','Erro'))
+    # info = info.infCons
+    # tree = ElementTree.fromstring(r.content)
+    # print(tree)
+    # print(dict_data)
+    # for child in root.iter('*'):
+    #    print(child.tag)
+    # print(r.content)
+    # todos = response.text
+    # doc = xml.dom.minidom.parse(todos);
+    # mydoc = minidom.parse(todos)
+    # items = mydoc.getElementsByTagName('dados_cadastrais')
     # dados = response.json()
     # todos = json.loads(response.content)
     #    print(todos)
     # print(doc)
-    print(doc.nodeName)
-    print(doc.firstChild.tagName)
+    # print(doc.nodeName)
+    # print(doc.firstChild.tagName)
+    # one specific item attribute
+    # print('Item #2 attribute:')
+    # print(items[1].attributes['name'].value)
 if url:
     buscar_dados()
