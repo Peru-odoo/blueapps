@@ -1,34 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="blue_consultar_cpf.list">
-      <field name="name">blue_consultar_cpf list</field>
-      <field name="model">blue_consultar_cpf.blue_consultar_cpf</field>
+    <!-- explicit list view definition      -->
+
+    <record model="ir.ui.view" id="view_consignado_matricula_tree">
+      <field name="name">consignado.matricula.tree</field>
+      <field name="model">consignado.matricula</field>
+      <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+        <tree editable="top">
+            <field name="partner_id"/>
+            <field name="name"/>
+            <field name="senha"/>
+            <field name="banco"/>
+            <field name="tipo_conta"/>
+            <field name="agencia"/>
+            <field name="margem_negativa"/>
+            <field name="margem_livre"/>
+            <field name="margem_real"/>
+            <field name="sigla"/>
+            <field name="secretaria"/>
         </tree>
       </field>
     </record>
--->
+
+    <record model="ir.ui.view" id="view_consignado_contrato_tree">
+      <field name="name">consignado.contrato.tree</field>
+      <field name="model">consignado.contrato</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree editable="top">
+            <field name="partner_id"/>
+            <field name="matricula"/>
+            <field name="name"/>
+            <field name="banco_origem"/>
+            <field name="saldo_devedor"/>
+            <field name="valor_parcela"/>
+            <field name="valor_liberado"/>
+            <field name="valor_consultoria"/>
+            <field name="valor_liquido"/>
+            <field name="qtd_parcelas"/>
+        </tree>
+      </field>
+    </record>
 
     <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="blue_consultar_cpf.action_window">
-      <field name="name">blue_consultar_cpf window</field>
-      <field name="res_model">blue_consultar_cpf.blue_consultar_cpf</field>
+
+    <record model="ir.actions.act_window" id="consignado_matriculas">
+      <field name="name">Matrículas e Beneficios</field>
+      <field name="res_model">consignado.matricula</field>
+      <field name="type">ir.actions.act_window</field>
       <field name="view_mode">tree,form</field>
     </record>
--->
+
+    <record model="ir.actions.act_window" id="consignado_contratos">
+      <field name="name">Contratos à negociar</field>
+      <field name="res_model">consignado.contrato</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
 
     <!-- server action to the one above -->
 <!--
-    <record model="ir.actions.server" id="blue_consultar_cpf.action_server">
-      <field name="name">blue_consultar_cpf server</field>
-      <field name="model_id" ref="model_blue_consultar_cpf_blue_consultar_cpf"/>
+    <record model="ir.actions.server" id="consignado.action_server">
+      <field name="name">consignado server</field>
+      <field name="model_id" ref="model_consignado_consignado"/>
       <field name="state">code</field>
       <field name="code">
         action = {
@@ -41,20 +78,22 @@
 -->
 
     <!-- Top menu item -->
-<!--
-    <menuitem name="blue_consultar_cpf" id="blue_consultar_cpf.menu_root"/>
--->
+
+    <menuitem name="Consignado" id="consignado_menu" sequence="5"
+    web_icon="bureaucrat_knowledge,static/description/icon.png"/>
+
     <!-- menu categories -->
+
+    <menuitem name="Matriculas" id="consignado_matricula_menu"  parent="consignado_menu"
+    action="consignado_matriculas" sequence="10"/>
+    <menuitem name="Contratos" id="consignado_contrato_menu" parent="consignado_menu"
+    action="consignado_contratos" sequence="20"/>
+
 <!--
-    <menuitem name="Menu 1" id="blue_consultar_cpf.menu_1" parent="blue_consultar_cpf.menu_root"/>
-    <menuitem name="Menu 2" id="blue_consultar_cpf.menu_2" parent="blue_consultar_cpf.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="blue_consultar_cpf.menu_1_list" parent="blue_consultar_cpf.menu_1"
-              action="blue_consultar_cpf.action_window"/>
-    <menuitem name="Server to list" id="blue_consultar_cpf" parent="blue_consultar_cpf.menu_2"
-              action="blue_consultar_cpf.action_server"/>
+    <menuitem name="List" id="consignado.menu_1_list" parent="consignado.menu_1"
+              action="consignado.action_window"/>
+    <menuitem name="Server to list" id="consignado" parent="consignado.menu_2"
+              action="consignado.action_server"/>
 -->
   </data>
 </odoo>

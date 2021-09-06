@@ -2,7 +2,7 @@ from odoo import fields, models, api
 
 
 class Contratos (models.Model):
-    _name = 'consignado.contratos'
+    _name = 'consignado.contrato'
     _description = 'Contratos à negociar'
 
     name = fields.Char("N. Contrato",

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Apps Actions History',
-    'version': '1.0',
+    'version': '1.0.1',
     'summary': """Displaying History of module installation/uninstallation/upgradation""",
     'description': """History of module installation/uninstallation/upgradation""",
+
     'category': 'Base',
-    'author': 'Kreative',
+
+    'author': 'BlueConnect, Kreative',
     'website': "",
     'license': 'AGPL-3',
 
@@ -22,6 +24,6 @@
     'qweb': [],
 
     'installable': True,
-    'auto_install': False,
+    'auto_install': True,
     'application': False,
 }

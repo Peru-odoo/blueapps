@@ -11,12 +11,13 @@ class Matricula (models.Model):
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Cliente',
-        required=True)
+        required=False)
     cpf = fields.Char(
         string='CPF',
+#        related="partner_id.cpf",
         required=False)
     rg = fields.Char(
-        string='RG', 
+        string='RG',
         required=False)
     banco = fields.Char(
         string='Banco',

@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_blue_consultar_cpf_blue_consultar_cpf,blue_consultar_cpf.blue_consultar_cpf,model_blue_consultar_cpf_blue_consultar_cpf,base.group_user,1,1,1,1
+access_blue_consignado_contrato,blue_consignado.contrato,model_consignado_contrato,base.group_user,1,1,1,1
+access_blue_consignado_matricula,blue_consignado.matricula,model_consignado_matricula,base.group_user,1,1,1,1

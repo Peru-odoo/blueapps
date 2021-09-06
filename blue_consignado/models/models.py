@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
-
-
- class blue_consultar_cpf(models.Model):
-     _name = 'blue_consultar_cpf.blue_consultar_cpf'
-     _description = 'blue_consultar_cpf.blue_consultar_cpf'
+#from odoo import models, fields, api
+# class blue_consultar_cpf(models.Model):
+#     _name = 'blue_consultar_cpf.blue_consultar_cpf'
+#     _description = 'blue_consultar_cpf.blue_consultar_cpf'
 
 #     name = fields.Char()
 #     value = fields.Integer()
