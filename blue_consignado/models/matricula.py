@@ -12,10 +12,10 @@ class Matricula (models.Model):
         comodel_name='res.partner',
         string='Cliente',
         required=False)
-    cpf = fields.Char(
+'''    cpf = fields.Char(
         string='CPF',
 #        related="partner_id.cpf",
-        required=False)
+        required=False)'''
     rg = fields.Char(
         string='RG',
         required=False)
@@ -49,7 +49,3 @@ class Matricula (models.Model):
     secretaria = fields.Char(
         string='Secretaria',
         required=False)
-
-
-
-

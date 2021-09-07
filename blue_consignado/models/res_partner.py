@@ -3,10 +3,10 @@ from odoo import fields, models, api
 class ResPartner (models.Model):
     _inherit = "res.partner"
 
-    cpf = fields.Char(
+'''    cpf = fields.Char(
         string='CPF',
 #        related="partner_id.cpf",
-        required=False)
+        required=False)'''
     rg = fields.Char(
         string='RG',
         required=False)

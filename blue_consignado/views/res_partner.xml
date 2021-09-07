@@ -10,7 +10,7 @@
                 <xpath expr="//page[@name='contact_addresses']" position="before">
                     <page name="consignado" string="Consignado" autofocus="autofocus">
                             <group>
-                                <field name="matricula_id"  nolabel="1">
+                                <field name="matricula_id"  nolabel="1/">
                             </group>
                             <group>
                                 <field name="contrato_id"  nolabel="1"/>
