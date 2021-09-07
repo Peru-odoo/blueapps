@@ -50,14 +50,14 @@
       <field name="name">Matrículas e Beneficios</field>
       <field name="res_model">consignado.matricula</field>
       <field name="type">ir.actions.act_window</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <record model="ir.actions.act_window" id="consignado_contratos">
       <field name="name">Contratos à negociar</field>
       <field name="res_model">consignado.contrato</field>
       <field name="type">ir.actions.act_window</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,kanban</field>
     </record>
 
 

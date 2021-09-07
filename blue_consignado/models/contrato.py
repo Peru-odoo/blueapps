@@ -1,7 +1,7 @@
 from odoo import fields, models, api
 
 
-class Contratos (models.Model):
+class Contratos(models.Model):
     _name = 'consignado.contrato'
     _description = 'Contratos à negociar'
 
@@ -10,7 +10,8 @@ class Contratos (models.Model):
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Cliente',
-        required=True)
+        ondelete="cascade",
+        required=False)
     matricula = fields.Many2one(
         comodel_name='consignado.matricula',
         string='Matricula',

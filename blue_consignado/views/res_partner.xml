@@ -7,6 +7,9 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    
+                </xpath>
                 <xpath expr="//page[@name='contact_addresses']" position="before">
                     <page name="consignado" string="Consignado" autofocus="autofocus">
                             <group>

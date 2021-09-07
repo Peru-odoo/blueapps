@@ -1,28 +1,31 @@
 from odoo import fields, models, api
 
-class Matricula (models.Model):
+class Matricula(models.Model):
     _name = 'consignado.matricula'
     _description = 'Informações de matricula e beneficios dos leads.'
 
     name = fields.Char("Matrícula/NB")
     senha = fields.Char(
         string='Senha',
+        tracking=True,
         required=False)
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Cliente',
+        ondelete="cascade",
+        tracking=True,
         required=False)
-'''    cpf_fisica = fields.Char(
+    cpf_fisica = fields.Char(
         string='CPF',
-#        related="partner_id.cpf",
+        tracking=True,
         required=False)
     fisica_rg = fields.Char(
         string='RG',
+        tracking=True,
         required=False)
     banco = fields.Char(
         string='Banco',
-        required=False)'''
-        
+        required=False)
     agencia = fields.Char(
         string='Agência',
         required=False)
