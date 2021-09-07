@@ -12,13 +12,13 @@ class Matricula (models.Model):
         comodel_name='res.partner',
         string='Cliente',
         required=False)
-    cpf_fisica = fields.Char(
+'''    cpf_fisica = fields.Char(
         string='CPF',
 #        related="partner_id.cpf",
         required=False)
     fisica_rg = fields.Char(
         string='RG',
-        required=False)
+        required=False)'''
     banco = fields.Char(
         string='Banco',
         required=False)
