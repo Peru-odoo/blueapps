@@ -3,11 +3,11 @@ from odoo import fields, models, api
 class ResPartner (models.Model):
     _inherit = "res.partner"
 
-'''    cpf = fields.Char(
+    fisica_cpf = fields.Char(
         string='CPF',
 #        related="partner_id.cpf",
-        required=False)'''
-    rg = fields.Char(
+        required=False)
+    fisica_rg = fields.Char(
         string='RG',
         required=False)
     matricula_id = fields.One2many(
