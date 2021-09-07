@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Numeros de Telefone Adicionais",
+    "name": "10 Numeros de Telefone Adicionais em Parceiros",
     "summary": "Adds a secondary phone number on partners",
     "license": "AGPL-3",
     "version": "14.0.1.0.0",

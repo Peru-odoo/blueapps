@@ -20,6 +20,7 @@ class DbConnection(models.Model):
     connection_user = fields.Char(string="User Name", required=False, default='uniexpresscred_01')
     connection_password = fields.Char(string="Password", required=False, default='idmssqlsg90')
     loading_process_ids = fields.One2many(comodel_name="loading_process", inverse_name="dbconnection", string="Logs")
+    id_segline = fields.Char(string="ID/CPF", required=False)
 
     # ------------------------------customer----------------
     customer_id_map = fields.Char(string="Customer ID", required=False,
