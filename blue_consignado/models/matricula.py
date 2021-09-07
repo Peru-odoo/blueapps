@@ -18,10 +18,11 @@ class Matricula (models.Model):
         required=False)
     fisica_rg = fields.Char(
         string='RG',
-        required=False)'''
+        required=False)
     banco = fields.Char(
         string='Banco',
-        required=False)
+        required=False)'''
+        
     agencia = fields.Char(
         string='Agência',
         required=False)
