@@ -1,6 +1,11 @@
 import re
 import base64
 import logging
+import requests
+import untangle
+import xmltodict
+from xml.etree import ElementTree
+from datetime import date
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
@@ -12,6 +17,16 @@ _logger = logging.getLogger(__name__)
     from pytrustnfe.certificado import Certificado
 except ImportError:
     _logger.error('Cannot import pytrustnfe', exc_info=True)
+'''
+
+'''
+hj = date.today()
+print hj
+print hj.day
+print hj.month
+print hj.year
+
+futuro = hj.day()*1024+5 # hoje *1024+5
 '''
 
 class ResPartner(models.Model):
@@ -30,10 +45,42 @@ class ResPartner(models.Model):
     l10n_br_suframa = fields.Char('Suframa', size=20)
     json = fields.Text('Json Data')
 
-    _sql_constraints = [
+
+
+    def action_check_cpf(self):
+        if self.fisica_cpf:
+            url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=CONSULTACPF&doc={fisica_cpf}"
+            r = requests.get(url)
+            dict_data = xmltodict.parse(r.content)
+            beneficios = dict_data['consulta']['dadosPessoais']
+            for x in beneficios:
+                self.beneficios = (x['beneficio'])
+
+    def action_check_nb(self):
+        if self.beneficio1:
+            url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=CONSULTANB&doc={beneficio1}"
+            r = requests.get(url)
+            dict_data = xmltodict.parse(r.content)
+            rubricas = dict_data['consultaws']['rubrica']
+            for x in rubricas:
+                contrato = (x['codigo'], x['desrub'], x['sinal'], x['vlrub'])
+                self.beneficio1 = contrato
+
+    def action_check_siape(self):
+        if self.fisica_cpf:
+            url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=SIAPECPF&doc=03537286759"
+            r = requests.get(url)
+            dict_data = xmltodict.parse(r.content)
+            self.comment = (dict_data['consultaws']['dados_cadastrais']['beneficio'])
+
+
+'''    _sql_constraints = [
         ('res_partner_l10n_br_cnpj_cpf_uniq', 'unique (l10n_br_cnpj_cpf)',
          'Este CPF/CNPJ já está em uso por outro parceiro!')
-    ]
+    ]'''
+
+
+
 
 '''    def _formatting_address_fields(self):
         fields = super(ResPartner, self)._formatting_address_fields()
@@ -59,7 +106,7 @@ class ResPartner(models.Model):
                 }
             }'''
 
-    @api.onchange('l10n_br_cnpj_cpf')
+'''    @api.onchange('l10n_br_cnpj_cpf')
     def _onchange_l10n_br_cnpj_cpf(self):
         country_code = self.country_id.code or ''
         if self.l10n_br_cnpj_cpf and country_code.upper() == 'BR':
@@ -79,27 +126,9 @@ class ResPartner(models.Model):
         default_value = IrDefault.get('res.partner', 'country_id')
         if default_value is None:
             IrDefault.set('res.partner', 'country_id', self.env.ref('base.br').id)
-        return True
+        return True'''
 
-    def action_check_cpf(self):
-        url = "http://sip.segline.srv.br/jeta/api/campanha/cliente/importado"
-        if self.l10n_br_cnpj_cpf:
-            payload = json.dumps({
-                "CAMPANHA": 6374,
-                "CAMPO": "CPFCNPJ",
-                "TABELA": "CAMPANHA_IMPORTACAO",
-                "EMPRESA": "new",
-                "JETA": 38427,
-                "PAGESIZE": 1,
-                "PAGEINDEX": 2
-            })
-            headers = {
-                'Content-Type': 'application/json'
-            }
 
-            response = requests.request("POST", url, headers=headers, data=payload)
-            data = response.json()
-            self.comment = data
 
 '''    def action_check_sefaz(self):
         if self.l10n_br_cnpj_cpf and self.state_id:

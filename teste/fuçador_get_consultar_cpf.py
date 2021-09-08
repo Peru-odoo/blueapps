@@ -3,8 +3,9 @@ import untangle
 import xmltodict
 # import xml.etree.ElementTree as ET
 from xml.etree import ElementTree
+from datetime import date, datetime
 
-url = "http://162.214.190.43/~buscador/ws2/rFucador.php?u=vendaseirele&s=k13997&k=2053&tipo=CONSULTANB&doc=5162815965"
+url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=CONSULTACPF&doc=16685717572"
 payload = {}
 headers = {}
 
@@ -14,9 +15,11 @@ def buscar_dados():
     r = requests.get(url)
     dict_data = xmltodict.parse(r.content)
     # contatos = dict(dict_data) # Ocorreu tudo bem
-    contatos = dict_data
-    # print(type(contatos))
-    print(contatos['consultaws']['dados_cadastrais']['beneficio'])
+    contatos = dict_data['consulta']['dadosPessoais']
+    #print(contatos)
+    for x in contatos:
+        print(x.value())
+    # print(contatos['consultaws']['dados_cadastrais']['beneficio'])
     # print(contatos.get('dados_cadastrais','Erro'))
     # info = info.infCons
     # tree = ElementTree.fromstring(r.content)
