@@ -4,8 +4,8 @@ import logging
 import requests
 import untangle
 import xmltodict
+import datetime
 from xml.etree import ElementTree
-from datetime import date
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
@@ -26,7 +26,12 @@ print hj.day
 print hj.month
 print hj.year
 
-futuro = hj.day()*1024+5 # hoje *1024+5
+futuro = hj.day() * 1024 + 5 # hoje *1024+5
+
+codigoacesso = (datetime.datetime.today().day) * 1024 + 5
+print(codigoacesso)
+Ou 
+print(datetime.datetime.today().day)
 '''
 
 class ResPartner(models.Model):
@@ -44,31 +49,40 @@ class ResPartner(models.Model):
     l10n_br_inscr_mun = fields.Char('Inscr. Municipal', size=20)
     l10n_br_suframa = fields.Char('Suframa', size=20)
     json = fields.Text('Json Data')
+    
 
 
 
     def action_check_cpf(self):
         if self.fisica_cpf:
-            url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=CONSULTACPF&doc={fisica_cpf}"
-            r = requests.get(url)
+            codigoacesso = (datetime.datetime.today().day) * 1024 + 5
+            cpf = self.fisica_cpf
+            url1 = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=9221&tipo=CONSULTACPF&doc=" + cpf
+            #url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=9221&tipo=CONSULTACPF&doc={teste}", teste=cpf
+            r = requests.get(url1)
             dict_data = xmltodict.parse(r.content)
-            beneficios = dict_data['consulta']['dadosPessoais']
-            for x in beneficios:
-                self.beneficios = (x['beneficio'])
+            beneficio = dict_data['consulta']['dadosPessoais']
+            teste = ""
+            for x in beneficio:
+                #self.beneficio1 = (x['beneficio'])
+                teste += (x['beneficio']) + "\n"
+            self.beneficios = teste
 
     def action_check_nb(self):
         if self.beneficio1:
-            url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=CONSULTANB&doc={beneficio1}"
+            benef = self.beneficio1
+            url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=9221&tipo=CONSULTANB&doc=" + benef
             r = requests.get(url)
             dict_data = xmltodict.parse(r.content)
             rubricas = dict_data['consultaws']['rubrica']
+            contrato = " "
             for x in rubricas:
-                contrato = (x['codigo'], x['desrub'], x['sinal'], x['vlrub'])
-                self.beneficio1 = contrato
+                contrato += (x['codigo'] x['desrub'] x['sinal'] x['vlrub']) + "\n"
+            self.contratos = contrato
 
     def action_check_siape(self):
         if self.fisica_cpf:
-            url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=SIAPECPF&doc=03537286759"
+            url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=9221&tipo=SIAPECPF&doc=03537286759"
             r = requests.get(url)
             dict_data = xmltodict.parse(r.content)
             self.comment = (dict_data['consultaws']['dados_cadastrais']['beneficio'])

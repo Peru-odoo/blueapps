@@ -5,7 +5,7 @@ import xmltodict
 from xml.etree import ElementTree
 from datetime import date, datetime
 
-url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=CONSULTACPF&doc=68141084887"
+url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=8197&tipo=CONSULTACPF&doc=68141084887"
 payload = {}
 headers = {}
 
@@ -18,7 +18,7 @@ def buscar_dados():
     contatos = dict_data['consulta']['dadosPessoais']
     # print(type(contatos))
     for x in contatos:
-        print(x.values())
+        print(x['beneficio'])
     # print(contatos['consultaws']['dados_cadastrais']['beneficio'])
     # print(contatos.get('dados_cadastrais','Erro'))
     # info = info.infCons

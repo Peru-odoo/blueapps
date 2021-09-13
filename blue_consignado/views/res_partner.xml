@@ -7,8 +7,24 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='name']" position="after">
-                    
+
+                <xpath expr="//h1" position="after">
+<!--
+                    <h3 attrs="{'invisible': [('is_company', '=', False)]}">
+                        <field name="l10n_br_legal_name" placeholder="Legal Name" nolabel="1"/>
+                    </h3>
+-->
+                    <h3>
+                        <field name="fisica_cpf" placeholder="CPF" nolabel="1"/>
+                    </h3>
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="contratos"/>
+                    <field name="beneficios"/>
+                    <field name="beneficio1"/>
+                    <field name="beneficio2" invisible='1'/>
+                    <field name="beneficio3" invisible='1'/>
                 </xpath>
                 <xpath expr="//page[@name='contact_addresses']" position="before">
                     <page name="consignado" string="Consignado" autofocus="autofocus">

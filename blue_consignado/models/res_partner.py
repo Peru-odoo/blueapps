@@ -3,7 +3,7 @@ from odoo import fields, models, api
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    fisica_cpf = fields.Char(
+    fisica_cpf = fields.Char(related='id_segline',
         string='CPF',
         tracking=True,
         required=False)

@@ -1,24 +1,26 @@
 import requests
 import untangle
 import xmltodict
+import datetime
 # import xml.etree.ElementTree as ET
 from xml.etree import ElementTree
-from datetime import date, datetime
+from datetime import date
 
-url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=7173&tipo=CONSULTACPF&doc=16685717572"
-payload = {}
-headers = {}
+codigoacesso = str((datetime.datetime.today().day) * 1024 + 5)
+print(codigoacesso)
+url = "http://fucador.com/ws2/rFucador.php?u=vendaseirele&s=k13997&k=" + codigoacesso + "&tipo=CONSULTACPF&doc=16685717572"
 
-
-def buscar_dados():
-    # response = requests.request("GET", url, headers=headers, data=payload)
+'''def buscar_dados():
     r = requests.get(url)
     dict_data = xmltodict.parse(r.content)
     # contatos = dict(dict_data) # Ocorreu tudo bem
     contatos = dict_data['consulta']['dadosPessoais']
-    #print(contatos)
-    for x in contatos:
-        print(x.value())
+    print(r)
+if url:
+    buscar_dados()'''
+
+'''    for x in contatos:
+        print(x)'''
     # print(contatos['consultaws']['dados_cadastrais']['beneficio'])
     # print(contatos.get('dados_cadastrais','Erro'))
     # info = info.infCons
@@ -41,5 +43,3 @@ def buscar_dados():
     # one specific item attribute
     # print('Item #2 attribute:')
     # print(items[1].attributes['name'].value)
-if url:
-    buscar_dados()
