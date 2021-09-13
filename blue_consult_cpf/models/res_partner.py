@@ -77,7 +77,7 @@ class ResPartner(models.Model):
             rubricas = dict_data['consultaws']['rubrica']
             contrato = " "
             for x in rubricas:
-                contrato += (x['codigo'] x['desrub'] x['sinal'] x['vlrub']) + "\n"
+                contrato += (x['codigo'], x['desrub'], x['sinal'], x['vlrub']) + "\n"
             self.contratos = contrato
 
     def action_check_siape(self):
