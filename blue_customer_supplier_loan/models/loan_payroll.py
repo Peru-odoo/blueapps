@@ -1062,7 +1062,7 @@ class EmployeeLoanDetails(models.Model):
                     last_loan_date = last_loan.date_applied
                     last_loan_date_obj = datetime.strptime(last_loan_date, DEFAULT_SERVER_DATE_FORMAT)
                     diff = last_loan_date_obj + relativedelta(months=int(policy.policy_value))
-                    print uio
+                    print(uio)
                     if diff > loan_date_today_obj:
                         qualified = False
                         msg += '\n %s :\n\t\t Last loan date: %s \n\t\tGap required(months) : %s \n\t\tcan apply on/after: %s' \
