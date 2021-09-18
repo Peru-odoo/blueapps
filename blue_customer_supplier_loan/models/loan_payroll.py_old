@@ -38,7 +38,8 @@ from odoo.exceptions import Warning
 class LoanType(models.Model):
     _name = 'partner.loan.type'
     _description = 'Loan Type'
-    _inherit = ['mail.thread', 'ir.needaction_mixin']
+#     _inherit = ['mail.thread', 'ir.needaction_mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
     
 #    @api.multi
     def onchange_interest_payable(self, int_payble):
@@ -151,7 +152,8 @@ class LoanType(models.Model):
 class LoanInstallmentDetail(models.Model):
     _name = 'partner.loan.installment.details'
     _description = 'Loan Installment'
-    _inherit = ['mail.thread', 'ir.needaction_mixin']
+#     _inherit = ['mail.thread', 'ir.needaction_mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
     #_order = "loan_id desc"
     
 ##    @api.multi
@@ -564,7 +566,8 @@ class LoanInstallmentDetail(models.Model):
 class EmployeeLoanDetails(models.Model):
     _name = "partner.loan.details"
     _description = "Partner Loan"
-    _inherit = ['mail.thread', 'ir.needaction_mixin']
+#     _inherit = ['mail.thread', 'ir.needaction_mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
     _order = "name desc"
     
 #     def _get_loan_rec(self, cr, uid, ids, context=None):
@@ -577,13 +580,16 @@ class EmployeeLoanDetails(models.Model):
     @api.depends('installment_lines', 'principal_amount', 'int_rate', 'duration', 'installment_lines.state')
     def _cal_amount_all(self):
         for rec in self:
+            rec.total_amount_paid = 0.0
+            rec.total_interest_amount = 0.0
             if rec.int_payable:
                 if rec.interest_mode == 'flat':
                     rec.total_interest_amount = self.flat_rate_method(rec.principal_amount, rec.int_rate, rec.duration)
                 else:
                     if rec.int_rate > 0:
                         values = self.reducing_balance_method(rec.principal_amount, rec.int_rate, rec.duration)
-                        for key, value in values.iteritems():
+                        #for key, value in values.iteritems():
+                        for key, value in values.items():
                             rec.total_interest_amount += value['interest_comp']
                     
             for payment in rec.installment_lines:
@@ -1004,7 +1010,26 @@ class EmployeeLoanDetails(models.Model):
 #             gross_amount = line.amount
         return {'value':{'department_id': department_id, 'loan_policy_ids':list(set(policies_on_categ + policies_on_empl)),
                          'partner_gross':gross_amount, 'partner_loan_account':address_id.property_account_receivable_id.id or False}}
-    
+
+    #probuse override to fix issue of  when we apply for a loan first loan policy is selected and when we save loan request the loan policy get removed/disappeared and we have to select loan policy again
+    @api.model
+    def create(self, vals):
+        if vals.get('partner_id', False):
+            partner_id = vals['partner_id']
+            partner = self.env['res.partner'].sudo().browse(partner_id)
+
+            policies_on_categ = []
+            policies_on_empl = []
+            for categ in partner.category_id:
+                if categ.loan_policy:
+                    policies_on_categ += map(lambda x:x.id, categ.loan_policy)
+            if partner.loan_policy:
+                policies_on_empl += map(lambda x:x.id, partner.loan_policy)
+
+            loan_policy_ids = list(set(policies_on_categ + policies_on_empl))
+            vals.update({'loan_policy_ids': [(6, 0, loan_policy_ids)]})
+        return  super(EmployeeLoanDetails, self).create(vals)
+
 #    @api.multi
     def action_applied(self):
         for loan in self:
@@ -1036,11 +1061,11 @@ class EmployeeLoanDetails(models.Model):
     @api.model
     def check_employee_loan_qualification(self, loan_obj):
         loan_date_today = loan_obj.date_applied
-        loan_date_today_obj = datetime.strptime(loan_date_today, DEFAULT_SERVER_DATE_FORMAT)
+        loan_date_today_obj = datetime.strptime(str(loan_date_today), DEFAULT_SERVER_DATE_FORMAT)
         msg = 'Mr./Mrs. %s does not meet following Loan policies:' % (loan_obj.partner_id.name)
         qualified = True
-        print "--------------loan_obj",loan_obj
         allow_multiple_loan = self._check_multi_loan(loan_obj.partner_id)
+        allow_multiple_loan = filter(None, allow_multiple_loan) #probuse
         if loan_obj.partner_id.loan_defaulter:
             msg += '\n Blacklisted: You are Blacklisted as loan defaulter and hence you cannot apply for a new loan !'
             qualified = False
@@ -1055,14 +1080,16 @@ class EmployeeLoanDetails(models.Model):
                     qualified = False
                     msg += '\n %s :Loan amount is > %s ' % (policy.name, loan_obj.max_loan_amt)
             
-            if policy.policy_type == 'loan_gap' and not allow_multiple_loan:
+#             if policy.policy_type == 'loan_gap' and not allow_multiple_loan: #probuse
+            if policy.policy_type == 'loan_gap' and allow_multiple_loan:
                 loans_list = self.search([('state', '=', 'disburse'), ('partner_id', '=', loan_obj.partner_id.id)], order='date_applied asc')
                 if loans_list:
-                    last_loan = self.browse(loans_list[0])
+#                     last_loan = self.browse(loans_list[0]) #probuse
+                    last_loan = loans_list[0] #probuse
                     last_loan_date = last_loan.date_applied
-                    last_loan_date_obj = datetime.strptime(last_loan_date, DEFAULT_SERVER_DATE_FORMAT)
+                    last_loan_date_obj = datetime.strptime(str(last_loan_date), DEFAULT_SERVER_DATE_FORMAT)
                     diff = last_loan_date_obj + relativedelta(months=int(policy.policy_value))
-                    print uio
+#                     print uio
                     if diff > loan_date_today_obj:
                         qualified = False
                         msg += '\n %s :\n\t\t Last loan date: %s \n\t\tGap required(months) : %s \n\t\tcan apply on/after: %s' \
@@ -1132,7 +1159,7 @@ class EmployeeLoanDetails(models.Model):
             raise Warning(_('Please give disbursement date.'))
         else:
             date_disb = loan.date_disb
-        date_approved_obj = datetime.strptime(date_disb, DEFAULT_SERVER_DATE_FORMAT)
+        date_approved_obj = datetime.strptime(str(date_disb), DEFAULT_SERVER_DATE_FORMAT)
         installment_obj = self.env['partner.loan.installment.details']
         day = date_approved_obj.day
         month = date_approved_obj.month
@@ -1309,12 +1336,12 @@ class EmployeeLoanDetails(models.Model):
 #         self.write({'state':'draft'})
         for rec in self:
             rec.state = 'draft'
-        from openerp import workflow
-        workflow.trg_delete(self._uid, self._name, self.id, self._cr)
-        workflow.trg_create(self._uid, self._name, self.id, self._cr)
-#        self.workflow_delete()
-#        self.workflow_create()
-        return True
+#         from openerp import workflow
+#         workflow.trg_delete(self._uid, self._name, self.id, self._cr)
+#         workflow.trg_create(self._uid, self._name, self.id, self._cr)
+# #        self.workflow_delete()
+# #        self.workflow_create()
+#         return True
     
 class LoanPloicy(models.Model):
     _name = "partner.loan.policy"
