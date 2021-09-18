@@ -64,7 +64,7 @@ class EmpLoanReport(models.TransientModel):
 # comment by probuse                              select=True
     )
     
-    @api.multi
+#    @api.multi
     def print_report(self, data):
         wiz_rec = self.read()
         data.update(form=wiz_rec[0],ids=self.ids)

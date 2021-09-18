@@ -41,7 +41,7 @@ class LoanType(models.Model):
 #     _inherit = ['mail.thread', 'ir.needaction_mixin']
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
     
-    
+#    @api.multi
     def onchange_interest_payable(self, int_payble):
         if not int_payble:
             return {'value':{'interest_mode':'', 'int_rate':0.0}}
@@ -156,7 +156,7 @@ class LoanInstallmentDetail(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
     #_order = "loan_id desc"
     
-#    
+##    @api.multi
 #    @api.depends('loan_id', 'loan_id.loan_type')
 #    def _check_status(self):
 #        payslip_obj = self.env['hr.payslip']
@@ -176,7 +176,7 @@ class LoanInstallmentDetail(models.Model):
 #                                self._cr.execute("update loan_installment_details set state='paid' where id = %s" % (install.id))
 #                                break
     
-    
+#    @api.multi
     @api.depends('loan_id', 'install_no')
     def _get_name(self):
         for install in self:
@@ -314,21 +314,21 @@ class LoanInstallmentDetail(models.Model):
         stored=True,
     )
     
-    
+#    @api.multi
     def action_reset(self):
 #         print "==============action_reset============="
         for rec in self:
             rec.state = 'unpaid'
 #         return self.write({'state':'unpaid'})
     
-    
+#    @api.multi
     def action_approve(self):
         for rec in self:
             rec.state = 'approve'
 #         print "========'=action_approve========="
 #         return self.write({'state':'approve'})
     
-    
+#    @api.multi
     def book_interest(self):#todoprobuse
         move_pool = self.env['account.move'] 
 #         period_pool = self.env['account.period']
@@ -386,7 +386,7 @@ class LoanInstallmentDetail(models.Model):
     #                 inst_move_id.post()
         return True
     
-    
+#    @api.multi
     def book_interest1(self):#ok
         move_pool = self.env['account.move']  
 #         period_pool = self.env['account.period']
@@ -446,7 +446,7 @@ class LoanInstallmentDetail(models.Model):
 #             inst_move_id.post()
         return True
     
-    
+#    @api.multi
     def pay_installment1(self):#ok
         ctx = dict(self._context or {})
         ctx.update(recompute=True)
@@ -504,7 +504,7 @@ class LoanInstallmentDetail(models.Model):
                 ctx.pop('recompute')
         return True
     
-    
+#    @api.multi
     def pay_installment(self):#ok #probusetodo when call from form view of opening balance
         ctx = dict(self._context or {})
         move_pool = self.env['account.move']  
@@ -576,7 +576,7 @@ class EmployeeLoanDetails(models.Model):
 #             result.append(line.loan_id.id)
 #         return result
     
-    
+#    @api.multi
     @api.depends('installment_lines', 'principal_amount', 'int_rate', 'duration', 'installment_lines.state')
     def _cal_amount_all(self):
         for rec in self:
@@ -599,7 +599,7 @@ class EmployeeLoanDetails(models.Model):
             rec.final_total = rec.principal_amount + rec.total_interest_amount
             rec.total_amount_due= rec.final_total - rec.total_amount_paid
     
-    
+#    @api.multi
     @api.depends('loan_policy_ids')
     def _calc_max_loan_amt(self):
         for rec in self:
@@ -613,7 +613,7 @@ class EmployeeLoanDetails(models.Model):
 #                    else:
                     rec.max_loan_amt = policy.policy_value 
     
-    #@api.one
+#    @api.one
     def _check_multi_loan(self, partner):
         allow_multiple_loans = partner.allow_multiple_loan
         for categ in partner.category_id:
@@ -622,7 +622,7 @@ class EmployeeLoanDetails(models.Model):
                 break
         return allow_multiple_loans
     
-    
+#    @api.multi
     @api.depends('loan_type')
     def _get_loan_values(self):
         res = {}
@@ -668,7 +668,7 @@ class EmployeeLoanDetails(models.Model):
                       }
         return res
     
-#    
+##    @api.multi
 #    def _check_status(self):
 #        payslip_obj = self.env['hr.payslip']
 #        for loan in self:
@@ -950,7 +950,7 @@ class EmployeeLoanDetails(models.Model):
     )
     
     
-#     #@api.one
+# #    @api.one
 #     def copy(self, default=None):
 #         print "--------copy-------------"
 #         if not default:
@@ -965,7 +965,7 @@ class EmployeeLoanDetails(models.Model):
 #         })
 #         return super(EmployeeLoanDetails, self).copy(default)
     
-    
+#    @api.multi
     def onchange_loan_type(self, loan_type, partner):
         if loan_type:
             if not partner:
@@ -980,7 +980,7 @@ class EmployeeLoanDetails(models.Model):
                 raise Warning( _('%s  does not Qualify for %s ') % (partner_obj.name, loan_type.name))
         return {}
     
-    
+#    @api.multi
     def onchange_employee_id(self, partner):
         if not partner:
             return {'value':{'loan_policy_ids':[]}}
@@ -1030,7 +1030,7 @@ class EmployeeLoanDetails(models.Model):
             vals.update({'loan_policy_ids': [(6, 0, loan_policy_ids)]})
         return  super(EmployeeLoanDetails, self).create(vals)
 
-    
+#    @api.multi
     def action_applied(self):
         for loan in self:
             self.onchange_loan_type(loan.loan_type.id, loan.partner_id.id)
@@ -1052,7 +1052,7 @@ class EmployeeLoanDetails(models.Model):
             loan.name = seq_no
         return True
     
-    
+#    @api.multi
     def action_cancel(self):
         for rec in self:
             rec.state = 'cancel'
@@ -1106,7 +1106,7 @@ class EmployeeLoanDetails(models.Model):
             return msg
         return qualified
     
-    
+#    @api.multi
     def compute_installments(self):
         for loan in self:
             if not len(loan.installment_lines):
@@ -1193,7 +1193,7 @@ class EmployeeLoanDetails(models.Model):
                                  }
             installment_obj.create(installment_line)
         return True
-    
+#    @api.multi
     def _interest_journal(self, loan, move, vals, partner_id, move_pool):
         interest_move = move
         if not loan.journal_id2:
@@ -1232,7 +1232,7 @@ class EmployeeLoanDetails(models.Model):
             vals.update(state='disburse', interest_loan_journal=interest_loan_journal_id.id)
         return vals
             
-    
+#    @api.multi
     def action_disburse(self):
         move_pool = self.env['account.move']  
 #         period_pool = self.env['account.period']
@@ -1302,7 +1302,7 @@ class EmployeeLoanDetails(models.Model):
 #             move_id.post()
         return True
     
-    
+#    @api.multi
     def action_approved(self):
         date_approved = time.strftime(DEFAULT_SERVER_DATE_FORMAT)
         date_approved_obj = datetime.strptime(date_approved, DEFAULT_SERVER_DATE_FORMAT)
@@ -1318,19 +1318,19 @@ class EmployeeLoanDetails(models.Model):
             self.write(vals)
         return True
     
-    
+#    @api.multi
     def action_rejected(self):
 #         print "---------------action_rejected------"
         for rec in self:
             rec.state = 'rejected'
 #         return self.write({'state':'rejected'})
     
-    
+#    @api.multi
     def action_paid(self):
         for rec in self:
             rec.state = 'paid'
     
-    
+#    @api.multi
     def action_reset(self):
 #         print "-----------action_reset----------"
 #         self.write({'state':'draft'})
@@ -1482,27 +1482,27 @@ class Partner(models.Model):
 #     _description = 'Loan Prepayment'
 #     _inherit = ['mail.thread']
 #     
-#     
+# #    @api.multi
 #     def validate(self):
 #         for a in self:
 #             pass
 #             a.state = 'open1'
 # #         return self.write({'state':'open1'})
 # 
-#     
+# #    @api.multi
 #     def validate1(self):
 #         for a in self:
 #             pass
 #             a.state = 'open'
 # #         return self.write({'state':'open'})
 #     
-#     
+# #    @api.multi
 #     def set_to_close(self):
 #         for rec in self:
 #             rec.state = 'close'
 # #         return self.write({'state': 'close'})
 #     
-#     
+# #    @api.multi
 #     def set_to_draft(self):
 #         for rec in self:
 #             rec.state = 'draft'
@@ -1534,7 +1534,7 @@ class Partner(models.Model):
 #     def flat_rate_method(self, principal, rate, duration):
 #         return ((principal * rate) / 100)
 # 
-#     
+# #    @api.multi
 #     def create_installments(self):
 #         if not self.ids:
 #             return True
@@ -1592,7 +1592,7 @@ class Partner(models.Model):
 #             old_paid = x
 #         return True
 #     
-#     
+# #    @api.multi
 #     def onchange_company_id(self, company_id=False):
 #         val = {}
 #         if company_id:
@@ -1604,13 +1604,13 @@ class Partner(models.Model):
 #         val['currency_id'] = company.currency_id.id
 #         return {'value': val}
 #     
-#     #@api.one
+# #    @api.one
 #     @api.depends('purchase_value', 'total_am')
 #     def _amount_residual(self):
 #         for s in self:
 #             s.value_residual = s.purchase_value - s.total_am
 #     
-#     #@api.one
+# #    @api.one
 #     @api.depends('depreciation_line_ids')
 #     def _total_am(self):
 #         for s in self:
@@ -1620,7 +1620,7 @@ class Partner(models.Model):
 #                     t += k.total
 #             s._total_am = t
 #     
-#     #@api.one
+# #    @api.one
 #     @api.depends('loan_type')
 #     def _get_loan_values(self):
 #         for rec in self:
@@ -1765,7 +1765,7 @@ class Partner(models.Model):
 #     int_rate = fields.Float(compute='_get_loan_values', string='Rate(Per Annum)', help='Interest rate between 0-100 in range', digits=(16, 2), store=True)
 #     interest_mode = fields.Selection(compute='_get_loan_values', selection=[('flat', 'Flat'), ('reducing', 'Reducing'), ('', '')], string='Interest Mode', store=True)
 #     
-#     
+# #    @api.multi
 #     def approve(self):
 # #         period_obj = self.env['account.period']
 #         move_obj = self.env['account.move']
@@ -1826,7 +1826,7 @@ class Partner(models.Model):
 #                 a.state = 'approve'
 # #         return self.write({'state': 'approve'})
 #     
-#     
+# #    @api.multi
 #     def set_to_cancel(self):
 #         for rec in self:
 #             rec.state = 'cancel'
