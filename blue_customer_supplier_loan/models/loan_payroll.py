@@ -1039,7 +1039,7 @@ class EmployeeLoanDetails(models.Model):
         loan_date_today_obj = datetime.strptime(loan_date_today, DEFAULT_SERVER_DATE_FORMAT)
         msg = 'Mr./Mrs. %s does not meet following Loan policies:' % (loan_obj.partner_id.name)
         qualified = True
-        print "--------------loan_obj",loan_obj
+        print("--------------loan_obj",loan_obj)
         allow_multiple_loan = self._check_multi_loan(loan_obj.partner_id)
         if loan_obj.partner_id.loan_defaulter:
             msg += '\n Blacklisted: You are Blacklisted as loan defaulter and hence you cannot apply for a new loan !'
