@@ -10,7 +10,7 @@ class PrepaymentWriteoff(models.Model):
     _description = 'Loan Prepayment WriteOff'
     _inherit = ['mail.thread']
     
-    @api.multi
+    
     def onchange_prepayment(self, loan_id=False):
         res = {}
         res['value'] = {'gross_value': 0.0, 'value_residual': 0.0, 'name':''}
@@ -28,14 +28,14 @@ class PrepaymentWriteoff(models.Model):
             })
         return res
     
-    @api.multi
+    
     def validate(self):
         for cap in self:
             pass
             cap.state = 'open'
 #         return self.write({'state': 'open'})
     
-    @api.multi
+    
     def approve(self):
         for cap in self:
             pass
@@ -44,31 +44,31 @@ class PrepaymentWriteoff(models.Model):
             cap.state = 'approve'
 #         return self.write({'state': 'approve'})
     
-    @api.multi
+    
     def set_to_draft_app(self):
         for rec in self:
             rec.state = 'draft'
 #         return self.write({'state': 'draft'})
     
-    @api.multi
+    
     def set_to_draft(self):
         for rec in self:
             rec.state = 'draft'
 #         return self.write({'state': 'draft'})
     
-    @api.multi
+    
     def set_to_close(self):
         for rec in self:
             rec.state = 'reject'
 #         return self.write({'state': 'reject'})
     
-    @api.multi
+    
     def set_to_cancel(self):
         for rec in self:
             rec.state = 'cancel'
 #         return self.write({'state': 'cancel'})
 
-    @api.multi
+    
     def create_move_write(self):
 #         period_obj = self.env['account.period']
         move_obj = self.env['account.move']

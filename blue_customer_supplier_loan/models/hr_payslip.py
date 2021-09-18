@@ -5,7 +5,7 @@ from odoo import models, api
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
 
-    @api.multi
+    
     def action_payslip_done(self):
         res = super(HrPayslip, self).action_payslip_done()
         for rec in self:

@@ -34,7 +34,7 @@ class PartnerLoanInstallmentDetails(models.Model):
     
     
     
-    @api.multi
+    
     def book_interest_new(self):
         move_pool = self.env['account.move']  
         for install in self:
@@ -91,7 +91,7 @@ class PartnerLoanInstallmentDetails(models.Model):
                 install.write(vals)
         return True
     
-    @api.multi
+    
     def action_pay_installment(self):
         move_pool = self.env['account.move']  
         for install in self:
