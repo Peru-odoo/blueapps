@@ -176,7 +176,7 @@ class PrepaymentWriteoff(models.Model):
             line.loan_id.write({'state':'paid'})
         return True
     
-    @api.one
+    #@api.one
     def copy(self, default=None):
         if default is None:
             default = {}

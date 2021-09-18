@@ -613,7 +613,7 @@ class EmployeeLoanDetails(models.Model):
 #                    else:
                     rec.max_loan_amt = policy.policy_value 
     
-    @api.one
+    #@api.one
     def _check_multi_loan(self, partner):
         allow_multiple_loans = partner.allow_multiple_loan
         for categ in partner.category_id:
@@ -950,7 +950,7 @@ class EmployeeLoanDetails(models.Model):
     )
     
     
-#     @api.one
+#     #@api.one
 #     def copy(self, default=None):
 #         print "--------copy-------------"
 #         if not default:
@@ -1604,13 +1604,13 @@ class Partner(models.Model):
 #         val['currency_id'] = company.currency_id.id
 #         return {'value': val}
 #     
-#     @api.one
+#     #@api.one
 #     @api.depends('purchase_value', 'total_am')
 #     def _amount_residual(self):
 #         for s in self:
 #             s.value_residual = s.purchase_value - s.total_am
 #     
-#     @api.one
+#     #@api.one
 #     @api.depends('depreciation_line_ids')
 #     def _total_am(self):
 #         for s in self:
@@ -1620,7 +1620,7 @@ class Partner(models.Model):
 #                     t += k.total
 #             s._total_am = t
 #     
-#     @api.one
+#     #@api.one
 #     @api.depends('loan_type')
 #     def _get_loan_values(self):
 #         for rec in self:
