@@ -1,6 +1,6 @@
 from odoo import fields, models, api
 
-class ResPartner(models.Model):
+class CrmLead(models.Model):
     _inherit = "crm.lead"
 
     fisica_cpf = fields.Char(
