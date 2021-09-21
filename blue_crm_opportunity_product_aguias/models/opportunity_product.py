@@ -4,6 +4,12 @@ from odoo.exceptions import UserError
 class CrmLeadProduct(models.Model):
     _name = 'consignado.matricula'
     
+    matricula_ids = fields.One2many(
+        comodel_name='consignado.matricula',
+        inverse_name='partner_id',
+        string='Matriculas',
+        track_visibility='onchange',
+        required=False)
     product_id =  fields.Many2one('product.product',string='Product')
     description = fields.Text(string='Description')
     qty = fields.Float(string='Ordered Qty',default=1.0)
@@ -48,7 +54,7 @@ class CrmLead(models.Model):
                 'order_line':order_lines,
             })
         else:
-            raise UserError('In order to create sale order, Customer field should not be empty !!!')
+            raise UserError('Para gerar uma ficha cadastral, o campo de cliente não deve estar vazio!!!')
         return True
     
     
