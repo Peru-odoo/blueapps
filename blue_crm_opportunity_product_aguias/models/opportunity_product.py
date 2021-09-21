@@ -2,7 +2,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 class CrmLeadProduct(models.Model):
-    _name = 'crm.lead.product'
+    _name = 'consignado.matricula'
     
     product_id =  fields.Many2one('product.product',string='Product')
     description = fields.Text(string='Description')
