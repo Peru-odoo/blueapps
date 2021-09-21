@@ -2,12 +2,8 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 class CrmLeadProduct(models.Model):
-    _name = 'consignado.matricula'
+    _name = 'crm.lead.product'
     
-    matricula_idd = fields.Many2one(
-        'consignado.matricula',
-        string='Matricula',
-        required=False)
     product_id =  fields.Many2one('product.product',string='Product')
     description = fields.Text(string='Description')
     qty = fields.Float(string='Ordered Qty',default=1.0)
