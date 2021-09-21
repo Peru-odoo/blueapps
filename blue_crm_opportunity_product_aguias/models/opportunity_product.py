@@ -4,11 +4,9 @@ from odoo.exceptions import UserError
 class CrmLeadProduct(models.Model):
     _name = 'consignado.matricula'
     
-    matricula_ids = fields.One2many(
-        comodel_name='consignado.matricula',
-        inverse_name='partner_id',
-        string='Matriculas',
-        track_visibility='onchange',
+    matricula_idd = fields.Many2one(
+        'consignado.matricula',
+        string='Matricula',
         required=False)
     product_id =  fields.Many2one('product.product',string='Product')
     description = fields.Text(string='Description')
