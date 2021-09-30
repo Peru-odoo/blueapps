@@ -1,0 +1,45 @@
+<odoo>
+
+    <record id="sales_validation_status_send" model="base.automation">
+        <field name="name">Sales Confirm Notification by Whatsapp</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="trigger">on_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[["state","=","draft"]]</field>
+        <field name="filter_domain">[["state","=","sale"]]</field>
+        <field name="state">code</field>
+        <field name="code">
+record.send_whatsapp_automatic()
+        </field>
+    </record>
+
+    <record id="sales_confirm_status" model="mail.template">
+        <field name="name">Sales: Confirm Order</field>
+        <field name="subject">Sales Confirm</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="body_html"><![CDATA[<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;">
+        <p> Hello *${object.partner_id.name or ''}*,</p>
+        Your order ${object.name} amount *${format_amount(object.amount_total, object.currency_id)}* is Confirmed.
+        <br>
+        Kindly refer below link for order receipt.
+        <br>
+        ]]>
+        </field>
+    </record>
+    
+    <record id="sales_confirm_multi" model="mail.template">
+        <field name="name">Sales: Confirm Multi</field>
+        <field name="subject">Sales Confirm</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="body_html"><![CDATA[<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;">
+        <p> Hello *_PARTNER_*,</p>
+        Your order _NUMBER_ amount _AMOUNT_TOTAL_ is Confirmed.
+        <br>
+        Kindly refer below link for order receipt.
+        <br>
+        ]]>
+        </field>
+    </record>
+    
+    
+</odoo>

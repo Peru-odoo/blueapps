@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <!-- Product Form View Inherited -->
+        <record model="ir.ui.view" id="view_product_quote_request_form_inherited">
+            <field name="name">product.quote.request.frm.inherited</field>
+            <field name="model">product.template</field>            
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>            
+            <field name="arch" type="xml">          
+                <xpath expr="//div[hasclass('oe_title')]/div[@name='options']" position="inside">
+                    <div>
+                        <field name="quote_products"/>  
+                        <label for="quote_products"/> 
+                    </div>
+                    <field name="is_extra_price"/>                    
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="product_product_tree_view_inherit" model="ir.ui.view">
+            <field name="name">product.product.tree.inherit</field>
+            <field name="model">product.product</field>
+            <field eval="7" name="priority"/>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="before">
+                    <field name="quote_products" optional="hide"/>
+                </xpath>                
+            </field>
+        </record>
+        <!-- <record id="product.product_normal_form_view" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="mode">primary</field>
+            <field eval="7" name="priority"/>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <form position="attributes">
+                    <attribute name="string">Product Variant</attribute>
+                    <attribute name="duplicate">false</attribute>
+                </form>
+                <field name="type" position="after">
+                    <field name="default_code"/>
+                    <field name="barcode"/>
+                </field>
+                <field name="list_price" position="attributes">
+                   <attribute name="name">lst_price</attribute>
+                   <attribute name="attrs">{'readonly': [('product_variant_count', '&gt;', 1)]}</attribute>
+                </field>
+                <xpath expr="//label[@for='list_price']" position="replace">
+                    <label for="lst_price"/>
+                </xpath>
+                <group name="packaging" position="attributes">
+                    <attribute name="attrs">{'invisible': 0}</attribute>
+                </group>
+                <field name="name" position="after">
+                    <field name="product_tmpl_id" class="oe_inline" readonly="1" invisible="1" attrs="{'required': [('id', '!=', False)]}"/>
+                </field>
+                <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                    <field name="product_template_attribute_value_ids" widget="many2many_tags" readonly="1"
+                        groups="product.group_product_variant"/>                    
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]/div[@name='options']" position="inside">
+                    <field name="quote_products" string="Request for Quote products"/>
+                    <label for="quote_products" string="Request for Quote products"/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <record id="product_product_view_form_inherit_web_quotation" model="ir.ui.view">
+            <field name="name">product.product.view.form.inherit.web.quotation</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']/div[@name='options']" position="inside">
+                    <div>
+                        <field name="quote_products"/>  
+                        <label for="quote_products"/> 
+                    </div>
+                    <field name="is_extra_price"/>
+                </xpath>                
+            </field>
+        </record>
+        
+        <record id="product_template_tree_view_inherit" model="ir.ui.view">
+            <field name="name">product.template.product.tree.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">                   
+                    <field name="quote_products" optional="hide"/>                      
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Sale Order form inherit -->
+
+        <record id="view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inh</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//button[@name='action_quotation_send']" position="before">
+                    <button name="confirm_rfq" string="Confirm RFQ" type="object" states="rfq"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_invoice_id']" position="before">
+                    <field name="project"/>
+                </xpath>
+                <xpath expr="//group[@name='sale_info']" position="inside">
+                    <field name="is_web_quotation" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="rfq,draft,sent,sale" attrs="{'invisible': [('is_web_quotation', '!=', True)]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale" attrs="{'invisible': [('is_web_quotation', '!=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+        <!-- Sale quotation List view Inherit -->
+        <record id="view_quotation_tree_inherit" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="priority">4</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="project" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_order_tree_inh" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.website.sale.quotation</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="project" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="state" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    </data>
+</openerp>

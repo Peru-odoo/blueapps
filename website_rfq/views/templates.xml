@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Custom CSS-JS">
+        <xpath expr="." position="inside">
+             <script src="/website_rfq/static/src/js/web.js" type="text/javascript"></script>             
+        </xpath>
+        
+    </template>
+    
+    <!-- Quote cart menu -->
+    <template id="header_quote_cart" name="Quote cart header Link">
+        <t t-set="cart_qty" t-value="website.sudo().get_qty()" />
+        <t>
+            <li class="nav-item">
+                <a href="/shop/quote" class="nav-link">
+                    <i class="fa fa-shopping-cart"></i>
+                    Quote Cart <sup t-attf-class="my_cart_quantity badge badge-primary" t-esc="cart_qty" />
+                </a>
+            </li>
+        </t>
+    </template>
+    <!-- Add Quote cart menu in all header styles-->
+    <template id="quote_cart_menu_template_header_default" inherit_id="website.template_header_default">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_hamburger" inherit_id="website.template_header_hamburger">
+        <xpath expr="//t[@t-call='portal.placeholder_user_sign_in']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_vertical" inherit_id="website.template_header_vertical">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_sidebar" inherit_id="website.template_header_sidebar">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_slogan" inherit_id="website.template_header_slogan">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_contact" inherit_id="website.template_header_contact">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_minimalist" inherit_id="website.template_header_minimalist">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_boxed" inherit_id="website.template_header_boxed">
+        <xpath expr="//t[@t-call='portal.placeholder_user_sign_in']" position="before">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_centered_logo" inherit_id="website.template_header_centered_logo">
+        <xpath expr="//t[@t-call='portal.placeholder_user_sign_in']" position="before">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_image" inherit_id="website.template_header_image">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_hamburger_full" inherit_id="website.template_header_hamburger_full">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="quote_cart_menu_template_header_magazine" inherit_id="website.template_header_magazine">
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+            <t t-call="website_rfq.header_quote_cart"></t>
+        </xpath>
+    </template>
+
+    <template id="add_to_ask_quote_btn" inherit_id="website_sale.products_item" customize_show="True" name="AFQ Button" priority="20">
+        <xpath expr="//*[hasclass('product_price')]" position="after">      
+            <div class="actions-primary">
+            <!-- <form t-attf-action="/shop/product/selected/#{product.id}" method="post">
+                <input name="product_id" t-att-value="product.product_variant_ids[0].id"
+                    type="hidden" />
+                <input type="hidden" name="csrf_token"
+                    t-att-value="request.csrf_token()" /> -->           
+                <t t-set="product_variant_id" t-value="product._get_first_possible_variant_id()"/>                
+                <button t-if="(product.quote_products or product.list_price == 0.000 and product.is_extra_price != true) " type="button" title="Ask Quote" class="btn btn-primary ml-1 d-quote o_add_quote" t-att-data-product-template-id="product.id" t-att-data-product-product-id="product_variant_id">                                
+                    <span> Ask Quote </span>
+                </button>
+            
+        <!-- </form> -->
+    </div>
+            
+        </xpath>
+    </template>
+    <template id="website_sales_template_product_detail_inherit" inherit_id="website_sale.product" name="Ask for Quotation Product Detail">        
+        <xpath expr="//a[@id='add_to_cart']" position="after">
+        <!-- <xpath expr="//div[@id='product_details']/h1" position="after"> -->
+            <div class="row">
+                <div id="alertmsg" style="padding: 0% 1%;" />
+            </div>
+            <!--        For User without Login -->            
+            <button t-if="product.quote_products  or product.list_price == 0.000 and product.is_extra_price != true" type="button" title="Ask Quote" class="btn btn-primary ml-1 d-quote o_add_quote" t-att-data-product-id="product_id" >                             
+                    <span> Ask Quote </span>
+            </button>
+                <!-- <input class="js_quantity" name="product_id" t-att-data-product-id="product.id" type="hidden" />
+                            <a role="button" class="btn btn-link js_add_suggested_products">
+                                <strong>Add to Cart</strong>
+                            </a> -->
+        </xpath>
+    </template>
+    <template id="quote_cart" name="Quote Cart">
+    
+        <t t-call="website.layout">
+            <div id="wrap">
+                <!-- <h3 style="text-align: center;">
+                            Request a Quote
+                </h3>
+                <br/><br/> -->
+
+                <div class="container container-fluid  oe_website_sale py-2">
+                    <div class="row">
+                        <div class="col-12 col-xl-8 oe_cart">
+                            <t t-call="website_rfq.wizard_checkout_quote">
+                                <t t-set="step" t-value="10" />
+                            </t>
+                            
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <t t-call="website_rfq.qoute_cart_lines" />
+                                    <div class="clearfix" />
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <t t-if="website.user_id != user_id">
+                                <div class="row" style="display:block;">
+                                    <a role="button" class="btn btn-primary ml-2" href="/shop">
+                                        <span class="fa fa-chevron-left" />
+                                        <span class="">Continue</span>
+                                    </a>
+                                    <t t-set="website_product"  t-value="website.get_quote_cart_products()"/>
+                                    <a role="button" class="btn btn-primary float-right mr-2"  href="/process/quote" id="btn_cart" t-if="website_product">
+                                        <span class="">Process Request Quote</span>
+                                        <span class="fa fa-chevron-right" />
+                                    </a>
+                                    <div class="oe_structure" id="oe_structure_website_sale_cart_1"/>
+                                </div>
+                            </t>
+                            <t t-if="website.user_id == user_id">
+                                <div class="row" style="display:block;">
+                                    <a role="button" class="btn btn-primary ml-2" href="/shop">
+                                        <span class="fa fa-chevron-left" />
+                                        <span class="">Continue</span>
+                                    </a>
+                                    <t t-set="website_product"  t-value="website.get_quote_cart_products()"/>
+                                    <!-- <a role="button" class="btn btn-primary float-right mr-2"  href="/shop/product/selected/nonlogin" id="btn_cart" t-if="website_product"> -->
+                                    <a role="button" class="btn btn-primary float-right mr-2"  href="/web/login?redirect=/shop/product/selected/nonlogin" id="btn_cart" t-if="website_product">
+                                        <span class="">Sign in and RFQ Checkout</span>
+                                        <span class="fa fa-chevron-right" />
+                                    </a>
+                                    <div class="oe_structure" id="oe_structure_website_sale_cart_1"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure" id="oe_structure_website_sale_cart_2"/>
+            </div>
+        </t>
+    </template>
+    <template id="qoute_cart_lines" name="Quote Cart Lines">
+        <t t-set="website_product" t-value="website.get_quote_cart_products()"/>
+        <div t-if="not website_product" class="alert alert-info">
+            Your cart is empty!
+        </div>
+        <table class="mb16 table table-striped table-sm" id="tbl" t-if="website_product">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="td-img">Product</th>
+                    <th class="text-center td-qty">Quantity</th>
+                    <th class="text-center td-action"></th>
+                </tr>
+            </thead>
+            <tbody id="tb_body">
+                <t t-foreach="website.get_quote_cart_products()" t-as="line">
+                    <tr t-att-class="'optional_product info' if line.id else None ">
+                        <td colspan="2" t-if="not line.product_id.product_tmpl_id" class='td-img'></td>
+                        <td align="center" t-if="line.product_id.product_tmpl_id" class='td-img'>
+                            <span t-field="line.product_id.image_128" t-options="{'widget': 'image', 'class': 'rounded o_image_64_max'}" />
+                        </td>
+                        <td t-if="line.product_id.product_tmpl_id" class='td-product_name' id="prod">
+                            <div>
+                                <t t-call="website_sale.cart_line_product_link">
+                                    <strong t-field="line.product_id.display_name" />
+                                </t>
+                            </div>
+                        </td>
+                        <td class="text-center td-qty">
+                            
+                            <div class="css_quantity input-group" id="txt" t-att-line_id="line.id" contenteditable="false">
+                                <div class="input-group-prepend">
+                                    <a t-attf-href="#" class="btn btn-link js_add_cart_json" aria-label="Remove one" title="Remove one">
+                                        <i class="fa fa-minus"></i>
+                                    </a>
+                                </div>
+                                <input type="text" id="add_qty" class="text-center form-control quantity" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id"  t-att-value="int(line.qty)" />
+                                <div class="input-group-append">                                    
+                                    <a t-attf-href="#" class="btn btn-link float_left js_add_cart_json" aria-label="Add one" title="Add one">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="td-action">
+                            <a t-attf-href='/quote/delete/#{slug(line)}' title="Remove from cart" class='no-decoration'> <small><i class='fa fa-trash-o'></i></small></a>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
+    </template>
+    <template id="wizard_checkout_quote" name="Wizard Checkout Quote">
+        
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="wizard">
+                    <div class="progress-wizard">
+                        <a class="no-decoration" t-att-href="step&gt;=10 and '/shop/quote' or '#'">
+                          <div id="wizard-step10" t-att-class="'progress-wizard-step %s' % (step == 10 and 'active' or step&gt;10 and 'complete' or 'disabled')">
+                            <div class="progress-wizard-bar d-none d-md-block"/>
+                            <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                            <div class="text-center progress-wizard-steplabel">Review RFQ</div>
+                          </div>
+                        </a>
+                        <a class="no-decoration" t-att-href="step&gt;=20 and '/shop/checkout' or '#'">
+                          <div id="wizard-step20" t-att-class="'progress-wizard-step %s' % (step == 20 and 'active' or step&gt;20 and 'complete' or 'disabled')">
+                            <div class="progress-wizard-bar d-none d-md-block"/>
+                            <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                            <div class="text-center progress-wizard-steplabel">Contact</div>
+                          </div>
+                        </a>
+                        <a class="no-decoration" t-att-href="step&gt;=40 and '/shop/product/quote/confirm' or '#'">
+                          <div id="wizard-step40" t-att-class="'progress-wizard-step %s' % (step == 40 and 'active' or step&gt;40 and 'complete' or 'disabled')">
+                            <div class="progress-wizard-bar d-none d-md-block"/>
+                            <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                            <div class="text-center progress-wizard-steplabel">Confirm RFQ</div>
+                          </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Get Quotation Request Page -->
+
+    <template id="get_quotation_request" name="Get Quotation Request">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Quote - Request</t>
+            <div id="wrap">
+                <div class="container container-fluid oe_website_sale">
+                    <!-- <h3 style="text-align:center">Quote - Request</h3> -->
+                    <!-- <t t-if="website.user_id == user_id"> -->
+                    <t>                     
+                        <!-- <form t-attf-action="/shop/product/quote/confirm" method="post"> -->
+                        <form t-attf-action="/process/quote/nonlogin" method="post">
+                        <!-- <form t-attf-action="/process/quote" method="post"> -->
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                            <div class="row">
+                                
+                                <div class="col-12 col-xl-auto order-xl-2 d-none d-xl-block">
+                                    <!-- <t t-call="website_sale_quotation.qoute_cart_lines"> -->
+                                        <t t-set="redirect" t-valuef="/shop/product/selected/nonlogin?express=1"/>
+                                    <!-- </t> -->
+                                </div>
+                                <div class="col-lg-12 oe_cart">
+                                    <t t-call="website_rfq.wizard_checkout_quote">
+                                        <t t-set="step" t-value="20" />
+                                    </t>
+                                    <div class="row o_portal_details">
+                                        <div class="col-md-12">
+                                            <div t-if="error_message" class="alert alert-danger">
+                                                <t t-foreach="error_message" t-as="err">
+                                                    <t t-esc="err" />
+                                                    <br />
+                                                </t>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            t-attf-class="form-group  col-sm-12 #{error and 'name' in error and 'has-error' or ''}">
+                                            <!-- <h2 class="o_page_header mt8">Your Address
+                                                <small> or </small>
+                                                <a role="button" href='/web/login?redirect=/process/quote' class='btn btn-primary' style="margin-top: -11px">Log In</a>
+                                            </h2> -->
+                    
+                                            <label class="col-form-label" for="name">Your Name</label>
+                                            <div>
+                                                <t t-foreach="request.env['res.users'].search([])" t-as="obj">
+                                                    <t t-if = "obj.id==request.session.uid">
+                                                        <t t-foreach="request.env['res.partner'].search([])" t-as="partner">
+                                                            <t t-if = "partner.id==obj.partner_id.id">
+                                                                <input type="text" class="form-control" name="name" t-att-value="partner.name" required="True"/>
+                                                            </t>
+                                                        </t>                        
+                                                    </t>
+                                                </t>                                                
+                                            </div>
+                                        </div><br/><br/>
+                                        <div
+                                            t-attf-class="form-group  col-sm-12 #{error and 'company' in error and 'has-error' or ''}">
+                                            <label class="col-form-label" for="name">Your Company</label>
+                                            <div>
+                                                <input type="text" class="form-control" name="company" />                                                 
+                                            </div>
+                                        </div><br/><br/>
+                                        <div
+                                            t-attf-class="form-group  col-sm-12 #{error and 'projectname' in error and 'has-error' or ''}">
+                                            <label class="col-form-label" for="email">Project Name</label>
+                                            <div>
+                                                <input type="projectname" required="True" name="projectname" class="form-control" />
+                                            </div>
+                                        </div><br/><br/>
+                                                                              
+                                        <div
+                                            t-attf-class="form-group  col-sm-6 #{error and 'email' in error and 'has-error' or ''}">
+                                            <label class="col-form-label" for="email">Email</label>
+                                            <div>
+                                                <t t-foreach="request.env['res.users'].search([])" t-as="obj">
+                                                    <t t-if = "obj.id==request.session.uid">
+                                                        <input type="email" required="True" name="email" class="form-control" t-att-value="obj.login"/>                        
+                                                    </t>
+                                                </t>                                                
+                                            </div>
+                                        </div><br/><br/>
+                                        <div
+                                            t-attf-class="form-group col-sm-6 #{error and 'phone' in error and 'has-error' or ''}">
+                                            <label class="col-form-label" for="phone">Phone</label>
+                                            <div >
+                                                <input type="text" required="True" name="phone" class="form-control" />
+                                            </div>
+                                        </div><br/><br/>
+                                        <div t-attf-class="form-group col-sm-6 div_street">
+                                            <label class="col-form-label" for="street">Street</label>
+                                            <div >
+                                                <input type="text" required="True" name="street" class="form-control" />
+                                            </div>
+                                        </div><br/><br/>
+                                        <div t-attf-class="form-group col-md-6 div_city">
+                                            <label class="col-form-label" for="city">City</label>
+                                            <div >
+                                                <input type="text" required="True" name="city" class="form-control" />
+                                            </div>
+                                        </div><br/><br/>
+                                        <div t-attf-class="form-group col-md-6 div_city">
+                                            <label class="col-form-label" for="zip">Zip</label>
+                                            <div >
+                                                <input type="text" required="True" name="zip" class="form-control" />
+                                            </div>
+                                        </div><br/><br/>
+                                        <div t-attf-class="form-group  col-lg-6 div_country">
+                                            <label class="col-form-label" for="country_id">Country</label>
+                                            <select id="country_id" name="country_id" t-attf-class="form-control">
+                                                <option value="">Country...</option>
+                                                <t t-foreach="countries" t-as="c">
+                                                    <option t-att-value="c.id" t-att-selected="c.id == (country and country.id or -1)">
+                                                        <t t-esc="c.name" />
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div><br/><br/>
+                                        <div id="state" t-attf-class="form-group col-lg-6">
+                                            <label class="control-label" for="state_id">State / Province</label>
+                                            <select name="state_id" class="form-control">
+                                                <option value="">select...</option>
+                                                <t t-foreach="states or []" t-as="state">
+                                                    <option t-att-value="state.id"  t-att-data-country_id="state.country_id.id">
+                                                        <t t-esc="state.name" />
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div><br/><br/>
+                                    </div>
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                    
+                                    <input type="hidden" name="partner_id" t-att-value="partner_id or '0'" />
+
+                                    <div class="row" style="display:contents">
+                                        <a href="/shop/quote" role="button" class="btn btn-primary ml-2">
+                                            <span class="fa fa-chevron-left" />
+                                            <span class="" >Return to cart</span>
+                                            
+                                        </a>
+                                        <button type="submit" class="btn btn-primary float-right mr-2">
+                                            <span> Next </span>
+                                            <span class="fa fa-chevron-right" />
+                                        </button>
+
+                                        <!-- <t t-if="name">
+                                        <a role="button" class="btn btn-primary float-right mr-2"  href="/shop/product/quote/confirm" id="btn_next">
+                                        <span class="">Next</span>
+                                        <span class="fa fa-chevron-right" />
+                                    </a>
+                                </t> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="get_billing" name="Get Quotation Billing">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Quote - Request</t>
+            <div id="wrap">
+                <div class="container container-fluid oe_website_sale">
+                    <!-- <h3 style="text-align:center">Quote - Request</h3> -->
+                        <div class="col-12 col-xl order-xl-1 oe_cart">
+                            <t t-call="website_rfq.wizard_checkout_quote">
+                                <t t-set="step" t-value="20" />
+                            </t>
+                            <!-- <div class="card">
+                                <div class="card-body" id="shipping_and_billing">
+                                    <div><b>Billing</b><span t-esc='order.partner_id' class="address-inline"/></div>
+                                    <div><b>Billing</b><span t-esc='order.partner_id' t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')" class="address-inline"/></div>
+                                </div>
+                            </div>
+                            <br/> -->
+                            <div class="card">
+                                <div class="card-body" id="shipping_and_billing">
+                                    <div><b>Name :</b><span t-esc='request.env.user.partner_id.name' class="address-inline"/></div>
+                                    <div><b>Company :</b><span t-esc='request.env.user.partner_id.commercial_company_name' class="address-inline"/></div>
+                                    <div><b>Project :</b><span t-esc='request.env.user.partner_id.project' class="address-inline"/></div>
+                                    <div><b>Email :</b><span t-esc='request.env.user.partner_id.email' class="address-inline"/></div>
+                                    <div><b>Phone :</b><span t-esc='request.env.user.partner_id.phone' class="address-inline"/></div>
+                                    <div><b>Address :</b><span t-esc='request.env.user.partner_id.contact_address_complete' /></div>
+                                </div>
+                            </div>
+                            <br/>
+                            <t t-if="website.user_id != user_id"> 
+                                <div class="row" style="display:block">
+                                    <a role="button" class="btn btn-primary ml-2" href="/shop/quote"  >
+                                        <span class="fa fa-chevron-left" />
+                                        <span class="">Continue</span>
+                                    </a>
+                                    <a role="button" class="btn btn-primary float-right mr-2"  href="/shop/product/quote/confirm" id="btn_final">
+                                        <span class="">Next</span>
+                                        <span class="fa fa-chevron-right" />
+                                    </a>
+                                </div>
+                            </t>
+                            
+                        </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="quote_thankyou" name="Quote Thank You">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure" />
+                <div class="container container-fluid">
+                    <!-- <h1>Your Quotation Request Information</h1> -->
+                    <div class="row">                       
+                        <div class="col-md-12">
+                            <t t-call="website_rfq.wizard_checkout_quote">
+                                <t t-set="step" t-value="40" />
+                            </t>
+                            <t t-if="website.user_id != user_id">
+                            <div class="card">
+                                <div class="card-body" id="shipping_and_billing">
+                                    <div><b>Name :</b><span t-esc='request.env.user.partner_id.name' class="address-inline"/></div>
+                                    <div><b>Company :</b><span t-esc='request.env.user.partner_id.commercial_company_name' class="address-inline"/></div>
+                                    <div><b>Project :</b><span t-esc='request.env.user.partner_id.project' class="address-inline"/></div>
+                                    <div><b>Email :</b><span t-esc='request.env.user.partner_id.email' class="address-inline"/></div>
+                                    <div><b>Phone :</b><span t-esc='request.env.user.partner_id.phone' class="address-inline"/></div>
+                                    <div><b>Address :</b><span t-esc='request.env.user.partner_id.contact_address_complete' /></div>
+                                </div>
+                            </div>
+                            <br/>
+                        </t>
+                            <div>                           
+
+                                <h2 class="text-center">Your Quotation Request Information</h2>
+                            <!-- <t t-if="website.user_id != user_id">                                    -->
+                            <div class="alert alert-success">
+                                <t t-set="website_product" t-value="website.get_quote_cart_products()"/>
+            
+                                <table class="mb16 table table-striped table-sm" id="tbl">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th class="td-img">Product</th>
+                                            <th class="text-center td-qty">Quantity</th>
+                                            <th class="text-center td-action"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tb_body">
+                                        <t t-foreach="website.get_quote_cart_products()" t-as="line">
+                                            <tr t-att-class="'optional_product info' if line.id else None ">
+                                                
+                                                <td colspan="2" t-if="line.product_id.product_tmpl_id" class='td-product_name' id="prod">
+                                                    <div>                                                       
+                                                        <strong t-field="line.product_id.display_name" />                       
+                                                    </div>
+                                                </td>
+                                                <td colspan="2" class="text-center">
+                                                    <strong t-field="line.qty" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <!-- </t> -->
+                            <div class="row" style="display:block">
+
+                                <a style="padding-left:25px;" role="button" class="btn btn-primary ml-2" href="/shop"  >
+                                    <span class="fa fa-chevron-left" />
+                                    <span class="text-center">Go to Shop</span>
+                                </a>
+                                <a role="button" class="btn btn-primary float-right mr-2"  href="/shop/product/quote/confirmclone" id="btn_final">
+                                    <span class="text-center">Confirm</span>
+                                    <span class="fa fa-chevron-right" />
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="oe_structure" />
+                
+            </div>
+        </t>
+    </template>
+
+    <template id="quote_final_page" name="Quote Final Page">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure" />
+                <div class="container container-fluid">
+                    <h1>Thank you for your Quotation Request!</h1>
+                    <a role="button" class="btn btn-primary d-none d-md-inline-block" href="/shop/quote/print" target="_blank" aria-label="Print" title="Print Quotation"><i class="fa fa-download"></i> Download Quotation</a>
+            
+                </div>
+                
+                <div class="oe_structure" />
+                
+            </div>
+        </t>
+    </template>
+    <!-- Invisible Buy Now -->
+    <template id="buy_now_btn_inherit" inherit_id="website_sale.product_buy_now" name="Ask for Quote Buy Now Product">
+        <xpath expr="//a[@id='buy_now']" position="attributes">
+            <attribute name="t-if">(product.quote_products == false and product.list_price != 0.00) or (product.quote_products == false and product.is_extra_price == true)</attribute>
+        </xpath>
+    </template>
+
+    
+    <template id="quotation_proudct_add_cart_cart_inherit" inherit_id="website_sale.product" name="Ask for Quote Add to Cart">
+        <xpath expr="//a[@id='add_to_cart']" position="attributes">
+            <attribute name="t-if">(product.quote_products == false and product.list_price != 0.00) or (product.quote_products == false and product.is_extra_price == true)</attribute>
+        </xpath>        
+    </template>
+    <template id="quotation_proudct_price_addcart_inherit" inherit_id="website_sale.products_item" name="Ask for Quote Product Price">
+        <xpath expr="//div[hasclass('product_price')]" position="attributes">
+            <attribute name="t-if">(product.quote_products == false and product.list_price != 0.00) or (product.quote_products == false and product.is_extra_price == true)</attribute>
+        </xpath>
+    </template>
+    <template id="website_sales_template_product_price_inherit" inherit_id="website_sale.product_price" name="Ask for Quote Hide Product price">        
+        <xpath expr="//div[hasclass('product_price','mt16')]" position="attributes">
+            <attribute name="t-if">(product.quote_products == false and product.list_price != 0.00) or (product.quote_products == false and product.is_extra_price == true)</attribute>
+        </xpath>
+    </template>
+    <template id="website_sale_product_qty_inherit" inherit_id="website_sale.product_quantity" name="Ask for Quote Quantity">
+        <xpath expr="//div[hasclass('css_quantity','input-group')]" position="attributes">
+            <attribute name="t-att-style">'display: none;' if product.quote_products or product.list_price == 0.00 or product.is_extra_price == false else ''</attribute>
+        </xpath>
+    </template>
+
+    <template id="website_sales_template_proudcts_addcart_icon_inherit" inherit_id="website_sale.products_add_to_cart" name="Ask for Quote Product Add to Cart list">        
+        <xpath expr="//t[@t-if='product_variant_id']/a" position="attributes">
+            <attribute name="t-if">(product.quote_products == false and product.list_price != 0.00) or (product.quote_products == false and product.is_extra_price == true)</attribute>
+        </xpath>
+        <!-- <xpath expr="//t[@t-elif='product._is_add_to_cart_possible()']/a" position="attributes">
+            <attribute name="t-if">product.quote_products == false</attribute>
+        </xpath> -->
+    </template>
+
+    <!--    Comparision Page  -->    
+    <template id="ask_for_quote_comparison_inherit" inherit_id="website_sale_comparison.product_compare" name="Ask for Quote Hide multi Product Comparision list">
+        <xpath expr="//div[hasclass('product_summary')]/span" position="replace">
+            <span t-if="product.quote_products == false and product.list_price != 0.00">
+                <strong>Price:</strong>
+                <del t-attf-class="text-danger mr8 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" 
+                style="white-space: nowrap;" 
+                t-esc="combination_info['list_price']" 
+                t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" 
+                />
+            </span>
+        </xpath>
+        <xpath expr="//form/a[hasclass('a-submit')]" position="replace">
+            <a role="button" t-if="product.quote_products == false and product.list_price != 0.00" class="btn btn-primary btn-block a-submit" href="#"><i class="fa fa-shopping-cart"></i>&amp;nbsp;Add to Cart</a>
+        </xpath>
+    </template>
+
+    <template id="ask_for_quote_comparison_product_inherit" inherit_id="website_sale_comparison.product_product" name="Ask for Quote Hide multi Product Comparision price">
+        <xpath expr="//div[hasclass('pl-2')]/h6/span" position="replace">
+            <span t-if="(product.quote_products == false and product.list_price != 0.00) or (product.quote_products == false and product.is_extra_price == true)" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"></span>
+        </xpath>
+    </template>
+
+    <!--  Wishlist page -->
+    <template id="ask_for_quote_product_wishlist" inherit_id="website_sale_wishlist.product_wishlist" name="Wishlist Page Hide">
+        <xpath expr="//td[3]//t[2]" position="attributes">
+            <attribute name="t-if">(wish.product_id.quote_products == false and wish.product_id.list_price != 0.00) or (wish.product_id.quote_products == false and wish.product_id.is_extra_price == true)</attribute>            
+        </xpath>
+
+        <xpath expr="//button[hasclass('o_wish_add')]" position="attributes">
+            <attribute name="t-if">(wish.product_id.quote_products == false and wish.product_id.list_price != 0.00) or (wish.product_id.quote_products == false and wish.product_id.is_extra_price == true)</attribute>            
+        </xpath>
+    </template>
+
+    
+    </odoo>

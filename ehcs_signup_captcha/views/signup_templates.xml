@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="signup_captcha" inherit_id="auth_signup.signup">
+        <xpath expr="//div[@class='text-center oe_login_buttons pt-3'] " position="replace">
+        	<t t-if="website.recaptcha_sitekey">
+	            <center>
+	                <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+	                <script>
+	                function recaptchaCallback() {
+	                    $('#submitBtn').removeAttr('disabled');
+	                    console.log("Checkbox checked..!")
+	                    };
+	                </script>
+	                <div class="g-recaptcha" t-att-data-sitekey="website.recaptcha_sitekey" data-callback="recaptchaCallback" />
+	                <br/>
+	            </center>
+	            <button type="submit" class="btn btn-primary btn-block" disabled="True" id="submitBtn" > Sign up</button><br/>
+		            <center>
+		                <a t-attf-href="/web/login?{{ keep_query() }}" class="btn btn-link btn-sm" role="button">Already have an account?</a>
+		            </center>
+		        <div class="o_login_auth"/>
+	        </t>
+	        
+        	<t t-else="">
+				<button type="submit" class="btn btn-primary btn-block" id="submitBtn" > Sign up</button><br/>
+	            <center>
+	                <a t-attf-href="/web/login?{{ keep_query() }}" class="btn btn-link btn-sm" role="button">Already have an account?</a>
+	            </center>
+	            <div class="o_login_auth"/>
+			</t>
+        </xpath> 
+    </template>
+</odoo>

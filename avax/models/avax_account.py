@@ -5,6 +5,7 @@ from odoo import fields, models, api, _
 from web3 import Web3
 import json
 import logging
+from decimal import Decimal
 
 _logger = logging.getLogger(__name__)
 
@@ -19,11 +20,11 @@ class AvaxAccount(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(required=True)
-    address = fields.Char()
+    address = fields.Char("Endereço")
     encrypted_key = fields.Text()
-    balance = fields.Float()
-    password = fields.Char()
-    user_id = fields.Many2one('res.users')
+    balance = fields.Float(string="Saldo")
+    password = fields.Char("Senha")
+    user_id = fields.Many2one('res.users', default=lambda self: self.env.user)
     connector_id = fields.Many2one('avax.connector', required=True)
     explorer_url = fields.Char(compute='_compute_url')
 
@@ -94,19 +95,22 @@ class AvaxAccount(models.Model):
         nonce = w3.eth.get_transaction_count(self.address)
 
         account_to = Web3.toChecksumAddress(to)
+        amount2 = w3.toWei(Decimal(amount), 'ether')
+
         tx = {
             'nonce': nonce,
             'chainId': self.connector_id.chain,
             'gasPrice': w3.eth.gas_price,
             'gas': 100000,
             'to': account_to,
-            'value': amount,
+            'value': amount2,
         }
         privatekey = w3.eth.account.decrypt(eval(self.encrypted_key), password)
         signed_tx = w3.eth.account.signTransaction(tx, privatekey)
         tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
         url = self.connector_id.explorer_url+'tx/'+tx_hash.hex()
-        msg = 'Transaction:{} \n'.format(tx_hash.hex())
+        msg = 'Valor Enviado:{} \n'.format(amount2)
+        msg += 'Transação:{} \n'.format(tx_hash.hex())
         msg += 'Explorer:{} \n'.format(url)
         self.message_post(body=msg)
         return

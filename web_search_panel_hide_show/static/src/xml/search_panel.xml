@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="web.SearchPanel" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='o_search_panel']" position="inside">
+            <div class="o_search_panel_control fa fa-long-arrow-left btn btn-icon" id='o_search_panel_control'
+                 t-on-click="click_search_panel"/>
+        </xpath>
+    </t>
+</templates>
+
+

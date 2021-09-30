@@ -1,0 +1,128 @@
+<odoo>
+
+    <!-- Server action-->
+    <record id="invoice_status_send" model="base.automation">
+        <field name="name">Invoice Paid: Register Payment</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="trigger">on_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">["&amp;",["payment_state","!=","not_paid"],["payment_state","!=","in_payment"]]</field>
+        <field name="filter_domain">[["payment_state","=","paid"]]</field>
+        <field name="state">code</field>
+        <field name="code">
+record.send_whatsapp_automatic()
+        </field>
+    </record>
+
+    <record id="invoice_validation_status_send" model="base.automation">
+        <field name="name">Invoice Open: Validate</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="trigger">on_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[["state","=","draft"]]</field>
+        <field name="filter_domain">[["state","=","posted"]]</field>
+        <field name="state">code</field>
+        <field name="code">
+record.send_whatsapp_automatic()
+        </field>
+    </record>
+
+    <record id="invoice_overdue_status" model="mail.template">
+        <field name="name">Invoice Overdue by whatsApp</field>
+        <field name="subject">Invoice Overdue</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                	Dear Sir/Madam,
+					<br/><br/>
+					Our records indicate that some payments on your account are still due. Please find details below.
+					<br/>
+					If the amount has already been paid, please disregard this notice. Otherwise, please forward us the total amount stated below.
+					<br/>
+					If you have any queries regarding your account, Please contact us.
+					<br/><br/>					
+					Thank you in advance for your cooperation.
+					<br/>
+					Best Regards,
+					<br/>
+                    Kindly refer attachment below for order.
+                    <br/>
+                </p>
+            </div>
+        </field>
+    </record>
+    
+    
+    <record id="invoice_outstanding_status" model="mail.template">
+        <field name="name">Invoice Outstanding by whatsApp</field>
+        <field name="subject">Invoice Outstanding</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Dear *${object.partner_id.name}*,
+                    <br/><br/>
+                    Here is your 
+                    % if object.number:
+                        invoice *${object.number}*
+                    % else:
+                        invoice
+                    %endif
+                    % if object.origin:
+                        (with reference: *${object.origin}*)
+                    % endif
+                    amount in *${format_amount(object.amount_total, object.currency_id)}* 
+                    % if object.type == 'out_invoice':
+                    	from 
+                    % else: 
+                    	to 
+                    % endif
+                    ${object.company_id.name}.
+                    <br/>
+                    % if object.type == 'out_invoice':
+                    	Please remit payment at your earliest convenience.
+                    % else:
+                    	We will make payment soon 
+                    % endif
+                    <br /><br />
+                    Do not hesitate to contact us if you have any question.
+                    <br/>
+                    Kindly refer below link for order.
+                    <br/>
+                </p>
+            </div>
+        </field>
+    </record>
+
+    <record id="invoice_paid_status" model="mail.template">
+        <field name="name">Invoice Paid: Status using whatsApp</field>
+        <field name="subject">Invoice Paid.</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="body_html" type="html">
+	        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+	           Dear *${object.partner_id.name or ''}*,
+	           <br/><br/>
+	           Your Invoice ${object.name} amount *${format_amount(object.amount_total, object.currency_id)}* is Paid.
+	           <br/><br/>
+	           Kindly refer below link for order.
+	           <br/>
+	        </p>
+        </field>
+    </record>
+
+	<record id="invoice_validate_multi" model="mail.template">
+        <field name="name">Invoice: Validate Multi</field>
+        <field name="subject">Invoice Validate</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="body_html"><![CDATA[<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px;">
+        <p> Hello *_PARTNER_*,</p>
+        Your order _NUMBER_ amount _AMOUNT_TOTAL_ is Validated.
+        <br>
+        Kindly refer below link for order receipt.
+        <br>
+        ]]>
+        </field>
+    </record>
+    
+</odoo>

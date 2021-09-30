@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <act_window id="account_send_payment_receipt_by_whatsapp_action"
+        name="Send Receipt By WhatsApp"
+        binding_model="account.payment"
+        res_model="whatsapp.compose.message"
+        view_mode="form"
+        target="new"
+        context="{
+            'default_composition_mode': 'comment',
+            'default_res_id': active_id,
+            'force_whatsapp': True,
+            'force_country': True,
+        }"/>
+
+</odoo>

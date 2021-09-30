@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="customer_select_form" model="ir.ui.view">
+        <field name="name">customer.wizard.form</field>
+        <field name="model">customer.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Search Quotation/Sales order">
+                <group>
+                    <field name="filter_id"/>
+                    <field name="salespersons_ids" widget='many2many_tags'/>
+                </group><br></br>
+                <group string="Product">
+                    <field name="product_ids" widget='many2many_tags'/>
+                    <field name="product_not_set_ids" widget='many2many_tags'/>
+                </group><br></br>
+                <group string="Sales Team">
+                    <field name="sale_team_ids" widget='many2many_tags'/>
+                    <field name="sale_team_not_set_ids" widget='many2many_tags'/>
+                </group><br></br>
+                <group string="Save Current Filter">
+                    <group>
+                        <field name="save_filter"/>
+                    </group>
+                    <group>
+                        <field name="filter_name" attrs="{'invisible': [('save_filter', '=', False)],'required':[('save_filter','=',True)]}"/>
+                    </group>
+                </group>
+                    <button string="Save Filter" class="btn-primary" name="save_filter_quotation" type="object" attrs="{'invisible': [('save_filter', '=', False)]}"/>
+                <footer>
+                    <button string="Search Quotation" class="btn-primary" name="set_quotation" type="object" />
+                    <button string="Search Sale Order" class="btn-primary" name="set_sale_order" type="object" />
+                    <button string="Search Quotation/Sale Order" class="btn-primary" name="set_quotation_sale_order" type="object" />
+                    <button string="Cancel" class="btn-primary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_select_form" model="ir.actions.act_window">
+        <field name="name">Search Quotation/Sales order</field>
+        <field name="res_model">customer.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

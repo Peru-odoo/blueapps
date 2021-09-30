@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <template id="opportunity_activity_id">
+          <t t-foreach="docs" t-as="doc">
+            <t t-call="web.html_container">
+             <t t-call="web.internal_layout">
+                <div class="page">
+                     <div>
+                         <p><h1><span t-field="doc.name"/></h1></p>
+                         <p>
+                             <h1>
+                                 <span t-field="doc.planned_revenue" t-options='{"widget": "monetary", "display_currency": doc.company_id.currency_id}'/> at
+                                <span t-field="doc.probability"/>%
+                            </h1>
+                         </p>
+                         <h4>
+                             <table class="table table-bordered">
+                                <tr>
+                                    <td><strong>Customer</strong></td>
+                                    <td><span t-field="doc.partner_id.name"/></td>
+                                    <td><strong>Email</strong></td>
+                                    <td><span t-field="doc.email_from"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Expected Closing</strong></td>
+                                    <td><span t-field="doc.date_deadline"/></td>
+                                    <td><strong>Phone</strong></td>
+                                    <td><span t-field="doc.phone"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Salesperson</strong></td>
+                                    <td><span t-field="doc.user_id.name"/></td>
+                                    <td><strong>Rating</strong></td>
+                                    <td><span t-field="doc.priority"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sales Team</strong></td>
+                                    <td><span t-field="doc.team_id.name"/></td>
+                                    <td><strong>Tags</strong></td>
+                                    <td><t t-foreach="doc.tag_ids" t-as="tag"><span t-field="tag.name"/>,</t></td>
+                                </tr>
+                             </table>
+                         </h4>
+                         <h3>
+                             <strong style="border-bottom:2px solid black;">Internal Notes:</strong>
+                             <p><span t-field="doc.description"/></p>
+                         </h3>
+                         <h3>
+                             <strong style="border-bottom:2px solid black;">Contact Information:</strong>
+                         </h3>
+                         <h4>
+                             <div class="row">
+                                 <div class="col-6">
+                                    <b>Customer Name:</b>
+                                    <span t-field="doc.partner_name"/>
+                                </div>
+                                <div class="col-6">
+                                    <b>Contact Name:</b>
+                                    <span t-field="doc.contact_name"/><span t-field="doc.title"/>
+                                </div>
+                             </div>
+                             <div class="row">
+                                 <div class="col-6">
+                                    <p><b>Address:</b></p>
+                                    <p><span t-field="doc.street"/></p>
+                                    <p><span t-field="doc.street2"/></p>
+                                    <p><span t-field="doc.city"/><span t-field="doc.state_id.name"/><span t-field="doc.zip"/></p>
+                                    <p><span t-field="doc.country_id.name"/></p>
+                                </div>
+                                <div class="col-6">
+                                    <p><b>Job Position: </b><span t-field="doc.function"/></p>
+                                    <p><b>Mobile: </b><span t-field="doc.mobile"/></p>
+                                    <!--p><b>Fax: </b><span t-field="doc.fax"/></p-->
+                                </div>
+                             </div>
+                             <div class="row">
+                                 <div class="col-6">
+                                     <p><b>Marketing</b></p>
+                                    <p><b>Campaign:</b><span t-field="doc.campaign_id.name"/></p>
+                                    <p><b>Medium:</b><span t-field="doc.medium_id.name"/></p>
+                                    <p><b>Source:</b><span t-field="doc.source_id.name"/></p>
+                                </div>
+                                <div class="col-6">
+                                    <p><b>Misc</b></p>
+                                    <p><b>Days to Assign: </b><span t-field="doc.day_open"/></p>
+                                    <p><b>Days to Close: </b><span t-field="doc.day_close"/></p>
+                                    <p><b>Referred By: </b><span t-field="doc.referred"/></p>
+                                </div>
+                             </div>
+                         </h4>
+                         <h3 t-if="doc.order_ids">
+                            <strong style="border-bottom:2px solid black;">Quotes:</strong>
+                         </h3>
+                         <t t-foreach="doc.order_ids" t-as="order">
+                         <table class="table table-bordered" t-if="doc.order_ids">
+                            <tr>
+                                <th>Number</th>
+                                <th>Date</th>
+                                <th>Salesperson</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td><span t-esc="order.name"/></td>
+                                <td><span t-esc="order.date_order"/></td>
+                                <td><span t-esc="order.user_id.name"/></td>
+                                <td><span t-esc="order.amount_total" t-options='{"widget": "monetary", "display_currency": order.company_id.currency_id}'/></td>
+                                <td>
+                                    <span t-if="order.state == 'draft'">Quotation</span>
+                                    <span t-if="order.state == 'sent'">Quotation Sent</span>
+                                    <span t-if="order.state == 'sale'">Sales Order</span>
+                                    <span t-if="order.state == 'done'">Locked</span>
+                                    <span t-if="order.state == 'cancel'">Cancelled</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Qty</th>
+                                <th>Unit Price</th>
+                                <th colspan="2">SubTotal</th>
+                            </tr>
+                            <t t-foreach="order.order_line" t-as="line">
+                                <tr>
+                                    <td><span t-esc="line.product_id.name"/></td>
+                                    <td><span t-esc="line.name"/></td>
+                                    <td><span t-esc="line.product_uom_qty"/> <span t-esc="line.product_uom.name"/></td>
+                                    <td><span t-esc="line.price_unit" t-options='{"widget": "monetary", "display_currency": line.company_id.currency_id}'/></td>
+                                    <td colspan="2"><span t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": line.company_id.currency_id}'/></td>
+                                </tr>
+                            </t>
+                        </table>
+                        </t>
+                        <h3>
+                            <span t-if="get_meetings"/>
+                            <strong style="border-bottom:2px solid black;">Meetings:</strong>
+                         </h3>
+                         <table class="table table-bordered" t-if="get_meetings">
+                            <tr>
+                                <th>Subject</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Attendees</th>
+                                <th>Location</th>
+                                <th>Duration</th>
+                            </tr>
+                            <tbody>
+                                <t t-foreach="get_meetings" t-as="meeting">
+                                    <tr>
+                                        <td><span t-esc="meeting.name"/></td>
+                                        <td><span t-esc="meeting.start_date"/></td>
+                                        <td><span t-esc="meeting.stop_date"/></td>
+                                        <td>
+                                            <t t-foreach="meeting.attendee_ids" t-as="ateendee">
+                                                <span t-esc="ateendee.common_name"/>,
+                                            </t>
+                                        </td>
+                                        <td><span t-esc="meeting.location"/></td>
+                                        <td><span t-esc="meeting.duration"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                     </div>
+                </div>
+              </t>
+          </t>
+          </t>
+        </template>
+        
+    </data>
+</openerp>

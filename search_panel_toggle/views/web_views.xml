@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+           <template id="search_panel_toggle" name="search_panel_toggle assets" inherit_id="web.assets_backend">
+		        <xpath expr="." position="inside">	     
+		           <link rel="stylesheet" type="text/less" href="/search_panel_toggle/static/src/css/search_panel_toggle.scss"/> 	
+			        <script type="text/javascript" src="/search_panel_toggle/static/src/js/search_panel_toggle_v14.js"></script>
+		            
+		        </xpath>
+   		</template>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- QWeb Reports for CRM Opportunity Activity -->
+        <report
+            id="crm_opportunity_activity"
+            model="crm.lead"
+            menu="True"
+            report_type="qweb-pdf"
+            string="Print Activity"
+            name="print_crm_opportunity_activity.opportunity_activity_id" 
+            file="print_crm_opportunity_activity.opportunity_activity_id"
+         />
+        
+    </data>
+</openerp>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- Products Search Bar autocomplete item -->
+    <div t-name="website_sale.productsSearchBar.autocomplete" class="dropdown-menu show w-100">
+
+        <t t-if="!products.length">
+            <span class="dropdown-item-text text-muted">No results found. Please try another search.</span>
+        </t>
+        <a t-foreach="products" t-as="product" t-att-href="product['website_url']" class="dropdown-item p-2 text-wrap">
+            <t t-set="dec_list_price" t-value="product['price_zero']" />
+            <div class="media align-items-center o_search_product_item">
+                <t t-if="widget.displayImage">
+                    <img t-attf-src="/web/image/product.template/#{product['id']}/image_128" class="flex-shrink-0 o_image_64_contain" />
+                </t>
+                <div class="media-body px-3">
+                    <t t-set="description" t-value="widget.displayDescription and product['description_sale']" />
+                    <h6 t-attf-class="font-weight-bold #{description ? '' : 'mb-0'}" t-esc="product['name']" />
+                    <p t-if="description" class="mb-0" t-esc="description" />
+                </div>
+                <div t-if="widget.displayPrice" class="flex-shrink-0">
+                    <t t-if="product['has_discounted_price']">
+                        <span t-if="product.list_price===false" class="text-danger text-nowrap" style="text-decoration: line-through;">
+                            <t t-raw="product['list_price']" t-if="product.quote_products===true"/>
+                        </span>
+                        <span t-if="product.list_price===true" class="text-danger text-nowrap" style="text-decoration: line-through;">
+                            <t t-raw="product['list_price']" t-if="product.list_price===false or product.is_extra_price === false"/>
+                        </span>
+                        <br />
+                    </t>
+                    <b t-if="product.list_price===false" class="text-nowrap">
+                        <!-- <t t-esc="product.list_price" /> -->
+                        <t t-raw="product['price']" t-if="product.quote_products===true"/>                        
+                        <!-- <t t-esc="product.quote_products" /> -->
+                    </b>
+                    <!-- for price zero -->
+                    <b t-if="product.list_price===true" class="text-nowrap">
+                        <!-- <t t-esc="product.list_price" /> -->
+                        <t t-raw="product['price']" t-if="product.list_price===false or product.is_extra_price === false"/>                        
+                        <!-- <t t-esc="product.quote_products" />   -->
+                    </b>
+                </div>
+            </div>
+        </a>
+        <t t-if="hasMoreProducts">
+            <button type="submit" class="dropdown-item text-center text-primary">All results</button>
+        </t>
+    </div>
+</templates>

@@ -1,0 +1,101 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* import_poncad
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-10 09:20+0000\n"
+"PO-Revision-Date: 2020-11-10 10:22+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: it\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: import_poncad
+#: code:addons/import_poncad/wizards/product.py:62
+#, python-format
+msgid "Buy"
+msgstr "Acquista"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__file
+msgid "File"
+msgstr ""
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: import_poncad
+#: model:ir.ui.menu,name:import_poncad.menu_import_root
+#: model_terms:ir.ui.view,arch_db:import_poncad.product_import_wizard
+msgid "Import"
+msgstr "Importa"
+
+#. module: import_poncad
+#: model_terms:ir.ui.view,arch_db:import_poncad.product_import_wizard
+msgid "Import Poncad"
+msgstr "Importa poncad"
+
+#. module: import_poncad
+#: model:ir.actions.act_window,name:import_poncad.poncad_wizard_import_action
+#: model:ir.ui.menu,name:import_poncad.menu_import_poncad
+msgid "Import poncad"
+msgstr "Importa poncad"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__multi
+msgid "Multi Phase"
+msgstr "Multi fase"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__origin
+msgid "Origin"
+msgstr "Documento origine"
+
+#. module: import_poncad
+#: model:ir.model.fields,field_description:import_poncad.field_product_template_import_wizard__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: import_poncad
+#: model:ir.model,name:import_poncad.model_product_template_import_wizard
+msgid "product.template.import.wizard"
+msgstr ""

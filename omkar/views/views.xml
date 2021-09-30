@@ -1,0 +1,113 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="omkar.list">
+      <field name="name">Customer</field>
+      <field name="model">omkar.customer</field>
+      <field name="arch" type="xml">
+        <tree string="Customer Information" decoration-danger="state == 'notpaid'" decoration-info="state == 'paid'">
+          <field name="name"/>
+          <field name="bill_no"/>
+          <field name="vehicle_model"/>
+          <field name="vehicle_no" optional="hide"/>
+          <field name="address"/>
+          <field name="issue_date"/>
+          <field name="work_done_date" optional="hide"/>
+          <field name="mobile_no"/>
+          <field name="kilometers" optional="hide"/>
+          <field name="state" optional="hide"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- form view -->
+    <record model="ir.ui.view" id="omkar.form">
+      <field name="name">Customer.form</field>
+      <field name="model">omkar.customer</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <field name="state" widget="statusbar"/>
+          </header>
+          <sheet>
+          <div  class="oe_title">
+            <h1>
+                <field name="name" default_focus="1" placeholder="Customer Name"/>
+            </h1>
+          </div>
+          <group>
+            <field name="bill_no"/>
+            <field name="customer_of"/>
+          </group>
+         <group>
+           <group>
+              <field name="vehicle_model" placeholder="Model"/>
+              <field name="vehicle_no" placeholder="Vehicle No"/>
+              <field name="kilometers"/>
+           </group>
+          <group>
+              <field name="address"/>
+              <field name="mobile_no"/>
+              <field name="issue_date"/>
+              <field name="work_done_date"/>
+          </group>
+        </group>
+        </sheet>
+        <sheet>
+          <group>
+            <field name="work_lines">
+                <tree editable="bottom">
+                  <field name="sequence" widget="handle"/>
+                  <field name="product_name"/>
+                  <field name="description"/>
+                  <field name="quantity"/>
+                  <field name="unit_price"/>
+                  <field name="currency_id" optional="hide"/>
+                  <field name="subtotal" widget="monetary"/>
+                </tree>
+
+            </field>
+          </group>
+           <div class="text-right" colspan='99'>
+            <b>Total : </b><field name="total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            <field name="currency_id"/>
+          </div>
+          Paid or Not : <field name="paid"/>
+<group>
+          <field name="signature" widget="signature"/></group>
+          <!-- <center><button type="object" name="" -->
+        </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="omkar.customer_action">
+      <field name="name">Omkar Customer Bill</field>
+      <field name="res_model">omkar.customer</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="sequence_reconcile_seq" model="ir.sequence">
+        <field name="name">Customer sequence</field>
+        <field name="code">omkar.customer</field>
+        <field name="prefix">OM/No/</field>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+    </record>
+
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Omkar Automobile" id="omkar.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Customers" id="omkar.customer" parent="omkar.menu_root" action="omkar.customer_action"/>
+
+  </data>
+</odoo>

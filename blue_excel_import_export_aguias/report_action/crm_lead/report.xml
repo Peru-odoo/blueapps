@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="action_report_crmlead_excel" model="ir.actions.report">
+        <field name="name">Gerar Ficha Cadastral de CRM</field>
+        <field name="model">crm.lead</field>
+        <field name="report_type">excel</field>
+        <field name="report_name">FICHA_CADASTRAL.xlsm</field>
+        <field name="report_file">crm_lead</field>
+        <field
+            name="print_report_name"
+        >(object.type in ('lead') and 'Proposta - %s' % (object.name)) or 'Contrato - %s' % (object.name)</field>
+    </record>
+    <record id="action_report_crmlead_excel2" model="ir.actions.report">
+        <field name="name">Gerar Ficha Cadastral - Compra de Divida</field>
+        <field name="model">crm.lead</field>
+        <field name="report_type">excel</field>
+        <field name="report_name">FICHA_CADASTRAL_COMPRA_DIVIDA.xlsm</field>
+        <field name="report_file">crm_lead</field>
+        <field
+            name="print_report_name"
+        >(object.type in ('lead') and 'Proposta - %s' % (object.name)) or 'Contrato - %s' % (object.name)</field>
+    </record>
+
+</odoo>

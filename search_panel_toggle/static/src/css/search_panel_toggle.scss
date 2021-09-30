@@ -1,0 +1,38 @@
+.o_controller_with_searchpanel {
+	.btn-search-panel-toggle {
+		width: 10px;
+		height: 100px;
+		border-width: 0 ;
+		display: flex;
+		align-items: center;
+		z-index: 10;
+		outline: none;
+		margin-top: calc(20% - 60px);
+		color: #23d0b0;
+	}
+	.hide-panel::before {
+		color: #23d0b0;
+		margin-left: -10px;
+	}
+	.show-panel::before {
+		color: #23d0b0;
+		margin-left: 2px;
+	}	
+	.hide-panel {
+		background: linear-gradient(to right, #4accba73, #4ff4cea1, #4accbacf);
+		margin-left: 8px;
+		border-top-left-radius:6px;
+		border-bottom-left-radius:6px;
+	}
+	.show-panel {
+		background: linear-gradient(to right, #4accbacf, #4ff4cea1, #4accba73);
+		margin-left: 0px;
+		border-top-right-radius:6px;
+		border-bottom-right-radius:6px;
+	}
+	.o_search_panel {
+		border: 1px solid #50a0f0;
+		border-radius: 6px;
+	}	
+	
+}

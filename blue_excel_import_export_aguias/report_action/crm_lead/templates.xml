@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_lead_excel_template" model="xlsx.template">
+        <field name="res_model">crm.lead</field>
+        <field name="fname">FICHA_CADASTRAL.xlsm</field>
+        <field name="name">Gerar Ficha Cadastral de CRM</field>
+        <field name="description">Sample Sales Order Template for testing</field>
+        <field name="input_instruction">
+            {
+                '__EXPORT__': {
+                    'Ficha': {
+                        '_HEAD_': {
+                            'B2': 'partner_id.display_name${value or ""}#{align=left;style=text}',
+                            'B3': 'name${value or ""}#{align=left;style=text}',
+                        }
+                    }
+                },
+            }
+        </field>
+    </record>
+    <record id="crm_lead2_excel_template" model="xlsx.template">
+        <field name="res_model">crm.lead</field>
+        <field name="fname">FICHA_CADASTRAL_COMPRA_DIVIDA.xlsm</field>
+        <field name="name">Gerar Ficha Cadastral - Compra de Divida</field>
+        <field name="description">Sample Sales Order Template for testing</field>
+        <field name="input_instruction">
+            {
+                '__EXPORT__': {
+                    'Ficha': {
+                        '_HEAD_': {
+                            'B2': 'partner_id.display_name${value or ""}#{align=left;style=text}',
+                            'B3': 'name${value or ""}#{align=left;style=text}',
+                        }
+                    }
+                },
+            }
+        </field>
+    </record>
+    <function model="xlsx.template" name="load_xlsx_template">
+        <value eval="[ref('crm_lead_excel_template')]" />
+    </function>
+</odoo>

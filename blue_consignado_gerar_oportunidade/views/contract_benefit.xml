@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+    <!-- explicit list view definition      -->
+
+    <record model="ir.ui.view" id="view_consignado_matricula_tree">
+      <field name="name">res.partner.benefit.tree</field>
+      <field name="model">res.partner.benefit</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree editable="top">
+            <field name="partner_id" optional="hide"/>
+            <field name="name"/>
+            <field name="senha" optional="show"/>
+            <field name="secretaria" optional="show"/>
+            <field name="sigla" optional="show"/>
+            <field name="banco" optional="show"/>
+            <field name="tipo_conta" optional="show"/>
+            <field name="agencia" optional="show"/>
+            <field name="conta" optional="show"/>
+            <field name="margem_negativa" string="Marg. Negativa" optional="show" sum="Negativa"/>
+            <field name="margem_livre" string="Marg. Livre" optional="show" sum="Livre"/>
+            <field name="margem_real" string="Marg. Real" optional="show" sum="Real"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_consignado_contrato_tree">
+      <field name="name">res.partner.contract.tree</field>
+      <field name="model">res.partner.contract</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree editable="top">
+            <field name="partner_id" optional="hide"/>
+            <field name="matricula_id" optional="hide"/>
+            <field name="name"/>
+            <field name="banco_origem" optional="show"/>
+            <field name="qtd_parcelas" optional="show"/>
+            <field name="saldo_devedor" optional="show" sum="Devedor"/>
+            <field name="valor_parcela" optional="show" sum="Parcela"/>
+            <field name="valor_liberado" optional="show" sum="Liberado"/>
+            <field name="valor_consultoria" optional="show" sum="Consultoria"/>
+            <field name="valor_liquido" optional="show" sum="Liquido"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="consignado_matriculas">
+      <field name="name">Matrículas e Beneficios</field>
+      <field name="res_model">res.partner.benefit</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="consignado_contratos">
+      <field name="name">Contratos à negociar</field>
+      <field name="res_model">res.partner.contract</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="consignado.action_server">
+      <field name="name">consignado server</field>
+      <field name="model_id" ref="model_consignado_consignado"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Consignado" id="consignado_menu" sequence="5"
+    web_icon="bureaucrat_knowledge,static/description/icon.png"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Matriculas" id="consignado_matricula_menu"  parent="consignado_menu"
+    action="consignado_matriculas" sequence="10"/>
+    <menuitem name="Contratos" id="consignado_contrato_menu" parent="consignado_menu"
+    action="consignado_contratos" sequence="20"/>
+
+<!--
+    <menuitem name="List" id="consignado.menu_1_list" parent="consignado.menu_1"
+              action="consignado.action_window"/>
+    <menuitem name="Server to list" id="consignado" parent="consignado.menu_2"
+              action="consignado.action_server"/>
+-->
+  </data>
+</odoo>

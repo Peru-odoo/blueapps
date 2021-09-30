@@ -5,16 +5,20 @@
 		<field name="model">crm.lead</field>
 		<field name="inherit_id" ref="crm.crm_lead_view_form" />
 		<field name="arch" type="xml">
-			<xpath expr="//page[@name='lead']" position="after">
-				<page string="Products For Quotation">
-					<field name="lead_product_ids">
+			<xpath expr="//page[@name='internal_notes']" position="before">
+				<page string="Contratos para Negociar" autofocus="autofocus">
+					<field name="lead_product_ids" context="{'default_partner_id': partner_id,'default_matricula_id': matricula_idd, 'default_product_id': 1}">
 						<tree editable="bottom">
-							<field name="product_id" />
-							<field name="description" />
-							<field name="qty" />
-							<field name="product_uom" />
-							<field name="price_unit"/>
-							<field name="tax_id" widget="many2many_tags"/>
+							<field name="partner_id" optional="hide" options="{'no_create_edit': True, 'no_open': True}" readonly="0"/>
+							<field name="matricula_id" optional="show" options="{'no_create_edit': True, 'no_open': True}" readonly="0"/>
+							<field name="contrato_id" domain="[('partner_id', '=', partner_id)]" options="{'no_create_edit': True, 'no_open': True}"/> <!--domain="[('matricula_id', '=', matricula_id)]"-->
+							<field name="product_id" optional="hide"/>
+							<field name="description" optional="hide"/>
+							<field name="qty" optional="hide"/>
+							<field name="product_uom" optional="hide"/>
+							<field name="price_unit" sum="Total Consultoria"/>
+							<field name="tax_id" widget="many2many_tags" optional="hide"/>
+							<field name="lead_id" optional="hide"/>
 						</tree>
 					</field>
 				</page>
@@ -27,9 +31,8 @@
 		<field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor" />
 		<field name="arch" type="xml">
 			<xpath expr="//button[@name='action_sale_quotations_new']" position="replace">
-				<button string="New Quotation" name="action_create_quotation" type="object" class="oe_highlight"/>
+				<button string="Gerar Contrato" name="action_create_quotation" type="object" class="oe_highlight"/>
 			</xpath>
-
 		</field>
 	</record>
 </odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--  Kanban-->
+    <record id="view_project_kanban_inherit" model="ir.ui.view">
+        <field name="name">project.project.kanban.inherited.button.details</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//a[@name='action_view_account_analytic_line']" position="after">
+                <a type="open">
+                    <span class="o_label"><span class="fa fa-info-circle"/> Project</span>
+                </a>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

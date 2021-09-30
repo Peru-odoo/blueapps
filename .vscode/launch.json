@@ -5,11 +5,43 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python:Odoo",
+            "type":"python",
+            "request":"launch",
+            "stopOnEntry": false,
+            "python":"${command:python.interpreterPath}",
+            "console":"integratedTerminal",
+            "program":"/usr/bin/odoo",
+            "args": [
+               "--config=/etc/odoo/aguias_dev.conf",
+            ],
+            "cwd":"${workspaceRoot}",
+            "env": {},
+            "envFile":"${workspaceRoot}/.env",
+            "debugOptions": [
+                "RedirectOutput"
+            ]
+        }   
+        {
             "name": "Python: Arquivo Atual",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
         }
+ 
+//        {
+//            "name": "Odoo",
+//            "type": "python",
+//            "stopOnEntry": false,
+//            "python": "${config.python.pythonPath}",
+//            "request": "launch",
+//            "program": "/usr/bin/odoo",
+//            "args": [
+//                "-c ${workspaceRoot}/desenv.conf"
+//              ],
+//            "cwd": "${workspaceRoot}",
+//            "console": "integratedTerminal"
+//        }
     ]
 }

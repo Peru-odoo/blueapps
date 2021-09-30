@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_quotation_sale_order_tree" model="ir.ui.view">
+        <field name="name">quotation.saleorder.tree</field>
+        <field name="model">quotation.saleorder</field>
+        <field name="arch" type="xml">
+            <tree string ="Search Quotation/Sales order">
+                <field name='name'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_quotation_sale_order_form" model="ir.ui.view">
+        <field name="name">quotation.saleorder.form</field>
+        <field name="model">quotation.saleorder</field>
+        <field name="arch" type="xml">
+            <form string ="Search Quotation/Sales order">
+                <sheet>
+                    <div>
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group> 
+                            <field name="salespersons_ids" widget='many2many_tags'/>
+                            <field name="product_ids" widget='many2many_tags'/>
+                            <field name="product_not_set_ids" widget='many2many_tags'/>
+                        </group>
+                        <group>
+                            <field name="sale_team_ids" widget='many2many_tags'/> 
+                            <field name="sale_team_not_set_ids" widget='many2many_tags'/> 
+                        </group>
+                    </group>
+                </sheet>
+	    </form>
+        </field>
+    </record>
+
+    <record id="action_quotation_sale_order" model="ir.actions.act_window">
+        <field name="name">Search Quotation/Sales order</field>
+        <field name="res_model">quotation.saleorder</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_quotation_sale_order_tree"/>
+    </record>
+
+    <menuitem id="menu_search_quotation_sale_order"
+              name="Search Quotation/Sales order"
+              parent="sale.menu_sale_config"
+              action="action_quotation_sale_order"
+              sequence="20"/>
+</odoo>

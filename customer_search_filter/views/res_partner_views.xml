@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  © 2018-Today Aktiv Software (http://www.aktivsoftware.com).
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <data>
+        <record id="inherit_res_partner_view" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="context">{'search_by_phone': True, 'search_by_mobile': True, 'search_by_email': True, 'search_by_city': True, 'search_by_function': True}</attribute>
+                    <attribute name="nolabel">1</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="inherit_res_partner_filter_view" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="filter_domain">['|', ('display_name', 'ilike', self), '|', ('ref', '=', self), '|', ('name', 'ilike', self), '|', ('mobile', 'ilike', self), '|', ('city', 'ilike', self), '|', ('email', 'ilike', self),'|', ('phone', 'ilike', self), ('function', 'ilike', self)]</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

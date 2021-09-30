@@ -1,0 +1,41 @@
+<odoo>
+
+    <record id="whatsapp_compose_message_view_invoice" model="ir.ui.view">
+        <field name="name">whatsapp.compose.message.form</field>
+        <field name="model">whatsapp.compose.message</field>
+        <field name="inherit_id" ref="aos_whatsapp.whatsapp_compose_message_view"/>
+        <field name="arch" type="xml">        	
+            <div name="partner" position="before">
+            	<div name="invoice" attrs="{'invisible' : ['|','|',('whatsapp_type', '!=', 'post'),('composition_mode', '!=', 'mass_post'),('model','!=','account.invoice')]}">
+                    <group>                      
+                        <label for="invoice_ids" string="Invoices"/>
+                        <div groups="base.group_user">
+                            <field name="invoice_ids" widget="many2many_tags" placeholder="Add invoices to notify..."
+                            	attrs="{'invisible' : [('whatsapp_type', '!=', 'post')]}"/>
+                        </div> 
+                    </group>
+                </div>
+            </div>
+            <!-- <field name="template_id" position="attributes">
+            	<attribute name="attrs">{'invisible' : ['|',('whatsapp_type', '!=', 'post'),('composition_mode', '!=', 'comment')]}</attribute>
+            </field> -->
+            <button name="whatsapp_message_post" position="after">
+				<button name="send_mail" type="object" string="  Send Mail" icon="fa-envelope" 
+					attrs="{'invisible': ['|',('whatsapp_type','=','get'),('model','!=','account.invoice')]}" class="oe_highlight" />
+            </button>
+        </field>
+    </record>
+    
+    <record id="action_send_invoice_mobile" model="ir.actions.act_window">
+        <field name="name">Send Whatsapp</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">whatsapp.compose.message</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="aos_whatsapp.whatsapp_compose_message_view"/>
+        <field name="context">{'default_composition_mode': 'mass_post'}</field>
+        <field name="target">new</field>
+        <field name="help">This wizard will send message partner with whatsapp</field>
+    	<field name="binding_model_id" ref="account.model_account_move" />
+    </record>
+
+</odoo>

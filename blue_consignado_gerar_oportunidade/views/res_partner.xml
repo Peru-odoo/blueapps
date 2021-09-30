@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.contract.view_partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//h1" position="after">
+                    <h3>
+                        <field name="fisica_cpf" placeholder="CPF" nolabel="1"/>
+                    </h3>
+                </xpath>
+<!--
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="contratos"/>
+                    <field name="beneficios"/>
+                    <field name="beneficio1"/>
+                    <field name="beneficio2" invisible='1'/>
+                    <field name="beneficio3" invisible='1'/>
+                </xpath>
+-->
+                <xpath expr="//page[@name='contact_addresses']" position="before">
+                    <page name="benefit" string="Matriculas/NB" autofocus="autofocus">
+                            <group>
+                                <field name="matricula_ids" nolabel="1" sample="1" multi_edit="1"/>
+                            </group>
+                    </page>
+                    <page name="contract" string="Contratos">
+                            <group>
+                                <group>
+                                    
+                                    <field name="matricula_id" options="{'no_create_edit': True, 'no_open': True}" sample="1" multi_edit="1"/>
+                                    <button string="Negociar Contratos" name="action_create_lead" type="object" class="oe_highlight"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="contrato_ids" domain="[('matricula_id', '=', matricula_id)]" context="{'default_matricula': matricula_id}" nolabel="1" sample="1" multi_edit="1"/>
+                            </group>
+
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

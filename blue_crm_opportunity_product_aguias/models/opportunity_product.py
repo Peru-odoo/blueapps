@@ -1,15 +1,27 @@
 from odoo import api, fields, models, _
+import odoo
 from odoo.exceptions import UserError
 
 class CrmLeadProduct(models.Model):
     _name = 'crm.lead.product'
-    
-    product_id =  fields.Many2one('product.product',string='Product')
-    description = fields.Text(string='Description')
-    qty = fields.Float(string='Ordered Qty',default=1.0)
-    product_uom = fields.Many2one('uom.uom', string='Unit of Measure')
-    price_unit = fields.Float(string='Unit Price')
-    tax_id = fields.Many2many('account.tax', string='Taxes')
+
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Cliente',
+        ondelete="cascade",
+        required=True)
+    matricula_id = fields.Many2one(
+        comodel_name='consignado.matricula',
+        string='Matricula',
+        ondelete="cascade",
+        required=True)
+    contrato_id =  fields.Many2one('consignado.contrato',string='Contrato')
+    product_id =  fields.Many2one('product.product',string='Tipo de Negocio')
+    description = fields.Text(string='Descrição')
+    qty = fields.Float(string='Quantidade',default=1.0)
+    product_uom = fields.Many2one('uom.uom', string='Unidade')
+    price_unit = fields.Float(string='Valor')
+    tax_id = fields.Many2many('account.tax', string='Taxas')
     lead_id = fields.Many2one('crm.lead')
     
     @api.onchange('product_id')
@@ -23,7 +35,17 @@ class CrmLeadProduct(models.Model):
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
     
-    lead_product_ids = fields.One2many('crm.lead.product','lead_id',string='Products For Quotation')
+    matricula_idd = fields.Many2one(
+        string="Matricula",
+        required="True",
+        comodel_name="consignado.matricula",
+        domain="[('partner_id', '=', partner_id)]",
+#        context={"key": "value"},
+        ondelete="cascade",
+        copy=True,
+        help="Seleciona a matricula qual deseja inserir no negocio.",
+    )
+    lead_product_ids = fields.One2many('crm.lead.product','lead_id',string='Contratos para Negociar')
 
     def action_create_quotation(self):
         sale_obj=self.env['sale.order']

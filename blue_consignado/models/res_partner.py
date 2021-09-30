@@ -5,37 +5,30 @@ class ResPartner(models.Model):
 
     fisica_cpf = fields.Char(
         string='CPF',
-        tracking=True,
         required=False)
 
     fisica_rg = fields.Char(
         string='RG',
-        tracking=True,
         required=False)
         
     contratos = fields.Text(
         string='Todos Contratos',
-        tracking=True,
         required=False)
 
     beneficios = fields.Text(
         string='Todas Matriculas/NB',
-        tracking=True,
         required=False)
 
     beneficio1 = fields.Char(
         string='Matricula/NB 1',
-        tracking=True,
         required=False)
 
     beneficio2 = fields.Char(
         string='Matricula/NB 2',
-        tracking=True,
         required=False)
 
     beneficio3 = fields.Char(
         string='Matricula/NB 3',
-        tracking=True,
         required=False)
 
     mae = fields.Char(
@@ -57,9 +50,24 @@ class ResPartner(models.Model):
         track_visibility='onchange',
         required=False)
 
+    matricula_idd = fields.Many2one(
+        comodel_name='consignado.matricula',
+        string='Matriculas',
+        track_visibility='onchange',
+        required=False)
+
     contrato_id = fields.One2many(
         comodel_name='consignado.contrato',
         inverse_name='partner_id',
+        string='Contratos',
+        track_visibility='onchange',
+        required=False)
+
+    contrato_ids = fields.One2many(
+        comodel_name='consignado.contrato',
+        inverse_name='matricula',
+        copy=True,
+#        domain="[('matricula', '=', matricula_idd)]",
         string='Contratos',
         track_visibility='onchange',
         required=False)

@@ -4,7 +4,7 @@
     'author': 'Kitworks Systems',
     'website': 'https://kitworks.systems/',
 
-    'category': 'Customizations',
+    'category': 'Sales',
     'license': 'OPL-1',
     'version': '14.0.0.0.1',
     'depends': [

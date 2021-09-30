@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import models, fields, api
 
-
 class AvaxAccountSendWizard(models.TransientModel):
     _name = 'avax.account.send.wizard'
     _description = 'Avax Account SendWizard'
@@ -12,13 +11,12 @@ class AvaxAccountSendWizard(models.TransientModel):
         return self.env.context.get('active_id', False)
 
     account_id = fields.Many2one(
-        'avax.account', default=_get_default_account_id)
-
+        'avax.account', required=True, default=_get_default_account_id)
     balance = fields.Float(related='account_id.balance')
-    password = fields.Char()
+    password = fields.Char(required=True)
     account_to_id = fields.Many2one('avax.account')
-    address = fields.Char(string='Destination Address')
-    amount = fields.Integer()
+    address = fields.Char(string='Destination Address',required=True)
+    amount = fields.Float(required=True)
 
     @api.onchange('account_to_id')
     def _onchange_(self):

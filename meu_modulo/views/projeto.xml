@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2021 BlueConnect
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="projeto_form_view">
+        <field name="name">projeto.form (in meu_modulo)</field>
+        <field name="model">projeto</field>
+        <field name="inherit_id" ref="TODO othermodule.form_view"/>
+        <field name="arch" type="xml">
+            <!-- TODO -->
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="projeto_search_view">
+        <field name="name">projeto.search (in meu_modulo)</field>
+        <field name="model">projeto</field>
+        <field name="inherit_id" ref="TODO othermodule.search_view"/>
+        <field name="arch" type="xml">
+            <!-- TODO -->
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="projeto_tree_view">
+        <field name="name">projeto.tree (in meu_modulo)</field>
+        <field name="model">projeto</field>
+        <field name="inherit_id" ref="TODO othermodule.tree_view"/>
+        <field name="arch" type="xml">
+            <!-- TODO -->
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="projeto_act_window">
+        <field name="name">Projeto</field> <!-- TODO -->
+        <field name="res_model">projeto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="projeto_menu">
+        <field name="name">Projeto</field>
+        <field name="parent_id" ref="xmlid of parent menu"/> <!-- TODO -->
+        <field name="action" ref="projeto_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</odoo>

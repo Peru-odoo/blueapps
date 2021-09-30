@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_invoice_form_whatsapp_customer" model="ir.ui.view">
+        <field name="name">account.move.whatsapp.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_invoice_sent'][1]" position="after">
+                <button type="action"
+                    name="%(aos_whatsapp.action_whatsapp_compose_message_post)d"
+                    string="  Send By WhatsApp"
+                    icon="fa-whatsapp"
+                    class="btn-primary"
+                    title="Send By WhatsApp"
+                    attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                    groups="base.group_user"
+                    context="{'mark_invoice_as_sent':True, 'whatsapp_type': 'post', 'composition_mode': 'comment'}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_sent'][last()]" position="after">
+                <button type="action"
+                    name="%(aos_whatsapp.action_whatsapp_compose_message_post)d"
+                    icon="fa-whatsapp"
+                    string="  Send By WhatsApp"
+                    title="Send By WhatsApp"
+                    attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', False), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))]}"
+                    context="{'whatsapp_type': 'post', 'composition_mode': 'comment'}"
+                    groups="base.group_user"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

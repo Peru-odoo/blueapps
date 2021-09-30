@@ -1,0 +1,23 @@
+<odoo>
+    <record id="kw_sale_customer_phone_tree" model="ir.ui.view">
+        <field name="name">sale.order (kw_sale_customer_phone)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after" >
+                    <field name="kw_phone" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="kw_sale_customer_phone_form" model="ir.ui.view">
+        <field name="name">sale.order (kw_sale_customer_phone)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after" >
+                    <field name="kw_phone" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

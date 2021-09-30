@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="base_view_partner_form_inheri" model="ir.ui.view">
+        <field name="name">res.partner.inherited.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <div>
+                    <field name="x_refe_fourn" placeholder='Référence'/>
+                </div>
+            </field>
+        </field>
+    </record>
+    <record id="sequence_ref_four" model="ir.sequence">
+        <field name="name">Ref Four</field>
+        <field name="code">ref.four</field>
+        <field name="active">TRUE</field>
+        <field name="prefix">V</field>
+        <field name="padding">7</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+    <record id="sequence_ref_cli" model="ir.sequence">
+        <field name="name">Ref Cli</field>
+        <field name="code">ref.cli</field>
+        <field name="active">TRUE</field>
+        <field name="prefix">C</field>
+        <field name="padding">7</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>    
+</odoo>

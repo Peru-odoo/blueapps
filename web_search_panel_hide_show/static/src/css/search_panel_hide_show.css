@@ -1,0 +1,70 @@
+.o_controller_with_searchpanel .o_search_panel {
+  flex: 0 0 200px;
+  top: 0px !important;
+  position: sticky !important;
+  position: -webkit-sticky !important;
+}
+
+.search_panel_o_hidden {
+  flex: none !important;
+  width: 0 !important;
+  position: unset !important;
+  display: block !important;
+  padding: 0;
+  z-index: 99999;
+}
+
+.o_search_panel_control {
+  /*show*/
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 14px;
+  height: 80px;
+  background-color: #000000;
+  opacity: 0.3;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  padding: 30px 1px 15px 5px;
+}
+
+.o_search_panel_control_left {
+  /*hide */
+  position: fixed;
+  width: 12px;
+  height: 80px;
+  left: 0px;
+  right: unset !important;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+  padding: 30px 11px 15px 0px;
+  top: 154px;
+  opacity: 0.3;
+  background-color: #000;
+  display: block
+}
+
+.o_search_panel_control:hover {
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+.o_search_panel_control_left:hover {
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+.fa-long-arrow-left:before {
+  content: "\f177";
+  color: white;
+}
+
+.fa-long-arrow-right {
+  content: "\f178";
+  color: white;
+}
+
+.fa-long-arrow-right:before {
+  content: "\f178";
+  color: white;
+}
