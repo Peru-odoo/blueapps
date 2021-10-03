@@ -30,7 +30,7 @@ class Account(models.Model):
     _inherit = 'account.move'
 
     def action_send_whatsapp(self):
-        compose_form_id = self.env.ref('whatsapp_mail_messaging.whatsapp_message_wizard_form').id
+        compose_form_id = self.env.ref('blue_whatsapp_mail_messaging.whatsapp_message_wizard_form').id
         ctx = dict(self.env.context)
         message = "Hi" + " " + self.partner_id.name + ',' + '\n' + "Here is your invoice" + ' ' + self.name + ' ' + "amounting" + ' ' + str(
             self.amount_total) + self.currency_id.symbol + ' ' + "from " + self.company_id.name + ". Please remit payment at your earliest convenience. " + '\n' + \
@@ -64,7 +64,7 @@ class Account(models.Model):
         if partner_check:
             account_move_numbers = account_move_ids.mapped('name')
             account_move_numbers = "\n".join(account_move_numbers)
-            compose_form_id = self.env.ref('whatsapp_mail_messaging.whatsapp_message_wizard_form').id
+            compose_form_id = self.env.ref('blue_whatsapp_mail_messaging.whatsapp_message_wizard_form').id
             ctx = dict(self.env.context)
             message = "Hi" + " " + self.partner_id.name + ',' + '\n' + "Your Orders are" + '\n' + account_move_numbers + \
                       ' ' + "is ready for review.Do not hesitate to contact us if you have any questions."

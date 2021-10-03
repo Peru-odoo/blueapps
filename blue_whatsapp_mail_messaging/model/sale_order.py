@@ -30,7 +30,7 @@ class Sale(models.Model):
     _inherit = 'sale.order'
 
     def action_send_whatsapp(self):
-        compose_form_id = self.env.ref('whatsapp_mail_messaging.whatsapp_message_wizard_form').id
+        compose_form_id = self.env.ref('blue_whatsapp_mail_messaging.whatsapp_message_wizard_form').id
         ctx = dict(self.env.context)
         message = "Hi" + " " + self.partner_id.name + ',' + '\n' + "Your quotation" + ' ' + self.name + ' ' + "amounting" + ' ' + str(
             self.amount_total) + self.currency_id.symbol + ' ' + "is ready for review.Do not hesitate to contact us if you have any questions."
@@ -63,7 +63,7 @@ class Sale(models.Model):
         if partner_check:
             sale_numbers = sale_order_ids.mapped('name')
             sale_numbers = "\n".join(sale_numbers)
-            compose_form_id = self.env.ref('whatsapp_mail_messaging.whatsapp_message_wizard_form').id
+            compose_form_id = self.env.ref('blue_whatsapp_mail_messaging.whatsapp_message_wizard_form').id
             ctx = dict(self.env.context)
             message = "Hi" + " " + self.partner_id.name + ',' + '\n' + "Your Orders are" + '\n' + sale_numbers + \
                       ' ' + '\n' + "is ready for review.Do not hesitate to contact us if you have any questions."

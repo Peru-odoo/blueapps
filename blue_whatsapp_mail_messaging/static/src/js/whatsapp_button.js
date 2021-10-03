@@ -1,9 +1,9 @@
-odoo.define('whatsapp_mail_messaging.whatsapp_button', function(require) {
+odoo.define('blue_whatsapp_mail_messaging.whatsapp_button', function(require) {
     "use strict";
     var SystrayMenu = require('web.SystrayMenu');
     var Widget = require('web.Widget');
     var ActionMenu = Widget.extend({
-        template: 'whatsapp_mail_messaging.whatsapp_icon',
+        template: 'blue_whatsapp_mail_messaging.whatsapp_icon',
         events: {
             'click .whatsapp_icon': 'onclick_whatsapp_icon',
         },
