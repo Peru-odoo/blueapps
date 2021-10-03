@@ -13,7 +13,7 @@
     "data": [
         "security/ir.model.access.csv",
         "data/age_range_cron.xml",
-        "views/res_partner_view.xml",
+#        "views/res_partner_view.xml",
         "views/res_partner_age_range_view.xml",
     ],
     "installable": True,

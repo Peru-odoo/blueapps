@@ -4,7 +4,25 @@ from odoo.exceptions import UserError
 
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
-    
+
+    banco_id = fields.Many2one(
+        'res.bank',
+        string='Banco Contrato')
+    n_contrato = fields.Char(string="Nº do Contrato")
+    x_prazo = fields.Char(string='Prazo/Pagas/Aberto')
+    v_parcela = fields.Float(string="Valor da Parcela")
+    s_devedor = fields.Float(string="Saldo Devedor")
+    t_investimento = fields.Float(string="Taxa Investimento")
+    nova_consultoria = fields.Float(string='Nova Consultoria')
+    v_liquido = fields.Float(string='Valor Líquido Cliente')
+    observacao_cliente = fields.Char(string='Observação do Cliente')
+# Novo Contrato
+    novo_banco = fields.Text(string='Banco')
+    novo_prazo = fields.Char(string='Prazo')
+    novo_v_parcela = fields.Float(string='Valor da Parcela')
+    v_liquido_geral = fields.Float(string='Valor Líquido Geral')
+    v_solicitado = fields.Float(string='Valor Solicitado')
+# Matricula
     matricula_id = fields.Many2one(
         string="Matricula",
         required="True",

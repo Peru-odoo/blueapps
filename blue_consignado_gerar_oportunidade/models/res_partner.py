@@ -83,7 +83,7 @@ class ResPartner(models.Model):
 #                'price_unit': line.price_unit,
 #                'tax_id':[(6, 0, line.tax_id.ids)]
             }))
-        if self.id:
+        if self.id and self.matricula_id:
             lead_id = sale_obj.create({
                 'name': self.name,
                 'partner_id':self.id, 
@@ -97,7 +97,7 @@ class ResPartner(models.Model):
                 'lead_product_ids':order_lines
             })
         else:
-            raise UserError('In order to create sale order, Customer field should not be empty !!!')
+            raise UserError('Para gerar uma nova oportunidade de negocio, o campo de matricula não deve esta vazio!!!')
         return True
 
 
