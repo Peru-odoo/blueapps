@@ -22,23 +22,24 @@
                 </xpath>
 -->
                 <xpath expr="//page[@name='contact_addresses']" position="before">
-                    <page name="benefit" string="Matriculas/NB" autofocus="autofocus">
+                    <page name="benefit" string="Matriculas/NB" invisible="True">
                             <group>
                                 <field name="matricula_ids" nolabel="1" sample="1" multi_edit="1"/>
                             </group>
                     </page>
-                    <page name="contract" string="Contratos">
+                    <page name="contract" string="Contratos" autofocus="autofocus">
                             <group>
-                                <group>
-                                    
-                                    <field name="matricula_id" options="{'no_create_edit': True, 'no_open': True}" sample="1" multi_edit="1"/>
-                                    <button string="Negociar Contratos" name="action_create_lead" type="object" class="oe_highlight"/>
-                                </group>
+                                <field name="matricula_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/> <!--  domain="[('partner_id', '=', id)]" -->
                             </group>
                             <group>
-                                <field name="contrato_ids" domain="[('matricula_id', '=', matricula_id)]" context="{'default_matricula': matricula_id}" nolabel="1" sample="1" multi_edit="1"/>
+                                <field name="matricula_ids" domain="[('id', '=', matricula_id)]" nolabel="1" sample="1" multi_edit="1"/>
                             </group>
-
+                            <group>
+                                <field name="contrato_ids" domain="[('matricula_id', '=', matricula_id)]" context="{'default_matricula_id': matricula_id}" nolabel="1" sample="1" multi_edit="1"/>
+                            </group>
+                            <group>
+                                <button string="Negociar Contratos" name="action_create_lead" type="object" class="oe_highlight" /> <!-- Para uma cor de botão mais escura: class="oe_stat_button" class="oe_highlight"-->
+                            </group>
                     </page>
                 </xpath>
             </field>

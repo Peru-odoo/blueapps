@@ -16,8 +16,8 @@
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th>Customer</th>
-                                    <th>Project Manager</th>
+                                    <th>Cliente</th>
+                                    <th>Product Owner</th>
                                 </tr>
                             </thead>
                             <tbody class="project_tbody">
@@ -31,18 +31,18 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h2>Tasks :</h2>
+                        <h2>Backlogs: </h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th>Task Name</th>
-                                    <th>Planned Hours</th>
-                                    <th>Remaining Hours</th>
-                                    <th>Assigned To</th>
-                                    <th>Assigned Date</th>
-                                    <th>Deadline</th>
-                                    <th>Stage</th>
+                                    <th>Título</th>
+                                    <th>Horas Planejadas</th>
+                                    <th>Horas Restantes</th>
+                                    <th>Responsavel</th>
+                                    <th>Data Atribuida</th>
+                                    <th>Prazo Final</th>
+                                    <th>Estágio</th>
                                 </tr>
                             </thead>
                             <tbody class="project_tbody">
@@ -80,7 +80,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>Sale Order :</h2>
+                        <h2>Ordem de Serviço: </h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -124,7 +124,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>Purchase Order :</h2>
+                        <h2>Ordem de Compra: </h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -178,7 +178,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>Inventory Usage</h2>
+                        <h2>Materiais Utilizados: </h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -222,7 +222,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>Project Deliverables</h2>
+                        <h2>Entregáveis ​​do Projeto</h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -261,7 +261,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>Work Package</h2>
+                        <h2>Pacote de Trabalho</h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -309,7 +309,7 @@
         <template id="report_project_project">
             <t t-call="web.html_container">
                 <t t-foreach="doc_ids" t-as="o">
-                    <t t-call="construction_management.report_project_project_custom"/>
+                    <t t-call="blue_construction_management.report_project_project_custom"/>
                 </t>
             </t>
         </template>

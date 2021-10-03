@@ -55,37 +55,6 @@ class ResPartnerContract(models.Model):
             self.product_uom = self.product_id.uom_id.id
             self.tax_id = self.product_id.taxes_id.ids
 
-class ResPartner(models.Model):
-    _inherit = 'res.partner'
-    
-    lead_product_ids = fields.One2many('res.partner.contract','partner_id',string='Contratos à Negociar')
-
-    def action_create_lead(self):
-        sale_obj=self.env['crm.lead']
-        sale_line_obj=self.env['res.partner.contract']
-        order_lines = []
-        for line in self.contrato_ids:
-            order_lines.append((0,0,{'matricula_id': line.matricula_id.id,
-                'name': line.partner_id.name,
-                'contrato_id':line.id
-#                'price_unit': line.price_unit,
-#                'tax_id':[(6, 0, line.tax_id.ids)]
-
-            }))
-        if self.id:
-            lead_id = sale_obj.create({
-                'partner_id':self.id,
-#                'team_id': self.team_id.id,
-#                'campaign_id': self.campaign_id.id,
-#                'medium_id': self.medium_id.id,
-#                'source_id': self.source_id.id,
-#                'opportunity_id': self.id,
-                'lead_product_ids':order_lines,
-            })
-        else:
-            raise UserError('In order to create sale order, Customer field should not be empty !!!')
-        return True
-    
     
     
     

@@ -2,18 +2,18 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 {
-    "name": "Excel Import/Export/Report Demo",
-    "version": "14.0.1.0.1",
-    "author": "Ecosoft,Odoo Community Association (OCA)",
+    "name": "Excel Importar/Exportar/Relatorios Aguias",
+    "version": "14.0.1.0.2",
+    "author": "Diego Santos, Ecosoft,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/server-tools",
     "category": "Tools",
-    "depends": ["excel_import_export", "sale_management", "purchase", "crm"],
+    "depends": ["excel_import_export", "sale_management", "crm"],
     "data": [
         "import_export_sale_order/actions.xml",
         "import_export_sale_order/templates.xml",
-        "import_export_purchase_order/actions.xml",
-        "import_export_purchase_order/templates.xml",
+#        "import_export_purchase_order/actions.xml",
+#        "import_export_purchase_order/templates.xml",
         "report_sale_order/report_sale_order.xml",
         "report_sale_order/templates.xml",
         "report_sale_order/security/ir.model.access.csv",

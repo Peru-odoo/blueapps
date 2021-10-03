@@ -8,7 +8,7 @@
             <field name="priority" eval="6"/>
             <field name="arch" type="xml">
 			<xpath expr="//page[@name='contact_addresses']" position="after">
-				<page string="Products For Quotation">
+				<page string="Contratos">
 					<field name="contrato_ids">
 						<tree editable="bottom">
 							<field name="name"/>
@@ -23,18 +23,44 @@
 			</xpath>
 		</field>
 	</record>
-<!--
+	<record id="crm_case_form_view_oppor_inherit_product" model="ir.ui.view">
+		<field name="name">crm.lead.oppor.inherited</field>
+		<field name="model">crm.lead</field>
+		<field name="inherit_id" ref="crm.crm_lead_view_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//page[@name='internal_notes']" position="before">
+				<page string="Operação" autofocus="autofocus">
+                    <group>
+                        <field name="matricula_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/> <!--  domain="[('partner_id', '=', id)]" -->
+                    </group>
+					<field name="lead_product_ids" context="{'default_partner_id': partner_id,'default_matricula_id': matricula_id, 'default_product_id': 1}">
+						<tree editable="bottom">
+							<field name="partner_id" optional="hide" options="{'no_create': True,'no_create_edit': True, 'no_open': True}" readonly="0"/>
+							<field name="matricula_id" optional="show" options="{'no_create_edit': True, 'no_open': True}" readonly="0"/>
+							<field name="contrato_id" domain="[('partner_id', '=', partner_id),('matricula_id', '=', matricula_id)]" options="{'no_create': True,'no_create_edit': True, 'no_open': True}"/> <!--domain="[('matricula_id', '=', matricula_id)]"-->
+							<field name="product_id" optional="hide"/>
+							<field name="description" optional="hide"/>
+							<field name="qty" optional="hide"/>
+							<field name="product_uom" optional="hide"/>
+							<field name="price_unit" sum="Total Consultoria"/>
+							<field name="tax_id" widget="many2many_tags" optional="hide"/>
+							<field name="lead_id" optional="hide"/>
+						</tree>
+					</field>
+				</page>
+			</xpath>
+		</field>
+	</record>
 	<record id="inherit_crm_case_form_view_oppor_crm_opportunity_product" model="ir.ui.view">
 		<field name="name">crm.lead.oppor.inherited</field>
 		<field name="model">crm.lead</field>
 		<field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor" />
 		<field name="arch" type="xml">
 			<xpath expr="//button[@name='action_sale_quotations_new']" position="replace">
-				<button string="New Quotation" name="action_create_lead" type="object" class="oe_highlight"/>
+				<button string="Gerar Contrato" name="action_create_quotation" type="object" class="oe_highlight"/>
 			</xpath>
 
 		</field>
 	</record>
--->
 	</data>	
 </odoo>

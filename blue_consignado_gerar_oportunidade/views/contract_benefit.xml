@@ -61,6 +61,12 @@
       <field name="view_mode">tree,form,kanban</field>
     </record>
 
+    <record model="ir.actions.act_window" id="consignado_crm_product">
+      <field name="name">Contratos do CRM</field>
+      <field name="res_model">crm.lead.product</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
 
     <!-- server action to the one above -->
 <!--
@@ -89,7 +95,8 @@
     action="consignado_matriculas" sequence="10"/>
     <menuitem name="Contratos" id="consignado_contrato_menu" parent="consignado_menu"
     action="consignado_contratos" sequence="20"/>
-
+    <menuitem name="Produtos do CRM" id="consignado_produto_menu" parent="consignado_menu"
+    action="consignado_crm_product" sequence="30"/>
 <!--
     <menuitem name="List" id="consignado.menu_1_list" parent="consignado.menu_1"
               action="consignado.action_window"/>

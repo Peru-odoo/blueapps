@@ -7,14 +7,14 @@
                 <div class="page">
                     <t t-foreach="docs" t-as="o">
                         <div class="row">
-                            <h2>Project Initiation</h2>
+                            <h2>Iniciação do Projeto</h2>
                             <br/>
                         </div>
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th>Project</th>
-                                    <th>Customer</th>
+                                    <th>Projeto</th>
+                                    <th>Cliente</th>
                                     <th>Assigned To</th>
                                     <th>Assigned Date</th>
                                     <th>Deadline</th>
@@ -40,7 +40,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <h2>Timesheet</h2>
+                        <h2>Planilha de Horas</h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -75,16 +75,16 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>SubTask</h2>
+                        <h2>Sub-Tarefas</h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th>Task Title</th>
-                                    <th>Project</th>
-                                    <th>Assigned To</th>
-                                    <th>Initially Planned Hours</th>
-                                    <th>Stage</th>
+                                    <th>Título da Tarefa</th>
+                                    <th>Projeto</th>
+                                    <th>Atribuído para</th>
+                                    <th>Horas Inicialmente Planejadas</th>
+                                    <th>Èstágio</th>
                                 </tr>
                             </thead>
                             <tbody class="project_tbody">
@@ -110,7 +110,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>Material Plannings</h2>
+                        <h2>Materias Planejados</h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -141,7 +141,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>Consumed Material</h2>
+                        <h2>Materiais Utilizados</h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -172,7 +172,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <h2>Material Requistions</h2>
+                        <h2>Requisições de Materiais</h2>
                         <br/>
                         <table class="table table-condensed">
                             <thead>
@@ -224,7 +224,7 @@
         <template id="report_project_job_order">
             <t t-call="web.html_container">
                 <t t-foreach="doc_ids" t-as="o">
-                    <t t-call="construction_management.report_project_job_order_custom"/>
+                    <t t-call="blue_construction_management.report_project_job_order_custom"/>
                 </t>
             </t>
         </template>
