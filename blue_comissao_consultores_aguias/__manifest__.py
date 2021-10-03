@@ -20,15 +20,15 @@
 #################################################################################
 
 {
-    'name': "Employee's leads Comission",
-    'author': 'Botspot infoware Pvt. Ltd.',
+    'name': "Comissão de Consultores por Lead",
+    'author': 'Diego Santos, Botspot infoware Pvt. Ltd.',
     'category': 'Employees',
     'summary': """Employee's leads commission rules set by percentage or amount of fix person """,
-    'website': 'http://www.botspotinfoware.com',
-    'company': 'Botspot Infoware Pvt. Ltd.',
-    'maintainer': 'Botspot Infoware Pvt. Ltd.',
+    'website': 'http://www.blueconnect.com.br',
+    'company': 'BlueConnect',
+    'maintainer': 'Diego Santos, BlueConnect',
     'description': """Employee's leads comission shows the commission for fixed person by percentage as well as amount. it giving commission per expected revenue of employee. It will be easy to give commission for product's expected revenue""",
-    'version': '14.0',
+    'version': '14.0.0.1',
     'versio': '1.0',
     'depends': ['base', 'hr', 'crm'],
     'data': [
