@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+          <report
+             id="action_report_lead_summary"
+             string="Lead Summary"
+             model="lead.summary.wizard"
+             report_type="qweb-pdf"
+             name="blue_comissao_consultores_aguias.lead_summary"
+             file="blue_comissao_consultores_aguias.lead_summary"
+          />
+    </data>
+</odoo>

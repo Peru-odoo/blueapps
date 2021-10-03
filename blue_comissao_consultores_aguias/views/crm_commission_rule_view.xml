@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_crm_commission_rule_tree">
+            <field name="name">crm.commission.rule.tree</field>
+            <field name="model">crm.commission.rule</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Sales commission Rule" >
+                    <field name="name"/>
+                    <field name="commission"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_crm_commission_rule_form" model="ir.ui.view">
+            <field name="name">crm.commission.rule.form</field>
+            <field name="model">crm.commission.rule</field>
+            <field name="arch" type="xml">
+                <form string="Sales commission Rule">               	
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="commission_type"/>
+                                <field name="commission"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_crm_commission_rule_view">
+            <field name="name">Sales Commission Rule</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.commission.rule</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="blue_comissao_consultores_aguias.view_crm_commission_rule_tree"/>
+        </record>
+
+        <menuitem id="crm_menu_config_sale_commission"
+            name="Sales Commission Rule"
+            action="blue_comissao_consultores_aguias.action_crm_commission_rule_view"
+            parent="crm.crm_menu_config"
+            sequence="1"
+            active="True"/>
+    </data>
+</odoo>

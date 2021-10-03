@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="lead_summary_form">
+        <field name="name">lead.summary.wizard.form</field>
+        <field name="model">lead.summary.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lead Summary">
+                <group style="width:50%;">
+                    <field name="user_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button string="Print" name="print_report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_lead_summary_wizard">
+        <field name="name">Lead Summary</field>
+        <field name="res_model">lead.summary.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="blue_comissao_consultores_aguias.lead_summary_form"/>
+    </record>
+  
+    <menuitem name="Reporting" id="crm_menu_report" parent="crm.crm_menu_root" sequence="20"/>
+    <menuitem name="Lead Summary" id="crm_menu_report_commission" parent="crm.crm_menu_report" action="blue_comissao_consultores_aguias.action_lead_summary_wizard" sequence="510"/>
+</odoo>
+   
+       
+                           
+

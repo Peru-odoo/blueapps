@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+        <record id="view_employee_form" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button type="object" class="oe_stat_button" icon="fa-star" name="get_leads">
+                        <field string="Opportunities" name="opportunity_count" widget="statinfo"/>
+                    </button>
+                </div>                                    
+                <xpath expr="//form//group[@name='managers']" position="before">
+                    <group string="Sales Commission" name="sale">
+                        <field name="total_sales_by_employee"/>
+                        <field name="commission_rule_id"/>
+                        <field name="total_commission"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>  
+   </data>   
+</odoo>

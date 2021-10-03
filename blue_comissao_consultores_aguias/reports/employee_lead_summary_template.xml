@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="lead_summary">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page"> 
+                    <br>
+                        <h1 align="center" style="font-size:25px">
+                            <center><span t-esc="user_id.name"/><span> Lead Summary</span></center>                            
+                        </h1>
+                    </br> 
+                    <div class="row">
+                        <div class="col-9">
+                            <strong>Start Date:</strong>
+                            <span t-esc="start_date" />
+                        </div>
+                        <div class="col-40">
+                            <strong>End Date:</strong>
+                            <span t-esc="end_date" />
+                        </div>
+                    </div>
+                    <br/>                                                             
+                    <table class="table table-condensed table-bordered">
+                        <thread>
+                            <tr>
+                                <th>Date Assign</th>
+                                <th>Leads</th>
+                                <th>Contact</th>
+                                <th>Expected Revenue</th>
+                            </tr>
+                        </thread>
+                        <tbody>
+                            <t t-foreach="lead_ids" t-as="lead">
+                                <tr>
+                                    <td> 
+                                        <span t-field="lead.date_open"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="lead.name"/>
+                                    </td>
+                                    <td>                                                                           
+                                        <span t-field="lead.contact_name"/>
+                                    </td> 
+                                    <td>
+                                        <span t-field="lead.expected_revenue"/>
+                                    </td> 
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="clearfix" name="so_total_summary">
+                        <div id="total" class="row" name="total">
+                            <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                                <table class="table table-sm">
+                                      <tr class="border-black o_total" style="">
+                                          <td name="td_total_sales_by_employee_label"><strong>Total Revenue</strong></td>
+                                          <td name="td_total_sales_by_employee" class="text-right">
+                                              <span t-esc="total_sales_by_employee"/>
+                                          </td>
+                                      </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix" name="so_total_summary">
+                        <div id="total" class="row" name="total">
+                            <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                                <table class="table table-sm">
+                                      <tr class="border-black o_total" style="">
+                                          <td name="td_commission_rule_id_label"><strong>Commission Rule</strong></td>
+                                          <td name="td_commission_rule_id" class="text-right">
+                                              <span t-esc="commission_rule_id.name"/>
+                                          </td>
+                                      </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix" name="so_total_summary">
+                        <div id="total" class="row" name="total">
+                            <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                                <table class="table table-sm">
+                                      <tr class="border-black o_total" style="">
+                                          <td name="td_total_commission_label"><strong>Total Commission</strong></td>
+                                          <td name="td_total_commission" class="text-right">
+                                              <span t-esc="total_commission"/>
+                                          </td>
+                                      </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>               
+    </template>
+</odoo>

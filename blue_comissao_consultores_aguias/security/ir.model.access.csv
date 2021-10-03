@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_commission_rule,access_crm_commission_rule,model_crm_commission_rule,base.group_user,1,1,1,1
+access_lead_summary_wizard,access_lead_summary_wizard,model_lead_summary_wizard,base.group_user,1,1,1,1
