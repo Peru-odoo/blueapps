@@ -13,8 +13,8 @@ class ResPartner(models.Model):
 
     _inherit = "res.partner"
 
-    birthdate_date = fields.Date("Birthdate")
-    age = fields.Integer(string="Age", readonly=True, compute="_compute_age")
+    birthdate_date = fields.Date("Data de Nascimento")
+    age = fields.Integer(string="Idade", readonly=True, compute="_compute_age")
 
     @api.depends("birthdate_date")
     def _compute_age(self):
