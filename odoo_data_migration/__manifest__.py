@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "BlueConnect Data Migration Segline",
+    'name': "Migração de Dados - BlueConnect - Segline",
     'summary': """
         This module can help you to migrate your data from your current system to Odoo database without RESTAPI,
         using database direct connection, this is very helpfull when your current system doesn't support RESTAPI technology.
@@ -19,7 +19,7 @@
     'author': "BlueConnect, Bassam Mannaa",
     'website': "https://www.blueconnect.com.br",
     'category': 'tools',
-    'version': '0.1.0.0.2',
+    'version': '0.2.0.0.2',
     'license': 'OPL-1',
     'images': ['static/description/main_screenshot.png'],
     'depends': ['base'],
