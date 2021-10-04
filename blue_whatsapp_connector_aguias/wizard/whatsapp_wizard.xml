@@ -2,8 +2,8 @@
 <odoo>
     <data>
         <record id="whatsapp_message_wizard_form" model="ir.ui.view">
-            <field name="name">whatsapp.message.wizard.form</field>
-            <field name="model">whatsapp.message.wizard</field>
+            <field name="name">whatsapp.message.wizard2.form</field>
+            <field name="model">whatsapp.message.wizard2</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="Enviar Whatsapp Mensagem">

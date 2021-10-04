@@ -3,7 +3,7 @@ import html2text
 
 
 class WhatsappSendMessage(models.TransientModel):
-    _name = 'whatsapp.message.wizard'
+    _name = 'whatsapp.message.wizard2' 
 
     user_id = fields.Many2one('res.partner', string="Recipient")
     mobile_number = fields.Char(related='user_id.mobile', required=True)

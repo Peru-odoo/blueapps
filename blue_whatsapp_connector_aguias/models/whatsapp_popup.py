@@ -7,7 +7,7 @@ class ResPartner(models.Model):
     def contacts_whatsapp(self):
         return {'type': 'ir.actions.act_window',
                 'name': _('Send Whatsapp Message'),
-                'res_model': 'whatsapp.message.wizard',
+                'res_model': 'whatsapp.message.wizard2',
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
@@ -20,7 +20,7 @@ class WhatsappCrm(models.Model):
     def crm_whatsapp(self):
         return {'type': 'ir.actions.act_window',
                 'name': _('Send Whatsapp Message'),
-                'res_model': 'whatsapp.message.wizard',
+                'res_model': 'whatsapp.message.wizard2',
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
@@ -33,7 +33,7 @@ class WhatsappInvoice(models.Model):
     def invoice_whatsapp(self):
         return {'type': 'ir.actions.act_window',
                 'name': _('Send Whatsapp Message'),
-                'res_model': 'whatsapp.message.wizard',
+                'res_model': 'whatsapp.message.wizard2',
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
@@ -46,7 +46,7 @@ class WhatsappPurchase(models.Model):
     def purchase_whatsapp(self):
         return {'type': 'ir.actions.act_window',
                 'name': _('Send Whatsapp Message'),
-                'res_model': 'whatsapp.message.wizard',
+                'res_model': 'whatsapp.message.wizard2',
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
@@ -59,7 +59,7 @@ class WhatsappSale(models.Model):
     def sale_whatsapp(self):
         return {'type': 'ir.actions.act_window',
                 'name': _('Send Whatsapp Message'),
-                'res_model': 'whatsapp.message.wizard',
+                'res_model': 'whatsapp.message.wizard2',
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
@@ -72,7 +72,7 @@ class WhatsappPurchase(models.Model):
     def stock_whatsapp(self):
         return {'type': 'ir.actions.act_window',
                 'name': _('Send Whatsapp Message'),
-                'res_model': 'whatsapp.message.wizard',
+                'res_model': 'whatsapp.message.wizard2',
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
