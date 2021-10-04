@@ -28,23 +28,67 @@
 		<field name="model">crm.lead</field>
 		<field name="inherit_id" ref="crm.crm_lead_view_form" />
 		<field name="arch" type="xml">
+			<xpath expr="//field[@name='team_id']" position="after">
+				<field name="matricula_id" string="Matricula/NB" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/> <!--  domain="[('partner_id', '=', id)]" -->
+				<field name="proposta" required="1"/>
+			</xpath>
 			<xpath expr="//page[@name='internal_notes']" position="before">
-				<page string="Operação" autofocus="autofocus">
+                <page string="Operação">
+                	<group>
+ <!-- grupo da ficha cadastral -->            
+                        <group string="Contrato">
+							
+                            <field name="banco_id"/>
+                            <field name="n_contrato"/>
+                            <field name="prazo"/>
+                            <field name="v_parcela" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                            <field name="s_devedor" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        </group>
+                              
+                        <group string="Novo Contrato">
+                             <field name="novo_banco"/>
+                             <field name="novo_prazo"/>   
+                             <field name="novo_v_parcela" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                             <field name="v_liquido_geral" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                             <field name="v_solicitado" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        </group>
+                        <group>
+                           <field name="t_investimento" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                           <field name="nova_consultoria" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                           <field name="v_liquido" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        </group>
+
+                        <group>
+                            <field name="observacao_cliente"/>
+							<field name="description" string="Observações Gerais" placeholder="Add a description..."/>
+                        </group>
+					</group>
+                </page>
+				<page string="Contratos" autofocus="autofocus">
                     <group>
-                        <field name="matricula_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/> <!--  domain="[('partner_id', '=', id)]" -->
+                        
                     </group>
 					<field name="lead_product_ids" context="{'default_partner_id': partner_id,'default_matricula_id': matricula_id, 'default_product_id': 1}">
 						<tree editable="bottom">
 							<field name="partner_id" optional="hide" options="{'no_create': True,'no_create_edit': True, 'no_open': True}" readonly="0"/>
-							<field name="matricula_id" optional="show" options="{'no_create_edit': True, 'no_open': True}" readonly="0"/>
+							<field name="matricula_id" optional="hide" options="{'no_create_edit': True, 'no_open': True}" readonly="0"/>
 							<field name="contrato_id" domain="[('partner_id', '=', partner_id),('matricula_id', '=', matricula_id)]" options="{'no_create': True,'no_create_edit': True, 'no_open': True}"/> <!--domain="[('matricula_id', '=', matricula_id)]"-->
 							<field name="product_id" optional="hide"/>
+            				<field name="banco_origem" optional="show"/>
+            				<field name="qtd_parcelas" optional="show"/>
+            				<field name="saldo_devedor" optional="show" sum="Devedor" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            				<field name="valor_parcela" optional="show" sum="Parcela" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            				<field name="valor_liberado" optional="show" sum="Liberado" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            				<field name="valor_consultoria" optional="show" sum="Consultoria" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            				<field name="valor_liquido" optional="show" sum="Liquido" widget="monetary" options="{'currency_field': 'company_currency'}"/>
 							<field name="description" optional="hide"/>
 							<field name="qty" optional="hide"/>
 							<field name="product_uom" optional="hide"/>
-							<field name="price_unit" sum="Total Consultoria"/>
+							<field name="price_unit" optional="hide"/>
 							<field name="tax_id" widget="many2many_tags" optional="hide"/>
 							<field name="lead_id" optional="hide"/>
+            				<field name="currency_id" invisible="1"/>
+            				<field name="company_currency" invisible="1"/>
 						</tree>
 					</field>
 				</page>

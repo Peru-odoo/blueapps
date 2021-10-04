@@ -9,6 +9,10 @@ class Matricula(models.Model):
         string='Senha',
         tracking=True,
         required=False)
+    company_id = fields.Many2one('res.company', string='Company',
+                                 default=lambda self: self.env.company)
+    currency_id = fields.Many2one('res.currency', string='Currency', related='company_id.currency_id', readonly=True, required=True, ondelete="cascade")
+    company_currency = fields.Many2one("res.currency", string='Currency', related='company_id.currency_id', readonly=True)
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Cliente',
@@ -53,3 +57,9 @@ class Matricula(models.Model):
     secretaria = fields.Char(
         string='Secretaria',
         required=False)
+    s_secretaria = fields.Selection(string='Secretaria', selection=[('saeb', 'SAEB'), ('funprev', 'FUNPREV'),('aposentado', 'Aposentado'),('ativo','Ativo'),('pensionista','Pensionista')])
+    
+#    company_currency = fields.Many2one("res.currency", string='Currency', related='company_id.currency_id', readonly=True)
+#    currency_id = fields.Many2one('res.currency', string='Currency', readonly=True, required=True, ondelete="cascade")
+
+    

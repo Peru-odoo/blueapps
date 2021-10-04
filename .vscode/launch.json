@@ -13,7 +13,7 @@
             "console":"integratedTerminal",
             "program":"/usr/bin/odoo",
             "args": [
-               "--config=/etc/odoo/aguias_dev.conf",
+               "--config=/etc/odoo/aguias_dev.conf", "-u blue_consignado_gerar_oportunidade",
             ],
             "cwd":"${workspaceRoot}",
             "env": {},
