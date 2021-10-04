@@ -6,7 +6,7 @@
             <field name="model">whatsapp.message.wizard</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <form string="Send Whatsapp Message">
+                <form string="Enviar Whatsapp Mensagem">
                     <group>
                         <group>
                             <field name="user_id"/>
@@ -14,14 +14,14 @@
                         </group>
                         <field name="model" invisible="1"/>
                         <group>
-                            <label for="mobile_number" string="Whatsapp Number" style="margin-left:25px !important;width:120px !important"/>
+                            <label for="mobile_number" string="Número do Whatsapp" style="margin-left:25px !important;width:120px !important"/>
                             <field name="mobile_number" nolabel="1"/>
                             <field name="template_id" options="{'no_create': True, 'no_edit': True}" invisible="1"/>
                         </group>
                     </group>
                     <footer>
-                        <button name="send_message" string="Send" type="object" style="background-color:#7C7BAD;color:#FFFFFF"/>
-                        <button name="cancel" string="Cancel" special="cancel"/>
+                        <button name="send_message" string="Enviar Mensagem" type="object" style="background-color:#7C7BAD;color:#FFFFFF"/>
+                        <button name="cancel" string="Cancelar" special="cancel"/>
                     </footer>
                 </form>
             </field>
