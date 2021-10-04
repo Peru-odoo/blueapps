@@ -37,7 +37,7 @@ class WhatsappInvoice(models.Model):
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
-                'context': {'default_template_id': self.env.ref('blue_whatsapp_connector_aguias.whatsapp_invoice_template').id},
+                'context': {'default_template_id': self.env.ref('blue_whatsapp_connector.whatsapp_invoice_template').id},
                 }
 
 class WhatsappPurchase(models.Model):
@@ -50,7 +50,7 @@ class WhatsappPurchase(models.Model):
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
-                'context': {'default_template_id': self.env.ref('blue_whatsapp_connector_aguias.whatsapp_purchase_template').id},
+                'context': {'default_template_id': self.env.ref('blue_whatsapp_connector.whatsapp_purchase_template').id},
                 }
 
 class WhatsappSale(models.Model):
@@ -63,7 +63,7 @@ class WhatsappSale(models.Model):
                 'target': 'new',
                 'view_mode': 'form',
                 'view_type': 'form',
-                'context': {'default_template_id': self.env.ref('blue_whatsapp_connector_aguias.whatsapp_sales_template').id},
+                'context': {'default_template_id': self.env.ref('blue_whatsapp_connector.whatsapp_sales_template').id},
                 }
 
 class WhatsappPurchase(models.Model):

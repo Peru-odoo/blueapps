@@ -1,5 +1,5 @@
 {
-    'name': 'Integração com Whatsapp',
+    'name': 'Integração com Whatsapp - Aguias',
     'version': '14.0.0.1',
     'summary': 'Whatsapp Odoo Connector',
     'author': 'Diego Santos, Saaragh Technologies Pte Ltd',
@@ -11,7 +11,7 @@
     'description': """Whatsapp Odoo Connector""",
     'category': 'Connector',
     'depends': [
-        'base', 'contacts', 'sale', 'crm', 'stock', 'sale_management', 'account', 'purchase'
+        'base', 'contacts', 'sale', 'crm', 'sale_management', 'account'
     ],
     'data': [
         'security/ir.model.access.csv',
