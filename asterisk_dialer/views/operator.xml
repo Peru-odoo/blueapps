@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id='operator_action' model='ir.actions.act_window'>
+            <field name='name'>Operators</field>
+            <field name='res_model'>asterisk_dialer.operator</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Click on Create to create your first operator!
+	        </p>
+		<p>Every operator needs to have, on one side, a Odoo user, and the other side, an Asterisk peer.</p>
+		<p>Make sure that every peer created for the Asterisk Dialer have the <b>accountcode</b> parameter set up.</p>
+            </field>
+
+        </record>
+
+        <menuitem id="operator_menu" parent='asterisk_dialer_menu'
+            name='Operators' action='operator_action' sequence='30'/>
+
+        <record id='operator_list' model='ir.ui.view'>
+            <field name='name'>operator_list</field>
+            <field name='model'>asterisk_dialer.operator</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='user'/>
+                    <field name="channel"/>
+                    <field name="contact"/>
+                    <field name="campaign"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="operator_form" model="ir.ui.view">
+            <field name="name">operator_form</field>
+            <field name="model">asterisk_dialer.operator</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Disconnect" name="disconnect" 
+                            type="object" class="btn btn-danger oe_read_only"
+                            attrs="{'invisible': [('state', '=', 'offline')]}"/>
+                    </header>
+                    <sheet>
+                        <div name="title" class="oe_title">
+                            <h1>
+                              <label class="oe_edit_only" for="user"/>
+                              <field name="user"/>
+                            </h1>
+                            <h2 class="o_row row no-gutters d-flex">
+                                <div class="col">
+                                    <div class="o_row">
+                                      <label class="oe_edit_only" for="accountcode"/>
+                                      <field class="oe_inline" name="accountcode"/>
+                                    </div>
+                                </div>
+                            </h2>
+                        </div>
+                        <group string="Status" name="status" class="oe_read_only">
+                            <group class="oe_read_only">
+                                <field name="campaign"/>
+                                <field name="channel"/>                                
+                            </group>
+                            <group>                                
+                                <field name="state"/>
+                                <field name="contact"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

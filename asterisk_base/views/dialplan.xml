@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="asterisk_base_dialplan_action" model="ir.actions.act_window">
+      <field name="name">Dialplan</field>
+      <field name="res_model">asterisk_base.dialplan</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'search_default_standard': '1'}</field>
+    </record>
+
+    <menuitem action="asterisk_base_dialplan_action"
+      groups="asterisk_common.group_asterisk_admin" 
+      id="asterisk_base_dialplan_menu"
+      name="Dialplans"
+      parent="asterisk_common.asterisk_apps_menu"
+      sequence="50"/>
+    
+    <record id="asterisk_base_dialplan_list" model="ir.ui.view">
+      <field name="name">asterisk_base.dialplan.list</field>
+      <field name="model">asterisk_base.dialplan</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="exten"/>
+          <field name="context"/>
+          <field name="dialplan_type"/>
+          <field name="is_custom"/>
+        </tree>
+      </field>
+    </record>
+    <record id="asterisk_base_dialplan_form" model="ir.ui.view">
+      <field name="name">asterisk_base.dialplan.form</field>
+      <field name="model">asterisk_base.dialplan</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <field name="dialplan_type" widget="statusbar" clickable="1"/>
+          </header>
+          <sheet>
+            <div name="title" class="oe_title">              
+              <h1 class="o_row row no-gutters d-flex">
+                <div class="col" name="dialplan_name">
+                  <label for="name" class="oe_edit_only"/>
+                  <div class="o_row">
+                    <field name="name" class="oe_inline"
+                      placeholder="Dialplan name..." required="1"/>
+                  </div>
+                </div>
+              </h1>
+              <label class="oe_edit_only" for="exten"/>
+              <h2>
+                <field class="oe_inline" name="exten" placeholder="Extension number..."
+                      attrs="{'required': [('is_custom', '=', False)]}"/>
+              </h2>
+            </div>
+            <group>
+              <group>                
+                <field name="is_custom"/>
+                <field name="write_date" invisible="1"/>
+              </group>
+              <group>
+                <field name="note"/>
+              </group>
+            </group>
+            <notebook>
+              <page attrs="{'invisible': [('is_custom', '=', True)]}" name="lines" string="Wizard">
+                <field name="lines">
+                  <tree editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="app"/>
+                    <field name="app_data"/>
+                    <field name="label"/>
+                  </tree>
+                </field>
+              </page>
+              <page name="dialplan" string="Dialplan" class="oe_read_only"
+                    attrs="{'invisible': [('is_custom', '=', True)]}">
+                <field name="dialplan" widget="asterisk_conf"
+                  class="oe_read_only"
+                  attrs="{'invisible': [('is_custom', '=', True)]}"/>
+              </page>
+              <page name="custom_dialplan" string="Custom Dialplan"                  
+                  attrs="{'invisible': [('is_custom', '=', False)]}">
+                <field name="custom_dialplan" widget="asterisk_conf"
+                    class="oe_edit_only"
+                    attrs="{'invisible': [('is_custom', '=', False)]}"/>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="asterisk_base_dialplan_search" model="ir.ui.view">
+      <field name="name">asterisk_base.dialplan.search</field>
+      <field name="model">asterisk_base.dialplan</field>
+      <field name="type">search</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="exten"/>
+          <field name="extension"/>
+          <field name="dialplan"/>
+          <filter domain="[('dialplan_type', '=', 'service')]"
+            name="service" string="Service"/>          
+          <filter domain="[('dialplan_type', '=', 'standard')]"
+            name="standard" string="Standard"/>
+          <separator/>
+          <filter domain="[('is_custom', '=', True)]" name="custom" string="Custom"/>
+        </search>
+      </field>
+    </record>
+  </data>
+</odoo>

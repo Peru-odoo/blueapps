@@ -1,0 +1,142 @@
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span6">
+      <h2 class="oe_slogan" style="color:#875A7B;">FreePBX contact manager sync.</h2>      
+    </div>
+    <div class="oe_span6">
+      <div class="oe_row_img oe_centered">
+        <img alt="Icon" class="oe_picture" src="icon.png"/>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span12">
+      <h4 class="oe_slogan"><b>Features</b></h4>
+      <div class="alert alert-info oe_mt32" style="padding:0.3em 0.6em; font-size: 150%;">
+        <ul class="list-unstyled">
+            <li>
+              <i class="fa fa-check-square-o text-primary"></i>
+              Sync contacts from Odoo to FreePBX.
+            </li>
+            <li>
+              <i class="fa fa-check-square-o text-primary"></i>
+              Update your FreePBX contacts regulary from Odoo.
+            </li>
+            <li>
+              <i class="fa fa-check-square-o text-primary"></i>
+              Easy installation.
+            </li>
+            <li>
+              <i class="fa fa-check-square-o text-primary"></i>
+              Automatic initialization of configuration.
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span12">
+      <h4 class="oe_slogan"><b>Installation</b></h4>
+      <ul>
+        <li>
+          Install Odoo module freepbx_contacts. Restart Odoo.
+        </li>
+        <li>
+          <p>
+            Login into your FreePBX server. Go the folder where you want to put the odoo_sync.py script.
+            For example, /opt/odoo_sync. Below you can find the installation session:
+          </p>
+          <p>
+            <br/>
+            <pre>
+              mkdir /opt/odoo_sync
+              cd /opt/odoo_sync
+              # Install dependencies
+              pip install mysql-connector-python
+              # Download odoo script and make it executable. Replace your.odoo.server to your data.
+              curl -v http://your.odoo.server/freepbx_contacts/static/files/odoo_sync.py > odoo_sync.py
+              chmod +x odoo_sync.py
+              # Initialize and download config file.
+              curl -v http://your.odoo.server/freepbx_contacts/init_cfg > odoo_sync.cfg
+              # Edit odoo_sync.cfg and adjust your local settings if required.
+              # Run the script to test it. No output means all is fine.
+              python ./odoo_sync.py
+            </pre>
+            Decide how often you want to sync your partners to FreePBX and create a cron job for this.
+            For example this will call sync script every hour:
+            <br/>
+            <pre>
+              echo '0 * * * * (cd /opt/odoo_sync && /opt/odoo_sync/odoo_sync.py)' | crontab -u root -
+            </pre>
+            <b>Warning! This will overwrite your root crontab. If you have existing crontab edit it manually
+              with <code>crontab -e</code>.</b>
+          </p>
+          <p>If you are not able to serve a single db using database of dbfilter then you need to create
+            odoo_sync.cfg manually. Here is an example: <br/>
+            <pre>
+            [odoo]
+            db=odoopbx_13
+            url=http://demo.odoopbx.com
+            token=99f649d0909c454a920c5aaec8c4373a
+
+            [mysql]
+            host=localhost
+            user=root
+            passwd=
+            db=asterisk
+            </pre>
+            <br/>
+           Do not forget to add freepbx.token System Parameter (see below).
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span12">
+      <h4 class="oe_slogan"><b>FAQ</b></h4>
+      <p>
+        <b>How to reset authentication token?</b><br/>
+        The auth token is stored in Technical -> System Parameters under freepbx.token param.
+        You can change it there and also update your odoo_sync.cfg file on your FreePBX server.
+      </p>
+      <p>
+        <b>My odoo_sync.cfg file contains 403 Forbidden Already initialized!</b> <br/>
+        This is because you already used init procedure. In order to generate a config file remove 
+        freepbx.token param from Technical -> System Parameters and call init_cfg URL again 
+        (see the Installation section above).
+      </p>
+      <p>
+        <b>RequestsDependencyWarning</b><br/>
+        If you get:
+        <pre>
+          /usr/lib/python2.7/site-packages/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.22) or 
+          chardet (2.2.1) doesn't match a supported version!
+        </pre>
+        then upgrade requests library:
+        <pre>
+          pip install --upgrade requests
+        </pre>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="oe_container">
+  <div class="oe_row oe_spaced">
+    <div class="oe_span12">
+      <h4 class="oe_slogan"><b>Support</b></h4>
+      <p>
+        For support and communication please visit OdooPBX.com forum and ask questions there.
+      </p>
+    </div>
+  </div>
+</section>

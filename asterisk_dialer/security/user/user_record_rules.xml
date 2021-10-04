@@ -1,0 +1,89 @@
+<odoo>
+
+    <record id="asterisk_dialer_campaign_user_rule" model="ir.rule">
+        <field name="name">Asterisk dialer campaign user rule</field>
+        <field name="model_id" ref="asterisk_dialer.model_asterisk_dialer_campaign"/>
+        <field name="groups" eval="[(6, 0, [ref('group_dialer_user')])]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="asterisk_dialer_channel_user_rule" model="ir.rule">
+        <field name="name">Asterisk dialer channel user rule</field>
+        <field name="model_id" ref="asterisk_dialer.model_asterisk_dialer_channel"/>
+        <field name="groups" eval="[(6, 0, [ref('group_dialer_user')])]"/>
+        <field name="domain_force">[('campaign.create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="asterisk_dialer_operator_user_rule" model="ir.rule">
+        <field name="name">Asterisk dialer operator user rule</field>
+        <field name="model_id" ref="asterisk_dialer.model_asterisk_dialer_operator"/>
+        <field name="groups" eval="[(6, 0, [ref('group_dialer_user')])]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="asterisk_dialer_campaign_log_user_rule" model="ir.rule">
+        <field name="name">Asterisk dialer campaign log user rule</field>
+        <field name="model_id" ref="asterisk_dialer.model_asterisk_dialer_campaign_log"/>
+        <field name="groups" eval="[(6, 0, [ref('group_dialer_user')])]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="asterisk_dialer_contact_user_rule" model="ir.rule">
+        <field name="name">Asterisk dialer contact user rule</field>
+        <field name="model_id" ref="asterisk_dialer.model_asterisk_dialer_contact"/>
+        <field name="groups" eval="[(6, 0, [ref('group_dialer_user')])]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="asterisk_dialer_generate_contacts_user_rule" model="ir.rule">
+        <field name="name">Asterisk dialer generate contacts user rule</field>
+        <field name="model_id" ref="asterisk_dialer.model_asterisk_dialer_generate_contacts"/>
+        <field name="groups" eval="[(6, 0, [ref('group_dialer_user')])]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="asterisk_dialer_add_contact_wizard_user_rule" model="ir.rule">
+        <field name="name">Asterisk dialer add contact wizard user rule</field>
+        <field name="model_id" ref="asterisk_dialer.model_asterisk_dialer_add_contact_wizard"/>
+        <field name="groups" eval="[(6, 0, [ref('group_dialer_user')])]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="asterisk_dialer_contact_note_user_rule" model="ir.rule">
+        <field name="name">Asterisk dialer contact note user rule</field>
+        <field name="model_id" ref="asterisk_dialer.model_asterisk_dialer_contact_note"/>
+        <field name="groups" eval="[(6, 0, [ref('group_dialer_user')])]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+</odoo>

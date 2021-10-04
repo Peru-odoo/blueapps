@@ -1,0 +1,16 @@
+<odoo>
+
+  <template id="web_phone_backend_assets" name="VOIP Client Assets" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+      <script type="text/javascript" src="/web_phone/static/src/lib/jssip.min.js"/>
+
+      <script type="text/javascript" src="/web_phone/static/src/js/dialing_panel.js"/>
+      <script type="text/javascript" src="/web_phone/static/src/js/systray_voip_menu.js"/>
+      <script type="text/javascript" src="/web_phone/static/src/js/web_client.js"/>
+
+      <link rel="stylesheet" type="text/scss" href="/web_phone/static/src/scss/call_center_field.scss"/>
+      <link rel="stylesheet" type="text/scss" href="/web_phone/static/src/scss/voip.scss"/>
+    </xpath>
+  </template>
+
+</odoo>

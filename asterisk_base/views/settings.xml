@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='base_settings_form' model='ir.ui.view'>
+        <field name='name'>asterisk_base.settings.form</field>
+        <field name='model'>asterisk_common.settings</field>
+        <field name="inherit_id" ref="asterisk_common.asterisk_settings_form"/>
+        <field name='arch' type='xml'>
+          <page name="originate" position="after">
+            <page name="base" string="Base">
+              <group>
+                <group>
+                  <field name="default_exten_length"/>
+                  <field name="default_exten_start"/>
+                </group>
+                <group>
+                  <button string="Re-build conf files" name="build_all_conf"
+                    type="object" class="btn btn-info"/>
+                </group>
+              </group>
+            </page>
+          </page>
+        </field>
+    </record>
+
+</odoo>

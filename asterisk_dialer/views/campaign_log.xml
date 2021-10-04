@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id='asterisk_dialer_campaign_log_action' model='ir.actions.act_window'>
+            <field name='name'>Campaign Logs</field>
+            <field name='res_model'>asterisk_dialer.campaign_log</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+	        <p class="o_view_nocontent_smiling_face">
+                     There are no logs in here yet!
+	        </p>
+                <p>Start a campaign and you'll see the campaign's logs here!</p>
+           </field>
+        </record>
+
+        <menuitem id="asterisk_dialer_campaign_log_menu"
+                  sequence="50"
+                  name="Logs"
+                  parent="asterisk_dialer_menu"
+                  action="asterisk_dialer_campaign_log_action"/>
+
+        <record id="asterisk_dialer_campaign_log_list" model="ir.ui.view">
+            <field name="name">asterisk.dialer.campaign.log.list</field>
+            <field name="model">asterisk_dialer.campaign_log</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="campaign"/>
+                    <field name="content"/>
+                    <field name="level" optional="hide"/>
+                    <field name="create_date" optional="hide"/>
+                    <field name="create_date_human" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="asterisk_dialer_campaign_log_search" model="ir.ui.view">
+            <field name="name">asterisk.dialer.campaign.log.search</field>
+            <field name="model">asterisk_dialer.campaign_log</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="campaign"/>
+                    <field name="content"/>
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                    <filter string="Today" name="today" domain="[('create_date','&gt;=',time.strftime('%%Y-%%m-%%d'))]"/>
+                    <filter string="Info" name="info" domain="[('level', '=', 'i')]"/>
+                    <filter string="Debug" name="debug" domain="[('level', '=', 'd')]"/>
+                    <filter string="Campaign" name="by_campaign" domain="[]"
+                        context="{'group_by': 'campaign'}"/>
+                    <filter string="Level" name="by_level" domain="[]"
+                        context="{'group_by': 'level'}"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

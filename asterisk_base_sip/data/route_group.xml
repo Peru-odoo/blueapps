@@ -1,0 +1,7 @@
+<odoo>
+    <record id="default_route_group" model="asterisk_base_sip.route_group">
+        <field name="name">Default</field>
+        <field name="note">Default route group for users</field>
+        <field name="is_user_default" eval="True"/>
+    </record>
+</odoo>

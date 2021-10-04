@@ -1,0 +1,26 @@
+<odoo>
+  <data>
+
+    <record id="view_web_phone_form" model="ir.ui.view">
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+      <field name="arch" type="xml">
+        <xpath expr="//group[3]" position="after">
+          <group string="Web Phone">
+            <group>
+              <field name="web_phone_sip_user"/>
+              <field name="web_phone_sip_proxy"/>
+              <field name="web_phone_stun_server"/>
+            </group>
+            <group>
+              <field name="web_phone_sip_secret"/>
+              <field name="web_phone_websocket"/>
+              <field name="web_phone_sip_protocol"/>
+            </group>
+          </group>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

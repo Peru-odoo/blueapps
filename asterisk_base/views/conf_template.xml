@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.actions.act_window" id="asterisk_base_conf_template_action">
+      <field name="name">Conf Templates</field>
+      <field name="res_model">asterisk_base.conf_template</field>
+      <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="asterisk_base_conf_template_menu"
+      parent="asterisk_common.asterisk_settings_menu"
+      sequence="30"
+      action="asterisk_base_conf_template_action" name="Conf Templates"/>
+
+  <record model="ir.ui.view" id="asterisk_base_conf_template_list">
+      <field name="name">asterisk conf templates</field>
+      <field name="model">asterisk_base.conf_template</field>
+      <field name="arch" type="xml">
+          <tree decoration-danger="diff_content != ''">
+              <field name="diff_content" invisible="1"/>
+              <field name="name"/>
+              <field name="code"/>
+          </tree>
+      </field>
+  </record>
+
+  <record model="ir.ui.view" id="asterisk_base_conf_template_form">
+      <field name="name">asterisk conf template form</field>
+      <field name="model">asterisk_base.conf_template</field>
+      <field name="arch" type="xml">
+          <form>
+              <sheet>
+                <field name="write_date" invisible="1"/>
+                <div name="title" class="oe_title">                    
+                  <h1>
+                    <label for="name" class="oe_edit_only"/>
+                    <field name="name"/>
+                  </h1>
+                    <h2>
+                      <label class="oe_edit_only" for="code"/>
+                        <field name="code" placeholder="Template code..."/>
+                  </h2>
+                </div>
+                  <button name="upgrade" type="object" string="Upgrade"
+                    attrs="{'invisible': [('diff_content', '=', '')]}"
+                    icon="fa-arrows-h" class="btn-warning oe_read_only"/>
+                <notebook>
+                  <page name="content" string="Current">
+                      <field name="content" widget="conf_template" nolabel="1"/>
+                  </page>
+                  <page name="original" string="Original"
+                        attrs="{'invisible': [('diff_content', '=', '')]}">
+                      <field name="original_content" widget="conf_template" nolabel="1"/>
+                  </page>
+                  <page name="diff" string="Difference"
+                        attrs="{'invisible': [('diff_content', '=', '')]}">
+                      <field name="diff_content" widget="diff_template" nolabel="1"/>
+                  </page>
+                </notebook>
+              </sheet>
+          </form>
+      </field>
+  </record>
+
+  <record model="ir.ui.view" id="asterisk_base_conf_template_search">
+    <field name="name">asterisk conf template search</field>
+    <field name="model">asterisk_base.conf_template</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="content"/>
+        <field name="code"/>
+      </search>
+    </field>
+  </record>
+
+</odoo>

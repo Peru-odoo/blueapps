@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-extend="asterisk_calls.systray_items">
+        <t t-jquery="#asterisk_calls_systray_partner_th" t-operation="append"> 
+            <th>Project</th>
+            <th>Task</th>
+        </t>
+        <t t-jquery="#asterisk_calls_systray_partner_td" t-operation="append"> 
+            <td t-att-project="channel.project[0]" id="asterisk_calls_systray_project_td">
+                <t t-if="channel.project">
+                    <t t-esc="channel.project[1]"/>                    
+                </t>
+            </td>
+            <td t-att-task="channel.task[0]" id="asterisk_calls_systray_task_td">
+                <t t-if="channel.task">
+                    <t t-esc="channel.task[1]"/>                    
+                </t>
+            </td>
+        </t>
+    </t>
+</templates>

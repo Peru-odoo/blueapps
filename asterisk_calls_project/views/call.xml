@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_project_call_list" model="ir.ui.view">
+        <field name="name">asterisk_calls.call.project.list</field>
+        <field name="model">asterisk_calls.call</field>
+        <field name="inherit_id" ref="asterisk_calls.asterisk_call_list"/>
+        <field name="arch" type="xml">
+            <field name="partner" position="after">
+                <field name="project" optional="show"/>
+                <field name="task" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_project_call_form" model="ir.ui.view">
+        <field name="name">asterisk_calls.call.project.form</field>
+        <field name="model">asterisk_calls.call</field>
+        <field name="inherit_id" ref="asterisk_calls.asterisk_call_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button type="object" name="create_task"
+                    string="Create Task" icon="fa-file"
+                    attrs="{'invisible': [('task', '!=', False)]}"
+                    title="Create Task" aria-label="Create Task"/>
+                <button type="object" name="create_project"
+                    string="Create Project" icon="fa-folder-open"
+                    attrs="{'invisible': ['|', ('project', '!=', False), ('task', '!=', False)]}"
+                    title="Create Project" aria-label="Create Project"/>
+            </xpath>
+            <xpath expr="//group[@name='info']" position="inside">
+                <field name="project"/>
+                <field name="task"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_project_call_search" model="ir.ui.view">
+        <field name="name">asterisk_calls.proecjt.search</field>
+        <field name="model">asterisk_calls.call</field>
+        <field name="inherit_id" ref="asterisk_calls.asterisk_call_search"/>
+        <field name="arch" type="xml">
+            <field name="partner" position="after">
+                <field name="project"/>
+                <field name="task"/>
+            </field>
+            <filter name="partners" position="after">
+                <filter name="projects" string="Projects" domain="[('project', '!=', False)]"/>
+                <filter name="tasks" string="Tasks" domain="[('task', '!=', False)]"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>

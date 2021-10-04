@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="queue_settings_template" model="asterisk_base.conf_template">
+    <field name="name">General Queue settings</field>
+    <field name="code">general_queue_settings</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">[general](+)
+; Queue Settings
+{% if rec.persistentmembers -%}
+	persistentmembers=yes
+{% else -%}
+	persistentmembers=no
+{% endif -%}
+{% if rec.keepstats -%}
+	keepstats=yes
+{% else -%}
+	keepstats=no
+{% endif -%}
+{% if rec.autofill -%}
+	autofill=yes
+{% else -%}
+	autofill=no
+{% endif -%}
+{% if rec.autopause -%}
+	autopause=yes
+{% else -%}
+	autopause=no
+{% endif -%} 
+maxlen={{ rec.maxlen }}
+{% if rec.setinterfacevar -%}
+	setinterfacevar=yes
+{% else -%}
+	setinterfacevar=no
+{% endif -%}
+{% if rec.setqueueentryvar -%}
+	setqueueentryvar=yes
+{% else -%}
+	setqueueentryvar=no
+{% endif -%}
+{% if rec.setqueuevar -%}
+	setqueuevar=yes
+{% else -%}
+	setqueuevar=no
+{% endif -%} 
+monitor_type={{ rec.monitor_type }}
+monitor_format={{ rec.monitor_format }}
+{% if rec.membermacro -%}
+	membermacro={{ rec.membermacro }}
+{% endif -%}
+{% if rec.updatecdr -%}
+	updatecdr=yes
+{% else -%}
+	updatecdr=no
+{% endif -%}
+{% if rec.shared_lastcall -%}
+	shared_lastcall=yes
+{% else -%}
+	shared_lastcall=no
+{% endif -%}
+{% if rec.negative_penalty_invalid -%}
+	negative_penalty_invalid=yes
+{% else -%}
+	negative_penalty_invalid=no
+{% endif -%}
+{% if rec.log_membername_as_agent -%}
+	log_membername_as_agent=yes
+{% else -%}
+	log_membername_as_agent=no
+{% endif -%}
+{% if rec.default_ring_timeout %}default_ring_timeout={{ rec.default_ring_timeout }}{% endif %}
+{% if rec.default_queue_timeout %}default_queue_timeout={{ rec.default_queue_timeout }}{% endif %}</field>
+  </record>
+</odoo>

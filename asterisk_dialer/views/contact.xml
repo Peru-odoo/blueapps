@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id='asterisk_dialer_contact_action' model='ir.actions.act_window'>
+            <field name='name'>Contacts</field>
+            <field name='res_model'>asterisk_dialer.contact</field>
+             <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Click on Create to create your first contact!
+	        </p>
+		<p>Go to your campaign and click on "Generate Contacts" to create rules that will add contacts to your campaign.</p>
+		<p>Alternatively, go to <b>Contacts</b>, switch to list view, mark the desired contacts and click on <b>Actions</b> &#8594; <b>Add to Dial Campaign</b>.</p>
+	    </field>
+        </record>
+
+        <menuitem id="asterisk_dialer_contact_menu" parent='asterisk_dialer_menu'
+            name='Contacts' action='asterisk_dialer_contact_action' sequence='20'/>
+
+        <record id='asterisk_dialer_contact_list' model='ir.ui.view'>
+            <field name='name'>asterisk_dialer.contact.list</field>
+            <field name='model'>asterisk_dialer.contact</field>
+            <field name='arch' type='xml'>
+                <tree multi_edit="1">
+                    <field name="name"/>
+                    <field name='phone' readonly="1"/>
+                    <field name="model" optional="hide"/>
+                    <field name="campaign"/>
+                    <field name="state"/>
+                    <field name="dial_attempt" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='asterisk_dialer_contact_form' model='ir.ui.view'>
+            <field name='name'>asterisk_dialer.contact.form</field>
+            <field name='model'>asterisk_dialer.contact</field>
+            <field name='arch' type='xml'>
+              <form>
+                  <header>
+                    <field name="state" widget="statusbar" clickable="1"/>
+                    <button name="originate" string="Originate" type="object" class="oe_read_only"/>
+                  </header>
+                  <sheet>
+                    <div name="title" class="oe_title">
+                        <h1>
+                          <div class="o_row" attrs="{'invisible': [('model_object', '!=', False)]}">
+                            <label class="oe_edit_only" for="name"/>
+                            <field name="name" placeholder="Name..."/>
+                          </div>
+                          <div class="o_row oe_read_only" attrs="{'invisible': [('model_object', '=', False)]}">
+                            <label class="oe_edit_only" for="model_object"/>
+                            <field name="model_object"/>
+                          </div>
+                        </h1>
+                    </div>
+                    <group>
+                      <group>
+                        <field name='phone'/>
+                        <field name='campaign'/>
+                        <field name="dial_attempt" class="oe_read_only"/>
+                      </group>
+                      <group>
+                        <field name="description"/>
+                      </group>
+                    </group>
+                    <notebook>
+                      <page string="Notes">
+                        <field name="notes">
+                          <tree editable="bottom">
+                            <field name="note"/>
+                            <field name="create_date" optional="hide"/>
+                            <field name="create_date_human" optional="show"/>
+                          </tree>
+                        </field>
+                      </page>
+                      <page string="Calls">
+                        <field name="calls">
+                            <tree limit="10">
+                              <field name="start_time_human" optional="show"/>
+                              <field name="start_time" optional="hide"/>
+                              <field name="duration" optional="hide"/>
+                              <field name="duration_human" optional="show"/>
+                              <field name="cause_txt" optional="show"/>
+                              <field name="channel" optional="hide"/>
+                              <field name="connected_operator"/>
+                            </tree>
+                        </field>
+                      </page>
+                  </notebook>
+                  </sheet>
+              </form>
+            </field>
+        </record>
+
+        <record id='asterisk_dialer_contact_search' model='ir.ui.view'>
+            <field name='name'>asterisk_dialer.contact.search</field>
+            <field name='model'>asterisk_dialer.contact</field>
+            <field name='type'>search</field>
+            <field name='arch' type='xml'>
+                <search>
+                    <field name='phone'/>
+                    <field name='campaign'/>
+                    <field name='name'/>                    
+                    <filter name="by_model" string="Models" context="{'group_by': 'model'}"/>
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

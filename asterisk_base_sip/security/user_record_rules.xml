@@ -1,0 +1,22 @@
+<odoo>
+    <record model="ir.rule" id="asyterisk_base_sip_peer_user_rule">
+        <field name="name">asterisk_base_sip_peer_user_rule</field>
+        <field name="model_id" ref="asterisk_base_sip.model_asterisk_base_sip_peer"/>
+        <field name="groups" eval="[(6,0,[ref('asterisk_common.group_asterisk_user')])]"/>
+        <field name="domain_force">[('user','=', user.asterisk_user.id)]</field>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+    <record model="ir.rule" id="asyterisk_base_sip_peer_status_user_rule">
+        <field name="name">asterisk_base_sip_peer_status_user_rule</field>
+        <field name="model_id" ref="asterisk_base_sip.model_asterisk_base_sip_peer_status"/>
+        <field name="groups" eval="[(6,0,[ref('asterisk_common.group_asterisk_user')])]"/>
+        <field name="domain_force">[('peer.user','=', user.asterisk_user.id)]</field>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>

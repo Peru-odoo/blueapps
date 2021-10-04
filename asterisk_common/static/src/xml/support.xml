@@ -9,7 +9,7 @@
 		    <h2> Documentation </h2>
 		    <p> For information please visit our <a 
                 class="btn btn-info btn-small" target="new"
-                href="https://bit.ly/2VfQpZt">documentation portal</a></p>
+                href="https://docs.odoopbx.com">Documentation portal</a></p>
 		    <hr/>
 		    <h2>Bugs, feature requests</h2>
                     <p> Please send bugs and feature requests to 
@@ -20,7 +20,9 @@
                     <h2>Tips &amp; tricks</h2>
                     <p> To talk about Asterisk &amp; Odoo integration join our
                         <a class="btn btn-info btn-small" target="new"
-                            href="https://odoopbx.com/forum/support-1">Community forum</a>
+                            href="https://odoopbx.com/forum/support-1">WEB Community Forum</a>
+                        or join our <a href="https://t.me/joinchat/lHjb8T2uI_NkNzQy" 
+                            class="btn btn-info btn-small" target="new">Odoo &amp; Asterisk Integration</a> Telegram Channel.
 			        </p>
                     <hr/>
                     <h2>E-mail Subscription</h2>

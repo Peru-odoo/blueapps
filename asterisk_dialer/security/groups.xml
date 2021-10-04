@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="module_asterisk_dialer_category"  model="ir.module.category">
+        <field name="name">Dialer</field>
+        <field name="sequence">30</field>
+        <field name="description">Dialer Security</field>
+    </record>
+
+    <record id="group_dialer_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="asterisk_dialer.module_asterisk_dialer_category"/>
+    </record>
+
+    <record id="group_dialer_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="asterisk_dialer.module_asterisk_dialer_category"/>
+        <field name="implied_ids" eval="[(5, 0, 0)]"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+
+</odoo>

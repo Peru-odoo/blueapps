@@ -1,0 +1,12 @@
+<odoo>    
+
+    <menuitem id="calls_board_menu"
+        parent="asterisk_common.asterisk_board_menu" name="Calls"
+        groups="asterisk_common.group_asterisk_admin"
+        sequence="50"/>
+
+    <menuitem id="call_reports_menu"
+        parent="asterisk_common.asterisk_reports_menu" name="Calls"
+        sequence="30"/>
+
+</odoo>

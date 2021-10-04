@@ -1,0 +1,20 @@
+<odoo>
+    <record id="access_asterisk_base_sip_peer_user" model="ir.model.access">
+        <field name="name">access_asterisk_base_sip_peer_user</field>
+        <field name="model_id" ref="asterisk_base_sip.model_asterisk_base_sip_peer"/>
+        <field name="group_id" ref="asterisk_common.group_asterisk_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+    <record id="access_asterisk_base_sip_peer_status_user" model="ir.model.access">
+        <field name="name">access_asterisk_base_sip_peer_status_user</field>
+        <field name="model_id" ref="asterisk_base_sip.model_asterisk_base_sip_peer_status"/>
+        <field name="group_id" ref="asterisk_common.group_asterisk_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>

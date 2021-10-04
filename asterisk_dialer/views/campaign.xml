@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id='asterisk_dialer_campaign_action' model='ir.actions.act_window'>
+            <field name='name'>Campaign</field>
+            <field name='res_model'>asterisk_dialer.campaign</field>
+	    <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Click on Create to create your first campaign!
+	        </p>
+		<p>Decide on a campaign type. It can be:</p>
+		<ul>
+                   <li><b>Operators</b> - calls are connected to the operators queue.</li>
+                   <li><b>Voice Message</b> - calls are sent to playback voice messages.</li>
+                </ul>
+                <p>If you select Voice Message it can also be of two types:</p>
+                <ul>
+		   <li><b>Sound file</b> - you upload a specially prepared for Asterisk sound file.</li>
+                   <li><b>Google TTS</b> - you type the message text and it is converted to sound using Google text-to-speech api.</li>
+                </ul>
+		<p>Every campaign can be set up to call your contacts multiple times by setting the <b>Dial Attempts</b> option to desired value.</p>
+            </field>
+        </record>
+
+        <record id='campaign_contacts_action' model='ir.actions.act_window'>
+            <field name='name'>Contacts</field>
+            <field name='res_model'>asterisk_dialer.contact</field>
+            <field name="view_mode">tree,form</field>
+	    <field name="domain">[('campaign', '=', context.get('campaign_id'))]</field>
+        </record>
+
+        <record id='campaign_calls_action' model='ir.actions.act_window'>
+            <field name='name'>Calls</field>
+            <field name='res_model'>asterisk_dialer.channel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('campaign', '=', context.get('campaign_id'))]</field>
+        </record>
+
+        <record id='campaign_logs_action' model='ir.actions.act_window'>
+            <field name='name'>Logs</field>
+            <field name='res_model'>asterisk_dialer.campaign_log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('campaign', '=', context.get('campaign_id'))]</field>
+        </record>
+
+        <menuitem id="asterisk_dialer_campaign_menu" parent='asterisk_dialer_menu'
+                  name='Campaigns' action='asterisk_dialer_campaign_action' sequence='10'/>
+
+        <record id='asterisk_dialer_campaign_list' model='ir.ui.view'>
+            <field name='name'>asterisk_dialer.campaign.list</field>
+            <field name='model'>asterisk_dialer.campaign</field>
+            <field name='type'>tree</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='name'/>
+                    <field name='number'/>
+                    <field name='campaign_type'/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='asterisk_dialer_campaign_form' model='ir.ui.view'>
+            <field name='name'>asterisk_dialer.campaign.form</field>
+            <field name='model'>asterisk_dialer.campaign</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form>
+                    <field name="id" invisible="1"/>
+                    <header>
+                        <field name="state" widget="statusbar" class="oe_read_only"/>
+                        <button string="Generate Contacts" name="%(generate_contacts_action)d" type="action"
+                            class="oe_highlight oe_read_only"/>
+                        <button name="wakeup" string="Wakeup" type="object" icon="fa-refresh" class="btn-success oe_read_only"
+                                attrs="{'invisible': [('state', '=', 'done')]}"/>
+                        <button string="Run" name="run_campaign" type="object" icon="fa-play" class="btn btn-info oe_read_only"
+                                attrs="{'invisible': [('state', '=', 'running')]}"/>
+                        <button string="Pause" name="pause_campaign" type="object" icon="fa-pause"
+                                class="btn btn-warning oe_read_only"
+                                attrs="{'invisible': [('state', 'in', ['paused', 'done', 'new'])]}"/>
+                        <button string="Done" name="done_campaign" type="object" icon="fa-check" class="btn btn-success oe_read_only"
+                                attrs="{'invisible': [('state', '=', 'done')]}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box oe_read_only">
+                            <button class="oe_stat_button" icon="fa-user"
+                                    context="{'campaign_id': id, 'default_campaign': id, 'hide_campaign': True}"
+                                    name="%(campaign_contacts_action)d" type="action">
+                                <field name="contact_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-phone"
+                                    context="{'campaign_id': id, 'default_campaign': id, 'hide_campaign': True, 'active_test': False}"
+                                    name="%(campaign_calls_action)d" type="action">
+                                <field name="call_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-pencil"
+                                    context="{'campaign_id': id, 'default_campaign': id, 'hide_campaign': True}"
+                                    name="%(campaign_logs_action)d" type="action">
+                                <field name="log_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div name="title" class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <notebook>
+                            <page string="Settings">
+                                <group>
+                                    <group>
+                                        <field name="is_common_tts_created" invisible="1"/>
+                                        <field name="active" invisible="1"/>
+                                        <field name='campaign_type'/>
+                                        <field name="number"
+                                               attrs="{'invisible': [('campaign_type', '!=', 'operators')],
+                                                        'required': [('campaign_type', '=', 'operators')]}"/>
+                                        <field name="msg_type"
+                                               widget="radio"
+                                               options="{'horizontal':true}"
+                                               attrs="{'invisible': [('campaign_type', '!=', 'voice_message')]}"/>
+                                        <field name="msg_filename" invisible="1"/>
+                                        <field name="msg_file" filename="msg_filename"
+                                               attrs="{'invisible': ['|', ('campaign_type', '!=', 'voice_message'), ('msg_type', '!=', 'sound_file')]}"/>
+                                        <field name="playback_widget" widget="html" string=""
+                                               attrs="{'invisible': ['|', ('campaign_type', '!=', 'voice_message'), ('msg_type', '!=', 'sound_file')]}"/>
+                                        <field name="tts_language"
+                                               attrs="{'invisible': ['|',('campaign_type', '!=', 'voice_message'), ('msg_type', '!=', 'google_tts')],
+                                                       'required': ['|',('campaign_type', '=', 'voice_message'), ('msg_type', '=', 'google_tts')]}"/>
+                                        <field name="tts_voice"
+                                               attrs="{'invisible': ['|',('campaign_type', '!=', 'voice_message'), ('msg_type', '!=', 'google_tts')],
+                                                       'required': ['|',('campaign_type', '=', 'voice_message'), ('msg_type', '=', 'google_tts')]}"/>
+                                        <field name="tts_pitch"
+                                               attrs="{'invisible': ['|',('campaign_type', '!=', 'voice_message'), ('msg_type', '!=', 'google_tts')],
+                                                       'required': ['|',('campaign_type', '=', 'voice_message'), ('msg_type', '=', 'google_tts')]}"/>
+                                        <field name="tts_speaking_rate"
+                                               attrs="{'invisible': ['|',('campaign_type', '!=', 'voice_message'), ('msg_type', '!=', 'google_tts')],
+                                                       'required': ['|',('campaign_type', '=', 'voice_message'), ('msg_type', '=', 'google_tts')]}"/>
+                                        <button class="oe_read_only btn btn-info" name="msg_test" type="object" string="Voice Message Test"
+                                            attrs="{'invisible': [('campaign_type', '!=', 'voice_message')]}"/>
+                                    </group>
+                                    <group col="4">
+                                        <field colspan="4" name='start_type'/>
+                                        <field colspan="4" name="start_date" attrs="{'invisible': [('start_type', '!=', 'scheduled')]}"/>
+                                        <field colspan="4" name="end_date" attrs="{'invisible': [('start_type', '!=', 'scheduled')]}"/>
+                                        <strong attrs="{'invisible': [('start_type', '!=', 'periodic')]}">Run every</strong>
+                                        <field colspan="1" name="period_number" nolabel="1"
+                                            attrs="{'invisible': [('start_type', '!=', 'periodic')], 'required': [('start_type', '=', 'periodic')]}"/>
+                                        <field colspan="1" name="period_type" nolabel="1"
+                                            attrs="{'invisible': [('start_type', '!=', 'periodic')], 'required': [('start_type', '=', 'periodic')]}"/>
+                                        <field colspan="4" name="next_run"
+                                            attrs="{'invisible': [('start_type', '!=', 'periodic')], 'required': [('start_type', '=', 'periodic')]}"/>
+					<field colspan="4" name="dial_attempts"/>
+                                        <field colspan="4" name='max_parallel_calls'/>
+                                        <field colspan="4" name='channel_provider'
+                                          placeholder="SIP/{NUMBER}@provider"/>
+                                        <field colspan="4" name="originate_timeout"/>
+                                        <field colspan="4" name="log_level"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="tts_text"
+                                        attrs="{'invisible': ['|',('campaign_type', '!=', 'voice_message'), ('msg_type', '!=', 'google_tts')],
+                                       'required': [('campaign_type', '=', 'voice_message'), ('msg_type', '=', 'google_tts')]}"/>
+                                </group>
+                            </page>
+                            <page string="Contacts">
+                                <field name="contacts">
+                                    <tree limit="10">
+                                        <field name="name"/>
+                                        <field name="phone"/>
+                                        <field name="model" optional="hide"/>
+                                        <field name="state"/>
+                                        <field name="dial_attempt" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Logs">
+                                <field name="logs">
+                                    <tree limit="10">
+                                        <field name="content"/>
+                                        <field name="create_date" optional="hide"/>
+                                        <field name="create_date_human" optional="show"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Calls">
+                                <field name="calls">
+                                    <tree limit="10">
+                                        <field name="start_time"/>
+                                        <field name="duration" optional="hide"/>
+                                        <field name="duration_human" optional="show"/>
+                                        <field name="contact"/>
+                                        <field name="cause_txt" optional="show"/>
+                                        <field name="channel" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id='asterisk_dialer_campaign_search' model='ir.ui.view'>
+            <field name='name'>asterisk_dialer.campaign.search</field>
+            <field name='model'>asterisk_dialer.campaign</field>
+            <field name='type'>search</field>
+            <field name='arch' type='xml'>
+                <search>
+                    <field name='name'/>
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

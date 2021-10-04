@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="sip_peer_template" model="asterisk_base.conf_template">
+    <field name="name">SIP Peer</field>
+    <field name="code">sip_peer</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">;
+[{{ rec.name }}]{%- if rec.template %}({{ rec.template.name.replace(' ', '_').lower() }}){% endif %}{% if rec.note %}; {{ rec.note }} {% endif %}
+{% if rec.accountcode -%}
+	accountcode={{ rec.accountcode }}
+{% endif -%}
+{% if rec.disallow -%}
+	disallow={{ rec.disallow }}
+{% endif -%}
+{% if rec.allow -%}
+	allow={{ rec.allow }}
+{% endif -%}
+{% if rec.allowoverlap -%}
+	allowoverlap={{ rec.allowoverlap }}
+{% endif -%}
+{% if rec.allowtransfer -%}
+	allowtransfer={{ rec.allowtransfer }}
+{% endif -%}
+{% if rec.allowsubscribe -%}
+	allowsubscribe={{ rec.allowsubscribe }}
+{% endif -%}
+	{% if rec.amaflags -%}
+amaflags={{ rec.amaflags }}
+	{% endif -%}
+{% if rec.autoframing -%}
+	autoframing={{ rec.autoframing }}
+{% endif -%}
+{% if rec.avpf -%}
+	avpf={{ rec.avpf }}
+{% endif -%}
+{% if rec.buggymwi -%}
+	buggymwi={{ rec.buggymwi }}
+{% endif -%}
+{% if rec.busylevel -%}
+	busylevel={{ rec.busylevel }}
+{% endif -%}
+{% if rec.callbackextension -%}
+	callbackextension={{ rec.callbackextension }}
+{% endif -%}
+{% if rec.callcounter -%}
+	callcounter={{ rec.callcounter }}
+{% endif -%}
+{% if rec.callgroup -%}
+	callgroup={{ rec.callgroup }}
+{% endif -%}
+{% if rec.callingpres -%}
+	callingpres={{ rec.callingpres }}
+{% endif -%}
+{% if rec.callerid -%}
+	callerid={{ rec.callerid }}
+{% endif -%}
+{% if rec.canreinvite -%}
+	canreinvite={{ rec.canreinvite }}
+{% endif -%}
+{% if rec.cancallforward -%}
+	cancallforward={{ rec.cancallforward }}
+{% endif -%}
+{% if rec.context -%}
+	context={{ rec.context }}
+{% endif -%}
+{% if rec.contactacl -%}
+	contactacl={{ rec.contactacl }}
+{% endif -%}
+{% if rec.contactdeny -%}
+	contactdeny={{ rec.contactdeny }}
+{% endif -%}
+{% if rec.contactpermit -%}
+	contactpermit={{ rec.contactpermit }}
+{% endif -%}
+{% if rec.defaultip -%}
+	defaultip={{ rec.defaultip }}
+{% endif -%}
+{% if rec.defaultuser -%}
+	defaultuser={{ rec.defaultuser }}
+{% endif -%}
+{% if rec.deny -%}
+	deny={{ rec.deny }}
+{% endif -%}
+{% if rec.dtlsautogeneratecert -%}
+	dtlsautogeneratecert={{ rec.dtlsautogeneratecert }}
+{% endif -%}
+{% if rec.dtlscafile -%}
+	dtlscafile={{ rec.dtlscafile }}
+{% endif -%}
+{% if rec.dtlscertfile -%}
+	dtlscertfile={{ rec.dtlscertfile }}
+{% endif -%}
+{% if rec.dtlscipher -%}
+	dtlscipher={{ rec.dtlscipher }}
+{% endif -%}
+{% if rec.dtlsenable -%}
+	dtlsenable={{ rec.dtlsenable }}
+{% endif -%}
+{% if rec.dtlsfingerprint -%}
+	dtlsfingerprint={{ rec.dtlsfingerprint }}
+{% endif -%}
+{% if rec.dtlssetup -%}
+	dtlssetup={{ rec.dtlssetup }}
+{% endif -%}
+{% if rec.dtlsverify -%}
+	dtlsverify={{ rec.dtlsverify }}
+{% endif -%}
+{% if rec.directmedia -%}
+	directmedia={{ rec.directmedia }}
+{% endif -%}
+{% if rec.dtmfmode -%}
+	dtmfmode={{ rec.dtmfmode }}
+{% endif -%}
+{% if rec.faxdetect -%}
+	faxdetect={{ rec.faxdetect }}
+{% endif -%}
+{% if rec.force_avp -%}
+	force_avp={{ rec.force_avp }}
+{% endif -%}
+{% if rec.fromdomain -%}
+	fromdomain={{ rec.fromdomain }}
+{% endif -%}
+{% if rec.fromuser -%}
+	fromuser={{ rec.fromuser }}
+{% endif -%}
+{% if rec.g726nonstandard -%}
+	g726nonstandard={{ rec.g726nonstandard }}
+{% endif -%}
+{% if rec.host -%}
+	host={{ rec.host }}
+{% endif -%}
+{% if rec.ignoresdpversion -%}
+	ignoresdpversion={{ rec.ignoresdpversion }}
+{% endif -%}
+{% if rec.insecure -%}
+	insecure={{ rec.insecure }}
+{% endif -%}
+{% if rec.icesupport -%}
+	icesupport={{ rec.icesupport }}
+{% endif -%}
+{% if rec.language -%}
+	language={{ rec.language }}
+{% endif -%}
+{% if rec.mailbox -%}
+	mailbox={{ rec.mailbox }}
+{% endif -%}
+{% if rec.mask -%}
+	mask={{ rec.mask }}
+{% endif -%}
+{% if rec.maxcallbitrate -%}
+	maxcallbitrate={{ rec.maxcallbitrate }}
+{% endif -%}
+{% if rec.md5secret -%}
+	md5secret={{ rec.md5secret }}
+{% endif -%}
+{% if rec.mohinterpret -%}
+	mohinterpret={{ rec.mohinterpret }}
+{% endif -%}
+{% if rec.mohsuggest -%}
+	mohsuggest={{ rec.mohsuggest }}
+{% endif -%}
+{% if rec.musiconhold -%}
+	musiconhold={{ rec.musiconhold }}
+{% endif -%}
+{% if rec.nat -%}
+	nat={{ rec.nat }}
+{% endif -%}
+{% if rec.outboundproxy -%}
+	outboundproxy={{ rec.outboundproxy }}
+{% endif -%}
+{% if rec.parkinglot -%}
+	parkinglot={{ rec.parkinglot }}
+{% endif -%}
+{% if rec.permit -%}
+	permit={{ rec.permit }}
+{% endif -%}
+{% if rec.pickupgroup -%}
+	pickupgroup={{ rec.pickupgroup }}
+{% endif -%}
+{% if rec.port -%}
+	port={{ rec.port }}
+{% endif -%}
+{% if rec.progressinband -%}
+	progressinband={{ rec.progressinband }}
+{% endif -%}
+{% if rec.qualify -%}
+	qualify={{ rec.qualify }}
+{% endif -%}
+{% if rec.qualifyfreq -%}
+	qualifyfreq={{ rec.qualifyfreq }}
+{% endif -%}
+{% if rec.regcontext -%}
+	regcontext={{ rec.regcontext }}
+{% endif -%}
+{% if rec.regexten -%}
+	regexten={{ rec.regexten }}
+{% endif -%}
+{% if rec.remotesecret -%}
+	remotesecret={{ rec.remotesecret }}
+{% endif -%}
+{% if rec.restrictcid -%}
+	restrictcid={{ rec.restrictcid }}
+{% endif -%}
+{% if rec.rfc2833compensate -%}
+	rfc2833compensate={{ rec.rfc2833compensate }}
+{% endif -%}
+{% if rec.rtcp_mux -%}
+	rtcp_mux={{ rec.rtcp_mux }}
+{% endif -%}
+{% if rec.rtpholdtimeout -%}
+	rtpholdtimeout={{ rec.rtpholdtimeout }}
+{% endif -%}
+{% if rec.rtpkeepalive -%}
+	rtpkeepalive={{ rec.rtpkeepalive }}
+{% endif -%}
+{% if rec.rtptimeout -%}
+	rtptimeout={{ rec.rtptimeout }}
+{% endif -%}
+{% if rec.secret -%}
+	secret={{ rec.secret }}
+{% endif -%}
+{% for chan_var in channel_vars -%}
+	setvar={{ chan_var }}
+{% endfor -%}
+{% if rec.sendrpid -%}
+	sendrpid={{ rec.sendrpid }}
+{% endif -%}
+{% if rec.srvlookup -%}
+	srvlookup={{ rec.srvlookup }}
+{% endif -%}
+{% if rec.subscribecontext -%}
+	subscribecontext={{ rec.subscribecontext }}
+{% endif -%}
+{% if rec.subscribemwi -%}
+	subscribemwi={{ rec.subscribemwi }}
+{% endif -%}
+{% if rec.supportpath -%}
+	supportpath={{ rec.supportpath }}
+{% endif -%}
+{% if rec.t38pt_usertpsource -%}
+	t38pt_usertpsource={{ rec.t38pt_usertpsource }}
+{% endif -%}
+{% if rec.textsupport -%}
+	textsupport={{ rec.textsupport }}
+{% endif -%}
+{% if rec.timerb -%}
+	timerb={{ rec.timerb }}
+{% endif -%}
+{% if rec.timert1 -%}
+	timert1={{ rec.timert1 }}
+{% endif -%}
+{% if rec.transport -%}
+	transport={{ rec.transport }}
+{% endif -%}
+{% if rec.trustrpid -%}
+	trustrpid={{ rec.trustrpid }}
+{% endif -%}
+{% if rec.type -%}
+	type={{ rec.type }}
+{% endif -%}
+{% if rec.usereqphone -%}
+	usereqphone={{ rec.usereqphone }}
+{% endif -%}
+{% if rec.videosupport -%}
+	videosupport={{ rec.videosupport }}
+{% endif -%}
+{% if rec.vmexten -%}
+	vmexten={{ rec.vmexten }}
+	{% endif -%}
+</field>
+</record>
+
+<record id="sip_extension" model="asterisk_base.conf_template">
+    <field name="name">SIP Peer Extension</field>
+    <field name="code">sip_extension</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">same => n,Dial(SIP/{{ rec.name }},{{ rec.extension.sip_user_dial_timeout }},t)
+same => n,Hangup()</field>
+</record>
+
+<record id="sip_template" model="asterisk_base.conf_template">
+    <field name="name">SIP Peer Template</field>
+    <field name="code">sip_template</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">;
+[{{ rec.section_name }}](!){% if rec.note %}; {{ rec.note }} {%- endif %}
+{% for option in rec.common_options -%}
+{{ option.param }}={{ option.value }}
+{% endfor -%}
+</field>
+</record>
+
+<template id="asterisk_base_sip.pjsip_peer">;
+[odoo-user-<t t-esc="rec.id"/>]<t t-if="rec.template">(<t t-raw="rec.template.name"/>)</t><t t-if="rec.note">; <t t-raw="rec.note"/></t>
+</template>
+
+<record id="user_extension" model="asterisk_base.conf_template">
+    <field name="name">User Extension</field>
+    <field name="code">user_extension</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">exten => {{ rec.exten }},n,Goto(odoo-user-{{ rec.id }},${EXTEN},1)</field>
+</record>
+
+<record id="user_in_dialplan" model="asterisk_base.conf_template">
+    <field name="name">User Incoming Dialplan</field>
+    <field name="code">user_in_dialplan</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">;
+[odoo-user-{{ rec.id }}] ; {{ rec.user.name }}
+{% for route_group in rec.route_groups -%}
+    include => route-group-{{ route_group.id }} ; {{ route_group.name }}
+{% endfor -%}
+exten => {{ rec.exten }},1,Verbose(CALL TO USER {{ rec.user.name }})
+{% if rec.lang -%}
+same => n,Set(CHANNEL(language)={{ rec.lang }})
+{% endif -%}
+{% if not rec.call_waiting -%}
+same => n,Verbose(CALL WAITING NOT SET CHECKING CALLS COUNT)
+same => n,Set(GROUP(cw)=odoo-user-{{ rec.id }})
+same => n,ExecIf($[ ${GROUP_COUNT(odoo-user-{{ rec.id }}@cw)} > 1 ]?Goto(busy))
+{% endif -%}
+{% if rec.cf_uncond_enabled -%}
+same => n,Verbose(UNCONDITIONAL CF ENABLED)
+same => n,Set(CHANNEL(accountcode)={{ rec.accountcode }})
+same => n,Dial(Local/{{ rec.cf_uncond_number }}@odoo-user-{{ rec.id }})
+    {% if rec.vm_enabled -%}
+same => n,Goto(vm)
+    {% else -%}
+same => n,Progress()
+same => n,Playtones(congestion)
+same => n,Wait(11)
+same => n,Hangup()
+    {% endif -%}
+{% endif -%}
+{% if rec.get_ring_channels_dial_string() -%}
+same => n,Dial({{ rec.get_ring_channels_dial_string() }},{{ rec.get_ring_channels_timeout() }},tT)
+{% endif -%}
+same => n,ExecIf($["${DIALSTATUS}" = "BUSY"]?Goto(busy))
+same => n,Goto(unavail)
+{% if rec.cf_on_unavail_enabled -%}
+same => n(unavail),Set(CHANNEL(accountcode)={{ rec.accountcode }})
+same => n,Dial(Local/{{ rec.cf_on_unavail_number }}@odoo-user-{{ rec.id }})
+{% else -%}
+same => n(unavail),Verbose(NOT AVAILABLE)
+same => n,Goto(vm)
+{% endif -%}
+{% if rec.cf_on_busy_enabled -%}
+same => n(busy),Set(CHANNEL(accountcode)={{ rec.accountcode }})
+same => n,Dial(Local/{{ rec.cf_on_busy_number }}@odoo-user-{{ rec.id }})
+{% else -%}
+same => n(busy),Verbose(BUSY)
+same => n,Goto(vm)
+    {% if rec.vm_enabled -%}
+same => n(vm),ExecIf($["${DIALSTATUS}" = "BUSY"]?Goto(vm-busy))
+same => n(vm-unavail),VoiceMail({{ rec.exten }},u)
+same => n,Answer()
+same => n,Playtones(congestion)
+same => n,Wait(11)
+same => n,Hangup()
+same => n(vm-busy),VoiceMail({{ rec.exten }},b)
+same => n,Answer()
+same => n,Playtones(busy)
+same => n,Wait(11)
+same => n,Hangup()
+    {% else -%}
+same => n(vm),Verbose(VOICEMAIL NOT ENABLED)
+same => n,Answer()
+same => n,Playtones(busy)
+same => n,Wait(11)
+same => n,Hangup()
+    {% endif -%}
+{% endif -%}
+;
+exten => i,1,Answer()
+exten => i,2,Playback(invalid)
+exten => i,3,Hangup()
+</field>
+</record>
+
+<record id="sip_peer_context" model="asterisk_base.conf_template">
+    <field name="name">SIP Peer Context</field>
+    <field name="code">sip_peer_context</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">;
+[sip-peer-{{ rec.id }}] ; {{ rec.peer_type.capitalize() }} {{ rec.name }}
+{% if rec.user -%}
+    {% for route_group in rec.user_route_groups -%}
+        include => route-group-{{ route_group.id }} ; {{ route_group.name }}
+    {% endfor -%}
+{% else -%}
+    {% for route_group in rec.route_groups -%}
+        include => route-group-{{ route_group.id }} ; {{ route_group.name }}
+    {% endfor -%}
+{% endif %}
+</field>
+</record>
+
+<record id="route_group_template" model="asterisk_base.conf_template">
+    <field name="name">Route Group</field>
+    <field name="code">route_group</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">;
+[route-group-{{ rec.id }}] ; {{ rec.name }}
+exten => _+X.,1,Goto(${EXTEN:1},1)
+exten => _X.,1,Verbose(ROUTE GROUP ID {{ rec.id }} {{ rec.name }})
+{% if rec.include_extensions -%}
+    exten => _X.,n,GotoIf($["${DIALPLAN_EXISTS(odoo-extensions,${EXTEN},1)}" = "1"]?odoo-extensions,${EXTEN},1)
+{% endif -%}
+{% for route in routes -%}
+    exten => _X.,n,GosubIf($["${DIALPLAN_EXISTS(route-{{ route.id }},${EXTEN},1)}" = "1"]?route-{{ route.id }},${EXTEN},1) ; {{ route.name }}
+{% endfor -%}
+exten => _X.,n,Hangup()
+</field>
+</record>
+
+<record id="route_template" model="asterisk_base.conf_template">
+    <field name="name">Route</field>
+    <field name="code">route</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">;
+[route-{{ rec.id }}] ; {{ rec.name }}
+exten => {{ rec.dst }}{% if rec.src %}/{{ rec.src }}{% endif %},1,Verbose(ROUTE ID {{ rec.id }} {{ rec.name }})
+{% if rec.lang -%}
+     same => n,Set(CHANNEL(language)={{ rec.lang }})
+{% endif -%}
+{% if rec.recording_enabled -%}
+     same => n,MixMonitor(${UNIQUEID}.wav)
+{% endif -%}
+{% if rec.destination_type == 'exten' and rec.partner_lookup_enabled -%}
+     same => n,Gosub(partner-name-lookup,${EXTEN},1)
+{% endif -%}
+{% if rec.destination_type == 'exten' -%}
+     same => n,Goto(odoo-extensions,{{ rec.exten.number }},1)
+{% elif rec.destination_type == 'sip_trunk' -%}
+    {% if rec.sip_headers -%}
+        {% for header in rec.sip_headers.split('\n') -%}
+            same => n,SipAddHeader({{ header }})
+        {% endfor -%}
+    {% endif -%}
+    same => n,ExecIf($["${OUTBOUND_CALLERID}" != ""]?Set(CALLERID(all)=${OUTBOUND_CALLERID}))
+    {% if rec.src_translations -%}
+        ; Channel translations
+        {% for t in rec.src_translations -%}
+            {% if t.src_channel -%}
+                same => n,ExecIf($[ "${CHANNEL(name)}" =~ "{{ t.src_channel }}" ]?Set(CALLERID(number)={{ t.src_replace }})) ; {{ t.src_channel }}
+            {% endif -%}
+        {% endfor -%}
+    {% endif -%}    
+    {% if rec.src_translations -%}
+        ; Account code user translations
+        {% for t in rec.src_translations -%}
+            {% if t.src_user -%}
+                 same => n,ExecIf($[ "${CHANNEL(accountcode)}" = "{{ t.src_accountcode }}" ]?Set(CALLERID(number)={{ t.src_replace }})) ; {{ t.src_user.name }}
+            {% endif -%}
+        {% endfor -%}
+    {% endif -%}
+    {% if rec.src_translations -%}
+        ; Src number translations
+        {# Default match without caller ID -#}
+        {% for t in rec.src_translations -%}
+            {% if t.src -%}
+                {% if t.src_replace -%}
+                    same => n,Set(CALLERID(number)={{ t.src_replace }}){% if t.src_user %}; {{ t.src_user.name }}{% endif %}                
+                {% else -%}
+                    same => n,Set(CALLERID(number)={{ t.src_prefix }}{{ t.src }}{% if t.src_skip %}{{ t.src_skip }}{% endif %}{% if t.src_skip_length %}:{{ t.src_skip_length }}{% endif %})
+                {% endif -%}
+            {% endif -%}
+        {% endfor -%}
+    {% endif -%}
+    {# Get destination number -#}
+    {% set number = '' -%}
+    {% if rec.dst_translations -%}
+        {% for t in rec.dst_translations -%}
+            {% if t.dst_replace -%}
+                {% set number = t.dst_replace -%}            
+            {% else -%}
+                {% if t.dst_prefix -%}
+                    {% set number = t.dst_prefix -%}
+                {% endif -%}
+                {% if t.dst_skip -%}
+                    {% set number = number + '${EXTEN:' + t.dst_skip -%}
+                    {% if t.dst_skip_length -%}
+                        {% set number = number + ':' + t.dst_skip_length -%}
+                    {% endif -%}
+                    {% set number = number + '}' -%}                
+                {% else -%}
+                    {% set number = number + '${EXTEN}' -%}
+                {% endif -%}
+            {% endif -%}
+            same => n,Dial({{ rec.sip_trunk.channel_name }}/{{ number }},{{ rec.sip_trunk_dial_timeout }},{{ rec.sip_trunk_dial_options }})
+        {% endfor -%}    
+    {% else -%}
+         same => n,Dial({{ rec.sip_trunk.channel_name }}/${EXTEN},{{ rec.sip_trunk_dial_timeout }},{{ rec.sip_trunk_dial_options }})
+    {% endif -%}    
+    {% if rec.fail_over_route and rec.fail_over_route.id != rec.id -%}
+         same => n,Goto(route-{{ rec.fail_over_route.id }},${EXTEN},1)
+    {% else -%}
+         same => n,Return()
+    {% endif -%}     
+{% elif rec.destination_type == 'dialplan' -%}
+     same => n,Goto(dialplan-{{ rec.dialplan.id }},${EXTEN},1)
+{% elif rec.destination_type == 'block' -%}
+    {% if rec.block_type == 'busy' -%}
+same => n,Playtones(busy)
+same => n,Wait(60)
+same => n,Hangup(17)
+    {% elif rec.block_type == 'ring' -%}
+same => n,Ringing()
+same => n,Wait(60)
+same => n,Hangup(16)
+    {% elif rec.block_type == 'monkeys' -%}
+same => n,Answer()
+same => n,Playback(tt-monkeys)
+same => n,Hangup(16)    
+    {% endif -%}
+{% endif -%}
+</field>
+</record>
+
+</odoo>

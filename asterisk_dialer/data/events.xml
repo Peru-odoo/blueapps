@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+
+    <record id="async_agi_start" model="asterisk_common.event">
+      <field name="name">AsyncAGIStart</field>
+      <field name="source">AMI</field>
+      <field name="model">asterisk_dialer.campaign</field>
+      <field name="method">async_agi_start</field>
+    </record>
+
+    <record id="hangup" model="asterisk_common.event">
+      <field name="name">Hangup</field>
+      <field name="source">AMI</field>
+      <field name="model">asterisk_dialer.channel</field>
+      <field name="method">hangup_channel</field>
+      <field name="delay">0.1</field>
+    </record>
+
+    <record id="confbridge_leave" model="asterisk_common.event">
+      <field name="name">ConfbridgeLeave</field>
+      <field name="source">AMI</field>
+      <field name="model">asterisk_dialer.operator</field>
+      <field name="method">confbridge_leave</field>
+    </record>
+
+    <record id="confbridge_join" model="asterisk_common.event">
+      <field name="name">ConfbridgeJoin</field>
+      <field name="source">AMI</field>
+      <field name="model">asterisk_dialer.operator</field>
+      <field name="method">confbridge_join</field>
+    </record>
+
+    <record id="originate_response" model="asterisk_common.event">
+      <field name="name">OriginateResponse</field>
+      <field name="source">AMI</field>
+      <field name="model">asterisk_dialer.channel</field>
+      <field name="method">originate_response</field>
+      <field name="condition">event['Response'] == 'Failure'</field>
+      <field name="delay">0.5</field>
+    </record>
+
+
+  </data>
+</odoo>

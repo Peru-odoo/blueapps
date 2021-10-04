@@ -1,0 +1,15 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="manage_campaign" model="ir.cron">
+            <field name="name">Campaign: start or stop</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_asterisk_dialer_campaign"/>
+            <field name="code">model.manage_campaign()</field>
+        </record>
+
+    </data>
+</odoo>

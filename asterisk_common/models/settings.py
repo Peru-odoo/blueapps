@@ -83,7 +83,7 @@ class AsteriskSettings(models.Model):
             return default
 
     @api.model
-    def set_param(self, param, value):
+    def set_param(self, param, value, keep_existing=False):
         data = self.search([])
         if not data:
             data = self.sudo().create({})
@@ -92,7 +92,12 @@ class AsteriskSettings(models.Model):
         logger.debug(
             'ASTERISK BASE SET PARAM: %s DATA: %s.',
             param, value)
-        setattr(data, param, value)
+        # Check if the param is already there.
+        if not keep_existing or not getattr(data, param):
+            # TODO: How to handle Boolean fields!?
+            setattr(data, param, value)
+        else:
+            logger.debug('Keeping existing value for param: %s', param)
         return True
 
     @api.model

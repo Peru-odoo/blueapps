@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <data>
+    <record id="access_asterisk_calls_call_service" model="ir.model.access">
+      <field name="name">access_asterisk_calls_call_service</field>
+      <field name="model_id" ref="model_asterisk_calls_call"/>
+      <field name="group_id" ref="asterisk_common.group_asterisk_agent"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+    <record id="access_asterisk_calls_channel_service" model="ir.model.access">
+      <field name="name">access_asterisk_calls_channel_service</field>
+      <field name="model_id" ref="model_asterisk_calls_channel"/>
+      <field name="group_id" ref="asterisk_common.group_asterisk_agent"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_unlink" eval="1"/>
+    </record>
+  </data>
+</odoo>

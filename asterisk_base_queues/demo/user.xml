@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+<record id="asterisk_common.user_admin" model="asterisk_common.user">
+  <field name="user" ref="base.user_admin"/>
+  <field name="queue_interface">SIP/1001</field>
+</record>
+<record id="asterisk_common.user_demo" model="asterisk_common.user">
+  <field name="user" ref="base.user_demo"/>
+  <field name="queue_interface">SIP/1002</field>
+</record>
+</odoo>

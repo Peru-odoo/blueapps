@@ -1,0 +1,40 @@
+<odoo>
+  <data noupdate="1">
+
+    <record id="talkbtn_sip_user" model="ir.config_parameter">
+      <field name="key">website_talk_button.talkbtn_sip_user</field>
+      <field name="value"></field>
+    </record>
+
+    <record id="talkbtn_sip_secret" model="ir.config_parameter">
+      <field name="key">website_talk_button.talkbtn_sip_secret</field>
+      <field name="value"></field>
+    </record>
+
+    <record id="talkbtn_exten" model="ir.config_parameter">
+      <field name="key">website_talk_button.talkbtn_exten</field>
+      <field name="value"></field>
+    </record>
+
+    <record id="talkbtn_sip_proxy" model="ir.config_parameter">
+      <field name="key">website_talk_button.talkbtn_sip_proxy</field>
+      <field name="value"></field>
+    </record>
+
+    <record id="talkbtn_websocket" model="ir.config_parameter">
+      <field name="key">website_talk_button.talkbtn_websocket</field>
+      <field name="value"></field>
+    </record>
+
+    <record id="talkbtn_sip_protocol" model="ir.config_parameter">
+      <field name="key">website_talk_button.talkbtn_sip_protocol</field>
+      <field name="value">udp</field>
+    </record>
+
+    <record id="talkbtn_stun_server" model="ir.config_parameter">
+      <field name="key">website_talk_button.talkbtn_stun_server</field>
+      <field name="value">stun.l.google.com:19302</field>
+    </record>
+
+  </data>
+</odoo>

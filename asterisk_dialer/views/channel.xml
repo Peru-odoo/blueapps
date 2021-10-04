@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.actions.act_window" id="asterisk_channel_action">
+      <field name="name">Channels</field>
+      <field name="res_model">asterisk_dialer.channel</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'search_default_active': '1'}</field>
+      <field name="help" type="html">
+	   <p class="o_view_nocontent_smiling_face">
+                No calls available yet!
+	   </p>
+           <p>Start a campaign and you'll see the channels used by the campaign's calls here!</p>
+      </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="asterisk_channel_action_archived">
+      <field name="name">Archived hannels</field>
+      <field name="res_model">asterisk_dialer.channel</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'active_test': False}</field>
+      <field name="domain">[('active', '=', False)]</field>
+
+  </record>
+
+
+  <menuitem id="asterisk_dialer_channel_menu" parent='asterisk_dialer_menu'
+      name='Channels' action='asterisk_channel_action' sequence="40"/>
+
+  <record model="ir.ui.view" id="asterisk_channel_list">
+      <field name="name">asterisk asterisk_channel_list</field>
+      <field name="model">asterisk_dialer.channel</field>
+      <field name="arch" type="xml">
+          <tree edit="false" create="false" duplicate="false">
+              <field name="operator"/>
+              <field name="contact"/>
+              <field name="campaign"/>
+              <field name="start_time_human" optional="show"/>
+              <field name="start_time" optional="hide"/>
+              <field name="end_time" optional="hide"/>
+              <field name="connected_operator"/>
+              <field name="channel" optional="hide"/>
+              <field name="duration" optional="hide"/>
+              <field name="duration_human" optional="show"/>
+              <field name="callerid_num" optional="hide"/>
+              <field name="cause_txt" optional="show"/>
+          </tree>
+      </field>
+  </record>
+
+  <record model="ir.ui.view" id="asterisk_channel_form">
+      <field name="name">asterisk_channel_form</field>
+      <field name="model">asterisk_dialer.channel</field>
+      <field name="arch" type="xml">
+          <form edit="false" create="false" duplicate="false">
+              <header>
+              </header>
+              <sheet>
+                <notebook>
+                  <page name="primary" string="Primary">
+                    <group>
+                      <group>
+                        <field name="operator"/>
+                        <field name="campaign"/>
+                        <field name="contact"/>
+                        <field name="start_time"/>
+                        <field name="end_time"/>
+                        <field name="connected_operator"/>
+                        <field name="duration"/>
+                      </group>
+                      <group>
+                        <field name="exten"/>
+                        <field name="callerid_num"/>
+                        <field name="callerid_name"/>
+                        <field name="channel"/>
+                        <field name="cause"/>
+                        <field name="cause_txt"/>
+                      </group>
+                    </group>
+                  </page>
+                  <page name="tech" string="Technical">
+                    <group>
+                      <group>
+                        <field name="connected_line_num"/>
+                        <field name="connected_line_name"/>
+                        <field name="context"/>
+                        <field name="app"/>
+                        <field name="app_data"/>
+                        <field name="priority"/>                        
+                      </group>
+                      <group>
+                        <field name="accountcode"/>
+                        <field name="timestamp"/>
+                        <field name="uniqueid"/>
+                        <field name="linkedid"/>
+                      </group>
+                    </group>                    
+                  </page>
+                </notebook>
+              </sheet>
+          </form>
+      </field>
+  </record>
+
+  <record model="ir.ui.view" id="asterisk_channel_search">
+    <field name="name">asterisk channel search</field>
+    <field name="model">asterisk_dialer.channel</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="channel"/>
+        <field name="exten"/>
+        <field name="callerid_num"/>
+        <field name="callerid_name"/>
+        <field name="app"/>
+        <field name="uniqueid"/>
+        <filter name="archived" string="Archived"
+          context="{'active_test': False}" domain="[('active', '=', False)]"/>
+      </search>
+    </field>
+  </record>
+
+
+</odoo>

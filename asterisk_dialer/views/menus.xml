@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="asterisk_dialer_menu" sequence="150"
+        name="Dialer"  parent="asterisk_common.asterisk_top_menu"/>
+
+</odoo>

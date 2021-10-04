@@ -1,0 +1,11 @@
+<odoo>
+  <data noupdate="1">
+    <record id="peer_status" model="asterisk_common.event">
+      <field name="name">PeerStatus</field>
+      <field name="source">AMI</field>
+      <field name="model">asterisk_base_sip.peer_status</field>
+      <field name="method">update_peer_status</field>
+      <field name="condition">event['ChannelType'] == 'SIP'</field>
+    </record>
+  </data>
+</odoo>

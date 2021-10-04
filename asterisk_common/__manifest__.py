@@ -1,7 +1,7 @@
 # ©️ OdooPBX by Odooist, Odoo Proprietary License v1.0, 2020
 {
     'name': "Asterisk Common (connector)",
-    'version': '2.9',
+    'version': '2.10',
     'price': 0,
     'currency': 'EUR',
     'author': "Odooist",

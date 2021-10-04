@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id='calls_settings_form' model='ir.ui.view'>
+      <field name='name'>asterisk_calls.settings.form</field>
+      <field name='model'>asterisk_common.settings</field>
+      <field name="inherit_id" ref="asterisk_common.asterisk_settings_form"/>
+      <field name='arch' type='xml'>
+        <page name="originate" position="after">
+          <page name="calls" string="Calls">
+            <group name="calls">
+              <group string="Call History Archive">
+                <field name="calls_keep_days"/>
+                <field name="recordings_keep_days"/>
+              </group>
+              <group string="Call Recording">
+                <field name="use_mp3_encoder"/>
+                <field name="mp3_encoder_quality" attrs="{'invisible': [('use_mp3_encoder', '=', False)]}"/>
+                <field name="mp3_encoder_bitrate" attrs="{'invisible': [('use_mp3_encoder', '=', False)]}"/>
+                <field name="delete_recordings"/>
+                <field name="recording_storage"/>
+                <button type="object" name="sync_recording_storage"
+                  help="Use this button after changing the storage type."
+                  string="Move storage" class="btn btn-info oe_read_only"/>
+              </group>
+              <group name="ui" string="User Interface">
+                <field name="auto_reload_channels"/>
+                <field name="is_widget_enabled"/>
+              </group>
+            </group>
+          </page>
+        </page>
+      </field>
+  </record>
+
+</odoo>

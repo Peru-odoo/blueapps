@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='common_base_sip_settings_form' model='ir.ui.view'>
+        <field name='name'>asterisk_base_sip.common.settings.form</field>
+        <field name='model'>asterisk_common.settings</field>
+        <field name="inherit_id" ref="asterisk_common.asterisk_settings_form"/>
+        <field name='arch' type='xml'>
+          <page name="base" position="after">
+            <page name="sip" string="SIP">
+              <group>
+                <group>
+<!--                  <field name="default_sip_channel_type"/>                  -->
+                  <field name="default_sip_channel_language"/>
+                </group>
+              </group>
+            </page>
+          </page>
+        </field>
+    </record>
+
+<!-- 
+<field name="originate_context" position="replace"/>
+--> 
+</odoo>

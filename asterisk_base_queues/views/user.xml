@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="asterisk_base_queues_user_form" model="ir.ui.view">
+        <field name="name">asterisk_base_queues.user.form</field>
+        <field name="model">asterisk_common.user</field>
+        <field name="inherit_id" ref="asterisk_common.asterisk_user_form"/>
+        <field name="arch" type="xml">
+            <field name="originate_enabled" position="after">
+                <field name="is_queue"/>
+            </field>
+            <page name="originate" position="inside">
+                <group>
+                    <field name="queue_interface" invisible="1"/>
+                </group>
+            </page>
+        </field>
+    </record>
+</odoo>

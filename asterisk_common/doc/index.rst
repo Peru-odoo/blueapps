@@ -4,6 +4,12 @@ The documentation is available at **docs.odoopbx.com**.
 
 ChangeLog
 =========
+2.10 (2021-09-07)
+#################
+
+* Added *keep_existing* parameter to asterisk_common.set_param in order to be able to have default settings
+  that will not overwrite existing values.
+
 2.9 (2021-07-01)
 ################
 

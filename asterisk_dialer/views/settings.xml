@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='base_settings_form' model='ir.ui.view'>
+        <field name='name'>asterisk_base.settings.form</field>
+        <field name='model'>asterisk_common.settings</field>
+        <field name="inherit_id" ref="asterisk_common.asterisk_settings_form"/>
+        <field name='arch' type='xml'>
+          <page name="originate" position="after">
+            <page name="dialer" string="Dialer">
+              <group>
+                <group>
+		            <field name="default_provider" placeholder="SIP/{NUMBER}@provider"/>
+                    <field name="default_campaign"/>
+                </group>
+                <group>
+                  <field name="dial_attempts"/>
+                </group>
+              </group>
+            </page>
+          </page>
+        </field>
+    </record>
+
+</odoo>

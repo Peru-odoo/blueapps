@@ -1,3 +1,3 @@
 humanize
-jsonrpcclient
+jsonrpcclient==3.3.6
 phonenumbers

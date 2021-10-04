@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="extenstion_template" model="asterisk_base.conf_template">
+    <field name="name">Extension</field>
+    <field name="code">extension_base</field>
+    <field name="server" ref="default_server"/>
+    <field name="content">; Extension for {{ rec.name }}
+{% if rec.record_calls -%}
+    exten => {{ rec.number }},1,MixMonitor(${UNIQUEID}.wav)
+{% else -%}
+    exten => {{ rec.number }},1,Verbose(EXTENSION {{ rec.name }})
+{% endif %}
+</field>
+</record>
+
+<record id="extenstion_dialplan_template" model="asterisk_base.conf_template">
+    <field name="name">Dialplan Extension</field>
+    <field name="code">extension_dialplan</field>
+    <field name="server" ref="default_server"/>
+    <field name="content">exten => {{ rec.exten }},n,Goto(dialplan-{{ rec.id }},${EXTEN},1)</field>
+</record>
+
+</odoo>

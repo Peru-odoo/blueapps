@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ticket_call_list" model="ir.ui.view">
+        <field name="name">asterisk_calls.call.ticket.list</field>
+        <field name="model">asterisk_calls.call</field>
+        <field name="inherit_id" ref="asterisk_calls.asterisk_call_list"/>
+        <field name="arch" type="xml">
+            <field name="partner" position="after">
+                <field name="ticket"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_ticket_call_form" model="ir.ui.view">
+        <field name="name">asterisk_calls.call.ticket.form</field>
+        <field name="model">asterisk_calls.call</field>
+        <field name="inherit_id" ref="asterisk_calls.asterisk_call_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button type="object" name="create_ticket"
+                    string="Create ticket" icon="fa-life-ring"
+                    attrs="{'invisible': [('ticket', '!=', False)]}"
+                    title="Create ticket" aria-label="Create ticket"/>
+            </xpath>
+            <xpath expr="//group[@name='info']" position="inside">
+                <field name="ticket" attrs="{'invisible': [('ticket', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_ticket_call_search" model="ir.ui.view">
+        <field name="name">asterisk_calls.call.ticket.search</field>
+        <field name="model">asterisk_calls.call</field>
+        <field name="inherit_id" ref="asterisk_calls.asterisk_call_search"/>
+        <field name="arch" type="xml">
+            <field name="partner" position="after">
+                <field name="ticket"/>
+            </field>
+            <filter name="partners" position="after">
+                <filter name="tickets" string="Tickets" domain="[('ticket', '!=', False)]"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,117 @@
+<odoo>
+  <!-- Queue(queuename,[options,[URL,[announceoverride,[timeout,[AGI,[macro,[gosub,[rule,[position]]]]]]]]]) -->
+  <record id="asterisk_base_queues.extension" model="asterisk_base.conf_template">
+    <field name="name">Queue Extension</field>
+    <field name="code">queue_extension</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">{% set options = '' -%}
+{% if rec.continue_on_hangup -%}
+        {% set options = options + 'c' -%}
+{% endif -%}
+{% set options = options + rec.options -%}
+same => n,Answer()
+same => n,Queue({{ rec.name }},{{ options }},,,{{ rec.timeout }})
+{% if rec.continue_on_hangup and rec.continue_exten -%}
+same => n,GotoIf($["${QUEUESTATUS}" = "CONTINUE"]?continue)
+{% endif -%}
+{% if rec.timeout_exten -%}
+same => n,GotoIf($["${QUEUESTATUS}" = "TIMEOUT"]?timeout)
+{% endif -%}
+{% if rec.maxlen > 0 and rec.full_exten -%}
+same => n,GotoIf($["${QUEUESTATUS}" = "FULL"]?full)
+{% endif -%}
+{% if rec.joinempty != 'yes' and rec.join_empty_exten -%}
+same => n,GotoIf($["${QUEUESTATUS}" = "JOINEMPTY"]?join_empty)
+{% endif -%}
+{% if rec.joinempty != 'yes' and rec.join_unavail_exten -%}
+same => n,GotoIf($["${QUEUESTATUS}" = "JOINUNAVAIL"]?join_unavail)
+{% endif -%}
+{% if rec.leavewhenempty and rec.leave_empty_exten -%}
+same => n,GotoIf($["${QUEUESTATUS}" = "LEAVEEMPTY"]?leave_empty)
+{% endif -%}
+{% if rec.leavewhenempty and rec.leave_unavail_exten %}
+same => n,GotoIf($["${QUEUESTATUS}" = "LEAVEUNAVAIL"]?leave_unavail)
+{% endif -%}
+same => n,Playtones(busy)
+same => n,Wait(11)
+same => n,Hangup()
+{% if rec.continue_on_hangup and rec.continue_exten -%}
+same => n(continue),Verbose(QUEUESTATUS: CONTINUE)
+same => n,Wait(1); Loop protection
+same => n,Goto({{ rec.continue_exten.number }},1)
+{% endif -%}
+{% if rec.timeout_exten -%}
+same => n(timeout),Verbose(QUEUESTATUS: TIMEOUT)
+same => n,Wait(1); Loop protection
+same => n,Goto(odoo-extensions, {{ rec.timeout_exten.number }},1)
+{% endif -%}
+{% if rec.maxlen > 0 and rec.full_exten -%}
+same => n(full),Verbose(QUEUESTATUS: FULL)
+same => n,Wait(1); Loop protection
+same => n,Goto(odoo-extensions,{{ rec.full_exten.number }},1)
+{% endif -%}
+{% if rec.joinempty != 'yes' and rec.join_empty_exten -%}
+same => n(join_empty),Verbose(QUEUESTATUS: JOINEMPTY)
+same => n,Wait(1); Loop protection
+same => n,Goto(odoo-extensions,{{ rec.join_empty_exten.number }},1)
+{% endif -%}
+{% if rec.joinempty != 'yes' and rec.join_unavail_exten -%}
+same => n(join_unavail),Verbose(QUEUESTATUS: JOINUNAVAIL)
+same => n,Wait(1); Loop protection
+same => n,Goto(odoo-extensions,{{ rec.join_unavail_exten.number }},1)
+{% endif -%}
+{% if rec.leavewhenempty and rec.leave_empty_exten -%}
+same => n(leave_empty),Verbose(QUEUESTATUS: LEAVEEMPTY)
+same => n,Wait(1); Loop protection
+same => n,Goto(odoo-extensions,{{ rec.leave_empty_exten.number }},1)
+{% endif -%}
+{% if rec.leavewhenempty and rec.leave_unavail_exten -%}
+same => n(leave_unavail),Verbose(QUEUESTATUS: LEAVEUNAVAIL)
+same => n,Wait(1); Loop protection
+same => n,Goto(odoo-extensions,{{ rec.leave_unavail_exten.number }},1)
+{% endif -%}</field>
+  </record>
+
+  <record id="asterisk_base_queues.queue_template" model="asterisk_base.conf_template">
+    <field name="name">Queue</field>
+    <field name="code">queue</field>
+    <field name="server" ref="asterisk_base.default_server"/>
+    <field name="content">;
+[{{ rec.name }}]
+strategy={{ rec.strategy }}
+{% if rec.announce_holdtime -%}
+announce-holdtime={{ rec.announce_holdtime }}
+{% endif -%}
+{% if rec.announce_frequency -%}
+        announce-frequency={{ rec.announce_frequency }}
+{% endif -%}
+{% if rec.ringinuse -%}
+	ringinuse=yes
+{% else -%}
+	ringinuse=no
+{% endif -%}
+musicclass={{ rec.musicclass }}
+maxlen={{ rec.maxlen }}
+servicelevel={{ rec.servicelevel }}
+timeout={{ rec.ring_timeout }}
+{% if rec.reportholdtime -%}
+	reportholdtime=yes
+{% else -%}
+	reportholdtime=no
+{% endif -%}
+{% if rec.leavewhenempty -%}
+	leavewhenempty=yes
+{% else -%}
+	leavewhenempty=no
+{% endif -%}
+{% if rec.joinempty -%}
+	joinempty=yes
+{% else -%}
+	joinempty=no
+{% endif -%}
+; MEMBERS
+{% for member in static_members -%}
+member => {{ member }}
+{% endfor -%}</field>
+</record>
+</odoo>
