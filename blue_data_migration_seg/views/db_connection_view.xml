@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="db_connection_form_view" model="ir.ui.view">
+            <field name="name">dbconnection</field>
+            <field name="model">dbconnection</field>
+            <field name="arch" type="xml">
+                <form string="Database Connection String">
+                    <header>
+                        <button string="Testar Conexão" name="test_connection" class="oe_highlight" type="object"/>
+                        <button string="Carregar Parceiros"  invisible="1" name="load_vendor_process" class="oe_highlight oe_inline"
+                                type="object"/>
+                        <button string="Load Customers" name="load_customer_process" class="oe_highlight"
+                                type="object"/>
+                        <button string="Carregar Tipos de Produtos" name="load_product_categ_process" class="oe_highlight"
+                                type="object"/>
+                        <button string="Carregar Produtos/Serviços" name="load_product_process" class="oe_highlight" type="object"/>
+                        <button string="Carregar Fataturas"  invisible="1" name="load_invoices_process" class="oe_highlight" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="connection_status" attrs="{'readonly': 1}"/>
+                            </group>
+                        </group>
+                        <separator string="Connection Details" colspan="2"/>
+                        <group  invisible="1">
+                            <group>
+                                <field name="connection_driver"/>
+                                <field name="connection_server"/>
+                                <field name="connection_db"/>
+                            </group>
+                            <group>
+
+                                <field name="connection_port"/>
+                                <field name="connection_user"/>
+                                <field name="connection_password" password="True"/>
+                            </group>
+                        </group>
+
+
+                        <notebook>
+                            <page string="Fornecedores" invisible="1">
+                                <group>
+                                    <group>
+                                        <field name="vendor_id_map" string="ID"/>
+                                        <field name="vendor_name_map" string="Name"/>
+                                        <field name="vendor_description_map" string="Description"/>
+                                    </group>
+                                    <group>
+                                        <field name="vendor_email_map" string="Email"/>
+                                        <field name="vendor_phone_map" string="Phone"/>
+                                        <field name="vendor_contact_map" string="Contact"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="vendor_table_name" string="Table Name"/>
+                                    <field name="vendor_table_where" string="Table Where"/>
+                                </group>
+                            </page>
+
+                            <page string="Clientes Segline">
+                                <group>
+                                    <group>
+                                        <field name="customer_table_name" string="Nome da Tabela"/>
+                                        <field name="customer_table_where" string="Codigo da Campanha"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="customer_id_map" string="ID/CPF"/>
+                                        <field name="customer_name_map" string="Nome"/>
+                                        <field name="customer_email_map" string="Email"/>
+                                        <field name="customer_phone_map" string="Hot"/>
+                                    </group>
+                                    <group>
+                                        <field name="ddD1"/>
+                                        <field name="telefone1"/>
+                                        <field name="ddD2"/>
+                                        <field name="telefone2"/>
+                                        <field name="ddD3"/>
+                                        <field name="telefone3"/>
+                                        <field name="ddD4"/>
+                                        <field name="telefone4"/>
+                                        <field name="ddD5"/>
+                                        <field name="telefone5"/>
+                                        <field name="ddD6"/>
+                                        <field name="telefone6"/>
+                                        <field name="ddD7"/>
+                                        <field name="telefone7"/>
+                                        <field name="ddD8"/>
+                                        <field name="telefone8"/>
+                                        <field name="ddD9"/>
+                                        <field name="telefone9"/>
+                                        <field name="ddD10"/>
+                                        <field name="telefone10"/>
+                                    </group>
+                                </group>
+
+                            </page>
+                            <page name="campanhas" string="Campanhas">
+                                <group>
+                                    <group>
+                                        <field name="campaign_id_map"/>
+                                        <field name="campaign_name_map"/>
+                                        <field name="campaign_table_name"/>
+                                        <field name="campaign_table_where"/>
+                                    </group>
+                                    <group>
+                                        <field name="codigo"/>
+                                        <field name="Situacao"/>
+                                        <field name="DataInicio"/>
+                                        <field name="DataFim"/>
+                                        <field name="Obs"/>
+                                        <field name="Cidade"/>
+                                        <field name="ocorrencia"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Categoria de Produtos">
+                                <group>
+                                    <group>
+                                        <field name="product_category_id_map" string="ID"/>
+                                        <field name="product_category_name_map" string="Name"/>
+                                    </group>
+                                    <group>
+                                        <field name="product_category_parent_id_map" string="Parent ID"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="product_category_table_name" string="Table Name"/>
+                                    <field name="product_category_table_where" string="Table Where"/>
+                                </group>
+                            </page>
+                            <page string="Produtos">
+                                <group>
+                                    <group>
+                                        <field name="product_id_map" string="ID"/>
+                                        <field name="product_name_map" string="Name"/>
+                                        <field name="product_description_map" string="Description"/>
+                                    </group>
+                                    <group>
+                                        <field name="product_price_map" string="Price"/>
+                                        <field name="product_cost_map" string="Cost"/>
+                                        <field name="category_id_map" string="Category ID"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="product_table_name" string="Table Name"/>
+                                    <field name="product_table_where" string="Table Where"/>
+                                </group>
+                            </page>
+                            <page string="Faturas" invisible="1">
+                                <group>
+                                    <group>
+                                        <field name="order_id_map" string="Order ID"/>
+                                        <field name="order_date_map" string="Order Date"/>
+                                        <field name="order_customer_id_map" string="Customer ID"/>
+                                    </group>
+                                    <group>
+                                        <field name="order_product_id_map" string="Product ID"/>
+                                        <field name="order_product_price_map" string="Product Price"/>
+                                        <field name="order_product_quantity_map" string="Product Quantity"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="order_table_name" string="Table Name"/>
+                                    <field name="order_table_where" string="Table Where"/>
+                                </group>
+                            </page>
+                            <page string="Registros">
+                                <field name="loading_process_ids" nolabel="1">
+                                    <tree>
+                                        <field name="tran_date_time"/>
+                                        <field name="action_type"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="db_connection_tree_view" model="ir.ui.view">
+            <field name="name">dbconnection</field>
+            <field name="model">dbconnection</field>
+            <field name="arch" type="xml">
+                <tree string="Database Connection String">
+                    <field name="name"/>
+                    <field name="connection_status"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="db_connection_action" model="ir.actions.act_window">
+            <field name="name">Conexão Proseg</field>
+            <field name="res_model">dbconnection</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

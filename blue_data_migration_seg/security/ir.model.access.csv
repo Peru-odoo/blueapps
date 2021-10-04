@@ -1,0 +1,5 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_blue_data_migration_seg_dbconnection,access.blue_data_migration_seg.dbconnection,model_dbconnection,group_blue_data_migration_seg_admin,1,1,1,1
+access_blue_data_migration_seg_loading_process,access.blue_data_migration_seg.loading_process,model_loading_process,group_blue_data_migration_seg_admin,1,1,1,1
+
+

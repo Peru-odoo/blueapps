@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+        <menuitem id="menu_blue_data_migration_seg"
+                  name="Conexão Proseg"
+                  parent="base.menu_administration"
+                  groups="group_blue_data_migration_seg_admin"
+                  sequence="1024"/>
+
+        <menuitem id="menu_db_connection"
+                  name="Importar Dados"
+                  parent="menu_blue_data_migration_seg"
+                  action="db_connection_action"
+                  groups="group_blue_data_migration_seg_admin"
+                  sequence="0"/>
+
+
+    </data>
+</odoo>
