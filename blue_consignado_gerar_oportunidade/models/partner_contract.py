@@ -8,6 +8,10 @@ class ResPartnerContract(models.Model):
 
     name = fields.Char("N. Contrato",
                        required=True)
+    company_id = fields.Many2one('res.company', string='Company',
+                                 default=lambda self: self.env.company)
+    currency_id = fields.Many2one('res.currency', string='Currency', related='company_id.currency_id', readonly=True, required=True, ondelete="cascade")
+    company_currency = fields.Many2one("res.currency", string='Currency', related='company_id.currency_id', readonly=True)               
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Cliente',
@@ -46,7 +50,12 @@ class ResPartnerContract(models.Model):
     tax_id = fields.Many2many('account.tax', string='Taxes')
     lead_id = fields.Many2one('crm.lead')
     partner_id = fields.Many2one('res.partner')
-    
+#    company_id = fields.Many2one('res.company', string='Company',
+#                                 default=lambda self: self.env.company)
+#    company_currency = fields.Many2one("res.currency", string='Currency', related='company_id.currency_id', readonly=True)
+#    currency_id = fields.Many2one('res.currency', string='Currency', readonly=True, required=True, ondelete="cascade")
+
+
     @api.onchange('product_id')
     def onchange_product_id(self):
         if self.product_id:

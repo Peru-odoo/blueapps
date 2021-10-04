@@ -12,15 +12,18 @@
             <field name="partner_id" optional="hide"/>
             <field name="name"/>
             <field name="senha" optional="show"/>
-            <field name="secretaria" optional="show"/>
+            <field name="secretaria" invisible="1"/>
+            <field name="s_secretaria" optional="show"/>
             <field name="sigla" optional="show"/>
             <field name="banco" optional="show"/>
             <field name="tipo_conta" optional="show"/>
             <field name="agencia" optional="show"/>
             <field name="conta" optional="show"/>
-            <field name="margem_negativa" string="Marg. Negativa" optional="show" sum="Negativa"/>
-            <field name="margem_livre" string="Marg. Livre" optional="show" sum="Livre"/>
-            <field name="margem_real" string="Marg. Real" optional="show" sum="Real"/>
+            <field name="margem_negativa" string="Marg. Negativa" optional="show" sum="Negativa" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            <field name="margem_livre" string="Marg. Livre" optional="show" sum="Livre" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            <field name="margem_real" string="Marg. Real" optional="show" sum="Real" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            <field name="currency_id" invisible="1"/>
+            <field name="company_currency" invisible="1"/>
         </tree>
       </field>
     </record>
@@ -36,11 +39,13 @@
             <field name="name"/>
             <field name="banco_origem" optional="show"/>
             <field name="qtd_parcelas" optional="show"/>
-            <field name="saldo_devedor" optional="show" sum="Devedor"/>
-            <field name="valor_parcela" optional="show" sum="Parcela"/>
-            <field name="valor_liberado" optional="show" sum="Liberado"/>
-            <field name="valor_consultoria" optional="show" sum="Consultoria"/>
-            <field name="valor_liquido" optional="show" sum="Liquido"/>
+            <field name="saldo_devedor" optional="show" sum="Devedor" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            <field name="valor_parcela" optional="show" sum="Parcela" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            <field name="valor_liberado" optional="show" sum="Liberado" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            <field name="valor_consultoria" optional="show" sum="Consultoria" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            <field name="valor_liquido" optional="show" sum="Liquido" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+            <field name="currency_id" invisible="1"/>
+            <field name="company_currency" invisible="1"/>
         </tree>
       </field>
     </record>
